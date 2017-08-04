@@ -3075,6 +3075,24 @@ You must have Bluetooth and Location turned on in order to use the Physical Web.
       <message name="IDS_DISABLED_INCOGNITO_LAUNCHER_SHORTCUT_MESSAGE" desc="Text for a toast displayed prompting the user to remove the disabled 'New incognito tab' app shortcut and recreate it.">
         Remove and recreate this shortcut
       </message>
+
+      <!-- Brave stats -->
+      <message name="IDS_BRAVE_STATS_TEXT_TRACKERS" desc="Text for blocked trackers stats on new tab page.">
+        Trackers
+Blocked
+      </message>
+      <message name="IDS_BRAVE_STATS_TEXT_ADS" desc="Text for blocked ads stats on new tab page.">
+        Ads
+Blocked
+      </message>
+      <message name="IDS_BRAVE_STATS_TEXT_HTTPS" desc="Text for upgraded HTTPS stats on new tab page.">
+        HTTPS
+Upgrades
+      </message>
+      <message name="IDS_BRAVE_STATS_TEXT_TIME" desc="Text for extimated saved time stats on new tab page.">
+        Est. Time
+Saved
+      </message>
     </messages>
   </release>
 </grit>
