@@ -34,6 +34,7 @@ MediaPlayerRenderer::MediaPlayerRenderer(int process_id, int routing_id)
     : render_process_id_(process_id),
       routing_id_(routing_id),
       has_error_(false),
+      media_resource_(nullptr),
       weak_factory_(this) {}
 
 MediaPlayerRenderer::~MediaPlayerRenderer() {
@@ -44,20 +45,15 @@ void MediaPlayerRenderer::Initialize(media::MediaResource* media_resource,
                                      media::RendererClient* client,
                                      const media::PipelineStatusCB& init_cb) {
   DVLOG(1) << __func__;
-
+  LOG(INFO) << "SAM: MediaPlayerRenderer::Initialize";
   DCHECK_CURRENTLY_ON(BrowserThread::UI);
 
+  media_resource_ = media_resource;
   renderer_client_ = client;
-
-  if (media_resource->GetType() != media::MediaResource::Type::URL) {
-    DLOG(ERROR) << "MediaResource is not of Type URL";
-    init_cb.Run(media::PIPELINE_ERROR_INITIALIZATION_FAILED);
-    return;
-  }
 
   base::TimeDelta creation_delay =
       media::MediaServiceThrottler::GetInstance()->GetDelayForClientCreation();
-
+  LOG(INFO) << "SAM: MediaPlayerRenderer::Initialize creation_delay: " << creation_delay;
   if (creation_delay.is_zero()) {
     CreateMediaPlayer(media_resource->GetMediaUrlParams(), init_cb);
     return;
@@ -74,12 +70,13 @@ void MediaPlayerRenderer::Initialize(media::MediaResource* media_resource,
 void MediaPlayerRenderer::CreateMediaPlayer(
     const media::MediaUrlParams& url_params,
     const media::PipelineStatusCB& init_cb) {
+  LOG(INFO) << "SAM: MediaPlayerRenderer::CreateMediaPlayer";
   DCHECK_CURRENTLY_ON(BrowserThread::UI);
 
   // Force the initialization of |media_resource_getter_| first. If it fails,
   // the RenderFrameHost may have been destroyed already.
   if (!GetMediaResourceGetter()) {
-    DLOG(ERROR) << "Unable to retrieve MediaResourceGetter";
+    LOG(ERROR) << "SAM: Unable to retrieve MediaResourceGetter";
     init_cb.Run(media::PIPELINE_ERROR_INITIALIZATION_FAILED);
     return;
   }
@@ -295,6 +292,11 @@ void MediaPlayerRenderer::CancelScopedSurfaceRequest() {
   ScopedSurfaceRequestManager::GetInstance()->UnregisterScopedSurfaceRequest(
       surface_request_token_);
   surface_request_token_ = base::UnguessableToken();
+}
+
+media::MediaResource* MediaPlayerRenderer::GetMediaResource() {
+  LOG(INFO) << "SAM: MediaPlayerManager::GetMediaResource";
+  return media_resource_;
 }
 
 }  // namespace content

@@ -60,7 +60,8 @@ bool StructTraits<media::mojom::VideoDecoderConfigDataView,
     return false;
 
   output->Initialize(codec, profile, format, color_space, rotation, coded_size,
-                     visible_rect, natural_size, extra_data, encryption_scheme);
+                     visible_rect, natural_size, extra_data, encryption_scheme,
+                     input.is_for_android_media_player());
 
   output->set_color_space_info(color_space_info);
 

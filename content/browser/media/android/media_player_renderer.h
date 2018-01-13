@@ -19,6 +19,10 @@
 #include "media/base/renderer_client.h"
 #include "url/gurl.h"
 
+namespace media {
+class MediaResource;
+}
+
 namespace content {
 
 // MediaPlayerRenderer bridges the media::Renderer and Android MediaPlayer
@@ -108,6 +112,8 @@ class CONTENT_EXPORT MediaPlayerRenderer : public media::Renderer,
   // it exists. No-ops otherwise.
   void CancelScopedSurfaceRequest();
 
+  media::MediaResource* GetMediaResource() override;
+
   // Identifiers to find the RenderFrameHost that created |this|.
   // NOTE: We store these IDs rather than a RenderFrameHost* because we do not
   // know when the RenderFrameHost is destroyed.
@@ -129,6 +135,9 @@ class CONTENT_EXPORT MediaPlayerRenderer : public media::Renderer,
   base::UnguessableToken surface_request_token_;
 
   std::unique_ptr<media::MediaResourceGetter> media_resource_getter_;
+
+  // Media source to get data from if it is not URL
+  media::MediaResource* media_resource_;
 
   // NOTE: Weak pointers must be invalidated before all other member variables.
   base::WeakPtrFactory<MediaPlayerRenderer> weak_factory_;

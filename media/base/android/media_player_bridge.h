@@ -24,6 +24,7 @@
 namespace media {
 
 class MediaPlayerManager;
+class MediaDataSourceBridge;
 
 // This class serves as a bridge between the native code and Android MediaPlayer
 // Java class. For more information on Android MediaPlayer, check
@@ -112,6 +113,9 @@ class MEDIA_EXPORT MediaPlayerBridge : public MediaPlayerAndroid {
 
   // Set the data source for the media player.
   void SetDataSource(const std::string& url);
+
+  // Set media data source for the media player.
+  void SetMediaDataSource();
 
   // Functions that implements media player control.
   void StartInternal();
@@ -210,6 +214,12 @@ class MEDIA_EXPORT MediaPlayerBridge : public MediaPlayerAndroid {
 
   // The flag is set if Start() has been called at least once.
   bool has_ever_started_;
+
+  // Whether source is URL or MediaDataSource
+  bool is_media_source_;
+
+  // Pointer to media data source to use for playback
+  std::auto_ptr<MediaDataSourceBridge> media_data_source_bridge_;
 
   // NOTE: Weak pointers must be invalidated before all other member variables.
   base::WeakPtrFactory<MediaPlayerBridge> weak_factory_;

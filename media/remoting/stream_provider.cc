@@ -298,6 +298,7 @@ void MediaStream::FlushUntil(int count) {
 }
 
 void MediaStream::Read(const ReadCB& read_cb) {
+  LOG(INFO) << "SAM: MediaStream::Read";
   DCHECK(read_complete_callback_.is_null());
   DCHECK(!read_cb.is_null());
   read_complete_callback_ = read_cb;

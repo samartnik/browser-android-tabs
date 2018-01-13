@@ -133,6 +133,7 @@ MultibufferDataSource::MultibufferDataSource(
       host_(host),
       downloading_cb_(downloading_cb),
       weak_factory_(this) {
+  LOG(INFO) << "SAM: MultibufferDataSource::MultibufferDataSource";
   weak_ptr_ = weak_factory_.GetWeakPtr();
   DCHECK(host_);
   DCHECK(!downloading_cb_.is_null());

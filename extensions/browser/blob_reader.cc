@@ -84,6 +84,7 @@ void BlobReader::SetByteRange(int64_t offset, int64_t length) {
 }
 
 void BlobReader::Start() {
+  LOG(INFO) << "SAM: BlobReader::Start";
   DCHECK_CURRENTLY_ON(content::BrowserThread::UI);
   fetcher_->Start();
 }

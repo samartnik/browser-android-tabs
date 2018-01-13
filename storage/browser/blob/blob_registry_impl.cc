@@ -508,6 +508,7 @@ void BlobRegistryImpl::GetBlobFromUUID(mojom::BlobRequest blob,
 void BlobRegistryImpl::RegisterURL(mojom::BlobPtr blob,
                                    const GURL& url,
                                    RegisterURLCallback callback) {
+  LOG(INFO) << "SAM: BlobRegistryImpl::RegisterURL";
   Delegate* delegate = bindings_.dispatch_context().get();
   DCHECK(delegate);
   if (!url.SchemeIsBlob() || !delegate->CanCommitURL(url)) {

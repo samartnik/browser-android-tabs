@@ -232,6 +232,7 @@ void PipelineImpl::RendererWrapper::Start(
   DCHECK(!text_renderer_);
   DCHECK(!renderer_ended_);
   DCHECK(!text_renderer_ended_);
+  LOG(INFO) << "SAM: PipelineImpl::RendererWrapper::Start";
   demuxer_ = demuxer;
   {
     base::AutoLock auto_lock(shared_state_lock_);
@@ -820,6 +821,7 @@ void PipelineImpl::RendererWrapper::SetState(State next_state) {
 
 void PipelineImpl::RendererWrapper::CompleteSeek(base::TimeDelta seek_time,
                                                  PipelineStatus status) {
+  LOG(INFO) << "SAM: PipelineImpl::RendererWrapper::CompleteSeek";
   DCHECK(media_task_runner_->BelongsToCurrentThread());
   DCHECK(state_ == kStarting || state_ == kSeeking || state_ == kResuming);
 
@@ -884,6 +886,7 @@ void PipelineImpl::RendererWrapper::CompleteSuspend(PipelineStatus status) {
 
 void PipelineImpl::RendererWrapper::InitializeDemuxer(
     const PipelineStatusCB& done_cb) {
+  LOG(INFO) << "SAM: PipelineImpl::RendererWrapper::InitializeDemuxer";
   DCHECK(media_task_runner_->BelongsToCurrentThread());
 
   demuxer_->Initialize(this, done_cb, !!text_renderer_);
@@ -891,10 +894,12 @@ void PipelineImpl::RendererWrapper::InitializeDemuxer(
 
 void PipelineImpl::RendererWrapper::InitializeRenderer(
     const PipelineStatusCB& done_cb) {
+  LOG(INFO) << "SAM: PipelineImpl::RendererWrapper::InitializeRenderer";
   DCHECK(media_task_runner_->BelongsToCurrentThread());
 
   switch (demuxer_->GetType()) {
     case MediaResource::Type::STREAM:
+      LOG(INFO) << "SAM: MediaResource::Type::STREAM";
       if (demuxer_->GetAllStreams().empty()) {
         DVLOG(1) << "Error: demuxer does not have an audio or a video stream.";
         done_cb.Run(PIPELINE_ERROR_COULD_NOT_RENDER);
@@ -903,6 +908,7 @@ void PipelineImpl::RendererWrapper::InitializeRenderer(
       break;
 
     case MediaResource::Type::URL:
+      LOG(INFO) << "SAM: MediaResource::Type::URL";
       // NOTE: Empty GURL are not valid.
       if (!demuxer_->GetMediaUrlParams().media_url.is_valid()) {
         DVLOG(1) << "Error: demuxer does not have a valid URL.";
@@ -932,6 +938,7 @@ void PipelineImpl::RendererWrapper::DestroyRenderer() {
 }
 
 void PipelineImpl::RendererWrapper::ReportMetadata() {
+  LOG(INFO) << "SAM: PipelineImpl::RendererWrapper::ReportMetadata";
   DCHECK(media_task_runner_->BelongsToCurrentThread());
 
   PipelineMetadata metadata;

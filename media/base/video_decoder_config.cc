@@ -57,7 +57,8 @@ VideoDecoderConfig::VideoDecoderConfig()
       profile_(VIDEO_CODEC_PROFILE_UNKNOWN),
       format_(PIXEL_FORMAT_UNKNOWN),
       color_space_(COLOR_SPACE_UNSPECIFIED),
-      rotation_(VIDEO_ROTATION_0) {}
+      rotation_(VIDEO_ROTATION_0),
+      is_for_android_media_player_(false) {}
 
 VideoDecoderConfig::VideoDecoderConfig(
     VideoCodec codec,
@@ -69,9 +70,11 @@ VideoDecoderConfig::VideoDecoderConfig(
     const gfx::Rect& visible_rect,
     const gfx::Size& natural_size,
     const std::vector<uint8_t>& extra_data,
-    const EncryptionScheme& encryption_scheme) {
+    const EncryptionScheme& encryption_scheme,
+    bool is_for_android_media_player)
+    : is_for_android_media_player_(is_for_android_media_player) {
   Initialize(codec, profile, format, color_space, rotation, coded_size,
-             visible_rect, natural_size, extra_data, encryption_scheme);
+             visible_rect, natural_size, extra_data, encryption_scheme, is_for_android_media_player_);
 }
 
 VideoDecoderConfig::VideoDecoderConfig(const VideoDecoderConfig& other) =
@@ -105,7 +108,8 @@ void VideoDecoderConfig::Initialize(VideoCodec codec,
                                     const gfx::Rect& visible_rect,
                                     const gfx::Size& natural_size,
                                     const std::vector<uint8_t>& extra_data,
-                                    const EncryptionScheme& encryption_scheme) {
+                                    const EncryptionScheme& encryption_scheme,
+                                    bool is_for_android_media_player) {
   codec_ = codec;
   profile_ = profile;
   format_ = format;
@@ -116,6 +120,7 @@ void VideoDecoderConfig::Initialize(VideoCodec codec,
   natural_size_ = natural_size;
   extra_data_ = extra_data;
   encryption_scheme_ = encryption_scheme;
+  is_for_android_media_player_ = is_for_android_media_player;
 
   switch (color_space) {
     case ColorSpace::COLOR_SPACE_JPEG:
@@ -134,6 +139,11 @@ void VideoDecoderConfig::Initialize(VideoCodec codec,
 }
 
 bool VideoDecoderConfig::IsValidConfig() const {
+  if (is_for_android_media_player_) {
+    // We don't need special config for Android media player
+    // Todo: add check for Android version
+    return true;
+  }
   return codec_ != kUnknownVideoCodec &&
       natural_size_.width() > 0 &&
       natural_size_.height() > 0 &&
@@ -187,5 +197,4 @@ void VideoDecoderConfig::SetIsEncrypted(bool is_encrypted) {
     encryption_scheme_ = AesCtrEncryptionScheme();
   }
 }
-
 }  // namespace media

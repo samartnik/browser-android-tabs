@@ -535,6 +535,7 @@ void DecoderStream<StreamType>::OnDecodeOutputReady(
 
 template <DemuxerStream::Type StreamType>
 void DecoderStream<StreamType>::ReadFromDemuxerStream() {
+  LOG(INFO) << "SAM: DecoderStream<StreamType>::ReadFromDemuxerStream";
   FUNCTION_DVLOG(3);
   DCHECK_EQ(state_, STATE_NORMAL);
   DCHECK(CanDecodeMore());
@@ -562,7 +563,7 @@ template <DemuxerStream::Type StreamType>
 void DecoderStream<StreamType>::OnBufferReady(
     DemuxerStream::Status status,
     const scoped_refptr<DecoderBuffer>& buffer) {
-  FUNCTION_DVLOG(3) << ": " << status << ", "
+  LOG(INFO) << "SAM: DecoderStream<StreamType>::OnBufferReady: " << status << ", "
                     << (buffer.get() ? buffer->AsHumanReadableString()
                                      : "NULL");
 

@@ -82,7 +82,7 @@ bool WebMAudioClient::InitializeConfig(
                      samples_per_second, codec_private, encryption_scheme,
                      base::TimeDelta::FromMicroseconds(
                          (seek_preroll != -1 ? seek_preroll : 0) / 1000),
-                     codec_delay_in_frames);
+                     codec_delay_in_frames, false);
   config->SetChannelsForDiscrete(channels_);
   return config->IsValidConfig();
 }

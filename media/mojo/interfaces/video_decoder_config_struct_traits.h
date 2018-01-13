@@ -73,6 +73,11 @@ struct StructTraits<media::mojom::VideoDecoderConfigDataView,
     return input.hdr_metadata();
   }
 
+  static bool is_for_android_media_player(
+      const media::VideoDecoderConfig& input) {
+    return input.is_for_android_media_player();
+  }
+
   static bool Read(media::mojom::VideoDecoderConfigDataView input,
                    media::VideoDecoderConfig* output);
 };

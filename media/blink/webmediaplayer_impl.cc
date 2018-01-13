@@ -1358,6 +1358,7 @@ void WebMediaPlayerImpl::OnPipelineResumed() {
 }
 
 void WebMediaPlayerImpl::OnDemuxerOpened() {
+  LOG(INFO) << "SAM: WebMediaPlayerImpl::OnDemuxerOpened";
   DCHECK(main_task_runner_->BelongsToCurrentThread());
   client_->MediaSourceOpened(new WebMediaSourceImpl(chunk_demuxer_));
 }
@@ -2114,10 +2115,10 @@ void WebMediaPlayerImpl::StartPipeline() {
           &WebMediaPlayerImpl::OnEncryptedMediaInitData, AsWeakPtr()));
 
   if (renderer_factory_selector_->GetCurrentFactory()
-          ->GetRequiredMediaResourceType() == MediaResource::Type::URL) {
+          ->GetRequiredMediaResourceType() == MediaResource::Type::URL
+          && kLoadTypeURL == load_type_) {
     if (data_source_)
       loaded_url_ = data_source_->GetUrlAfterRedirects();
-
     // MediaPlayerRendererClient factory is the only factory that a
     // MediaResource::Type::URL for the moment. This might no longer be true
     // when we remove WebMediaPlayerCast.
@@ -2139,7 +2140,6 @@ void WebMediaPlayerImpl::StartPipeline() {
   if (load_type_ != kLoadTypeMediaSource) {
     DCHECK(!chunk_demuxer_);
     DCHECK(data_source_);
-
 #if !defined(MEDIA_DISABLE_FFMPEG)
     Demuxer::MediaTracksUpdatedCB media_tracks_updated_cb =
         BindToCurrentLoop(base::Bind(
@@ -2155,7 +2155,6 @@ void WebMediaPlayerImpl::StartPipeline() {
   } else {
     DCHECK(!chunk_demuxer_);
     DCHECK(!data_source_);
-
     chunk_demuxer_ = new ChunkDemuxer(
         BindToCurrentLoop(
             base::Bind(&WebMediaPlayerImpl::OnDemuxerOpened, AsWeakPtr())),
@@ -2838,6 +2837,7 @@ void WebMediaPlayerImpl::RecordUnderflowDuration(base::TimeDelta duration) {
 
 void WebMediaPlayerImpl::RecordVideoNaturalSize(const gfx::Size& natural_size) {
   // Always report video natural size to MediaLog.
+  LOG(INFO) << "SAM: WebMediaPlayerImpl::RecordVideoNaturalSize";
   media_log_->AddEvent(media_log_->CreateVideoSizeSetEvent(
       natural_size.width(), natural_size.height()));
 

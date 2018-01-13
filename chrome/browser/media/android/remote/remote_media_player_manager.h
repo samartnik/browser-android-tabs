@@ -64,6 +64,8 @@ class RemoteMediaPlayerManager : public content::BrowserMediaPlayerManager {
   // playing locally. Will return nullptr if the local player no longer exists.
   media::MediaPlayerAndroid* GetLocalPlayer(int player_id);
 
+  media::MediaResource* GetMediaResource() override;
+
  protected:
   void OnSetPoster(int player_id, const GURL& url) override;
 

@@ -95,6 +95,7 @@ void MediaPlayerListener::OnMediaPrepared(
 void MediaPlayerListener::OnMediaInterrupted(
     JNIEnv* /* env */,
     const JavaParamRef<jobject>& /* obj */) {
+  LOG(WARNING) << "SAM: MediaPlayerListener::OnMediaInterrupted";
   task_runner_->PostTask(FROM_HERE, base::Bind(
       &MediaPlayerAndroid::OnMediaInterrupted, media_player_));
 }

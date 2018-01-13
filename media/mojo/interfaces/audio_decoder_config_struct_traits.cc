@@ -37,7 +37,7 @@ bool StructTraits<media::mojom::AudioDecoderConfigDataView,
 
   output->Initialize(codec, sample_format, channel_layout,
                      input.samples_per_second(), extra_data, encryption_scheme,
-                     seek_preroll, input.codec_delay());
+                     seek_preroll, input.codec_delay(), input.is_for_android_media_player());
 
   if (!output->IsValidConfig())
     return false;

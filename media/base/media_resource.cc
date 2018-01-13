@@ -11,7 +11,6 @@ MediaResource::MediaResource() {}
 MediaResource::~MediaResource() {}
 
 MediaUrlParams MediaResource::GetMediaUrlParams() const {
-  NOTREACHED();
   return MediaUrlParams{GURL(), GURL()};
 }
 

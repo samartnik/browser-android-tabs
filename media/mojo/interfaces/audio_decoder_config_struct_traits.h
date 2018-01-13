@@ -52,6 +52,11 @@ struct StructTraits<media::mojom::AudioDecoderConfigDataView,
     return input.encryption_scheme();
   }
 
+  static bool is_for_android_media_player(
+      const media::AudioDecoderConfig& input) {
+    return input.is_for_android_media_player();
+  }
+
   static bool Read(media::mojom::AudioDecoderConfigDataView input,
                    media::AudioDecoderConfig* output);
 };

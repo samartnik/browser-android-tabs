@@ -122,6 +122,7 @@ class StubLocalFrameClientForOrientationLockDelegate final
       const WebMediaPlayerSource&,
       WebMediaPlayerClient*,
       WebLayerTreeView*) override {
+    LOG(INFO) << "SAM: std::unique_ptr<WebMediaPlayer> CreateWebMediaPlayer";
     return WTF::MakeUnique<MockWebMediaPlayerForOrientationLockDelegate>();
   }
 };

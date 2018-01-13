@@ -478,6 +478,7 @@ class MEDIA_EXPORT ChunkDemuxer : public Demuxer {
   const bool buffering_by_pts_;
 
   std::map<MediaTrack::Id, ChunkDemuxerStream*> track_id_to_demux_stream_map_;
+  std::map<std::string, int> total_size_;
 
   DISALLOW_COPY_AND_ASSIGN(ChunkDemuxer);
 };

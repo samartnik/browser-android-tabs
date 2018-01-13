@@ -144,6 +144,7 @@ TypeConverter<media::mojom::AudioDecoderConfigPtr, media::AudioDecoderConfig>::
   config->seek_preroll = input.seek_preroll();
   config->codec_delay = input.codec_delay();
   config->encryption_scheme = input.encryption_scheme();
+  config->is_for_android_media_player = input.is_for_android_media_player();
   return config;
 }
 
@@ -155,7 +156,7 @@ TypeConverter<media::AudioDecoderConfig, media::mojom::AudioDecoderConfigPtr>::
   config.Initialize(input->codec, input->sample_format, input->channel_layout,
                     input->samples_per_second, input->extra_data,
                     input->encryption_scheme, input->seek_preroll,
-                    input->codec_delay);
+                    input->codec_delay, input->is_for_android_media_player);
   return config;
 }
 

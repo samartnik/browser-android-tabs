@@ -253,7 +253,7 @@ bool FFmpegAudioDecoder::FFmpegDecode(
           config_.Initialize(config_.codec(), config_.sample_format(),
                              channel_layout, av_frame_->sample_rate,
                              config_.extra_data(), config_.encryption_scheme(),
-                             config_.seek_preroll(), config_.codec_delay());
+                             config_.seek_preroll(), config_.codec_delay(), false);
           config_changed = true;
           if (is_sample_rate_change)
             ResetTimestampState(config_);

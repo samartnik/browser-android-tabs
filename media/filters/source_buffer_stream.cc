@@ -1482,7 +1482,7 @@ void SourceBufferStream<RangeClass>::Seek(base::TimeDelta timestamp) {
   seek_buffer_timestamp_ = timestamp;
   seek_pending_ = true;
 
-  if (ShouldSeekToStartOfBuffered(timestamp)) {
+  if (ShouldSeekToStartOfBuffered(timestamp)) {    
     ranges_.front()->SeekToStart();
     SetSelectedRange(ranges_.front().get());
     seek_pending_ = false;
@@ -1497,8 +1497,10 @@ void SourceBufferStream<RangeClass>::Seek(base::TimeDelta timestamp) {
       break;
   }
 
-  if (itr == ranges_.end())
+  if (itr == ranges_.end()) {
+    LOG(ERROR) << "SAM: not found range to seek to";
     return;
+  }
 
   if (!audio_configs_.empty()) {
     const auto& config =
@@ -1526,6 +1528,7 @@ template <typename RangeClass>
 void SourceBufferStream<RangeClass>::OnSetDuration(base::TimeDelta duration) {
   DVLOG(1) << __func__ << " " << GetStreamTypeName() << " ("
            << duration.InMicroseconds() << "us)";
+  LOG(INFO) << "SAM: SourceBufferStream<RangeClass>::OnSetDuration: " << duration;
   DCHECK(!end_of_stream_);
 
   if (ranges_.empty())

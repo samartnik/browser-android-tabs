@@ -36,7 +36,7 @@ WebMediaSource::AddStatus WebMediaSourceImpl::AddSourceBuffer(
     const blink::WebString& codecs,
     blink::WebSourceBuffer** source_buffer) {
   std::string id = base::GenerateGUID();
-
+  LOG(INFO) << "SAM: WebMediaSourceImpl::AddSourceBuffer";
   WebMediaSource::AddStatus result = static_cast<WebMediaSource::AddStatus>(
       demuxer_->AddId(id, type.Utf8().data(), codecs.Utf8().data()));
 

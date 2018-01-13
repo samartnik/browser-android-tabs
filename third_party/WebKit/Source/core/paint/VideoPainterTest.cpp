@@ -53,6 +53,7 @@ class VideoStubLocalFrameClient : public EmptyLocalFrameClient {
       const WebMediaPlayerSource&,
       WebMediaPlayerClient* client,
       WebLayerTreeView* view) override {
+    LOG(INFO) << "SAM: std::unique_ptr<WebMediaPlayer> CreateWebMediaPlayer";
     return WTF::MakeUnique<StubWebMediaPlayer>(client);
   }
 };

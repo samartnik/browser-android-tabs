@@ -76,6 +76,7 @@ void DecryptingDemuxerStream::Initialize(DemuxerStream* stream,
 }
 
 void DecryptingDemuxerStream::Read(const ReadCB& read_cb) {
+  LOG(INFO) << "SAM: DecryptingDemuxerStream::Read";
   DVLOG(3) << __func__;
   DCHECK(task_runner_->BelongsToCurrentThread());
   DCHECK_EQ(state_, kIdle) << state_;

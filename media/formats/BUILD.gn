@@ -46,6 +46,8 @@ source_set("formats") {
     "webm/webm_video_client.h",
     "webm/webm_webvtt_parser.cc",
     "webm/webm_webvtt_parser.h",
+    "common/android_stream_parser.cc",
+    "common/android_stream_parser.h",
   ]
 
   deps = [

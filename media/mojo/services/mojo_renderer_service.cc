@@ -41,6 +41,7 @@ mojo::StrongBindingPtr<mojom::Renderer> MojoRendererService::Create(
     std::unique_ptr<media::Renderer> renderer,
     InitiateSurfaceRequestCB initiate_surface_request_cb,
     mojo::InterfaceRequest<mojom::Renderer> request) {
+  LOG(INFO) << "SAM: MojoRendererService::Create";
   MojoRendererService* service = new MojoRendererService(
       mojo_cdm_service_context, std::move(audio_sink), std::move(video_sink),
       std::move(renderer), initiate_surface_request_cb);
@@ -162,11 +163,13 @@ void MojoRendererService::SetCdm(int32_t cdm_id, SetCdmCallback callback) {
 
 void MojoRendererService::OnError(PipelineStatus error) {
   DVLOG(1) << __func__ << "(" << error << ")";
+  LOG(ERROR) << "SAM: MojoRendererService::OnError" << "(" << error << ")";
   state_ = STATE_ERROR;
   client_->OnError();
 }
 
 void MojoRendererService::OnEnded() {
+  LOG(INFO) << "SAM: MojoRendererService::OnEnded";
   DVLOG(1) << __func__;
   CancelPeriodicMediaTimeUpdates();
   client_->OnEnded();

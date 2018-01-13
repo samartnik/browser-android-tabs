@@ -168,9 +168,11 @@ void MediaFactory::SetupMojo() {
 // Note that HLS and MP4 detection are pre-redirect and path-based. It is
 // possible to load such a URL and find different content.
 bool UseMediaPlayerRenderer(const GURL& url) {
+#if BUILDFLAG(USE_PROPRIETARY_CODECS)
   // Always use the default renderer for playing blob URLs.
   if (url.SchemeIsBlob())
     return false;
+#endif
 
   // Don't use the default renderer if the container likely contains a codec we
   // can't decode in software and platform decoders are not available.

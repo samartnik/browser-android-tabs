@@ -236,6 +236,7 @@ void FileReaderLoader::DidReceiveData(const char* data, unsigned data_length) {
 }
 
 void FileReaderLoader::DidFinishLoading(unsigned long, double) {
+  LOG(INFO) << "SAM: FileReaderLoader::DidFinishLoading";
   if (read_type_ != kReadByClient && raw_data_) {
     raw_data_->ShrinkToFit();
     is_raw_data_converted_ = false;

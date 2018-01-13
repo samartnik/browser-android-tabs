@@ -13,6 +13,7 @@ namespace media {
 class MediaPlayerAndroid;
 class MediaResourceGetter;
 class MediaUrlInterceptor;
+class MediaResource;
 
 // This class is responsible for managing active MediaPlayerAndroid objects.
 class MEDIA_EXPORT MediaPlayerManager {
@@ -74,6 +75,8 @@ class MEDIA_EXPORT MediaPlayerManager {
   virtual bool RequestPlay(int player_id,
                            base::TimeDelta duration,
                            bool has_audio) = 0;
+
+  virtual MediaResource* GetMediaResource() = 0;
 };
 
 }  // namespace media

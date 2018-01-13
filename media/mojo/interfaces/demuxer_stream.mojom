@@ -42,7 +42,7 @@ interface DemuxerStream {
   // TODO(dalecurtis): Remove this method in favor of serializing everything
   // into the DataPipe given to Initialize() once DataPipe supports framed data
   // in a nicer fashion.
-  Read() => (Status status,
+  Read1() => (Status status,
              DecoderBuffer? buffer,
              AudioDecoderConfig? audio_config,
              VideoDecoderConfig? video_config);

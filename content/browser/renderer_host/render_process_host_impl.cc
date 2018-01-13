@@ -4154,7 +4154,7 @@ void RenderProcessHostImpl::RecomputeAndUpdateWebKitPreferences() {
 // static
 void RenderProcessHostImpl::OnMojoError(int render_process_id,
                                         const std::string& error) {
-  LOG(ERROR) << "Terminating render process for bad Mojo message: " << error;
+  LOG(ERROR) << "SAM: Terminating render process for bad Mojo message: " << error;
 
   // The ReceivedBadMessage call below will trigger a DumpWithoutCrashing.
   // Capture the error message in a crash key value.

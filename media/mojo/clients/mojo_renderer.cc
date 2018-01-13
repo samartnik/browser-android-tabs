@@ -35,6 +35,7 @@ MojoRenderer::MojoRenderer(
 }
 
 MojoRenderer::~MojoRenderer() {
+  LOG(INFO) << "SAM: MojoRenderer::~MojoRenderer";
   DVLOG(1) << __func__;
   DCHECK(task_runner_->BelongsToCurrentThread());
 
@@ -76,7 +77,7 @@ void MojoRenderer::InitializeRendererFromStreams(
   // to the pipe.
   std::vector<DemuxerStream*> streams = media_resource_->GetAllStreams();
   std::vector<mojom::DemuxerStreamPtr> stream_proxies;
-
+  LOG(INFO) << "SAM: MojoRenderer::InitializeRendererFromStreams: " << streams.size();
   for (auto* stream : streams) {
     mojom::DemuxerStreamPtr stream_proxy;
     std::unique_ptr<MojoDemuxerStreamImpl> mojo_stream =
@@ -92,7 +93,6 @@ void MojoRenderer::InitializeRendererFromStreams(
     streams_.push_back(std::move(mojo_stream));
     stream_proxies.push_back(std::move(stream_proxy));
   }
-
   BindRemoteRendererIfNeeded();
 
   mojom::RendererClientAssociatedPtrInfo client_ptr_info;
@@ -108,6 +108,7 @@ void MojoRenderer::InitializeRendererFromStreams(
 }
 
 void MojoRenderer::InitializeRendererFromUrl(media::RendererClient* client) {
+  LOG(INFO) << "SAM: MojoRenderer::InitializeRendererFromUrl";
   DVLOG(2) << __func__;
   DCHECK(task_runner_->BelongsToCurrentThread());
 
@@ -320,6 +321,7 @@ void MojoRenderer::OnConnectionError() {
 
 void MojoRenderer::OnDemuxerStreamConnectionError(
     MojoDemuxerStreamImpl* stream) {
+  LOG(ERROR) << "SAM: MojoRenderer::OnDemuxerStreamConnectionError: stream=" << stream;
   DVLOG(1) << __func__ << ": stream=" << stream;
   DCHECK(task_runner_->BelongsToCurrentThread());
 
@@ -329,7 +331,8 @@ void MojoRenderer::OnDemuxerStreamConnectionError(
       return;
     }
   }
-  NOTREACHED() << "Unrecognized demuxer stream=" << stream;
+  LOG(ERROR) << "SAM: Unrecognized demuxer stream=" << stream;
+  NOTREACHED();
 }
 
 void MojoRenderer::BindRemoteRendererIfNeeded() {

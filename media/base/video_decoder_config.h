@@ -44,7 +44,8 @@ class MEDIA_EXPORT VideoDecoderConfig {
                      const gfx::Rect& visible_rect,
                      const gfx::Size& natural_size,
                      const std::vector<uint8_t>& extra_data,
-                     const EncryptionScheme& encryption_scheme);
+                     const EncryptionScheme& encryption_scheme,
+                     bool is_for_android_media_player);
 
   VideoDecoderConfig(const VideoDecoderConfig& other);
 
@@ -60,7 +61,8 @@ class MEDIA_EXPORT VideoDecoderConfig {
                   const gfx::Rect& visible_rect,
                   const gfx::Size& natural_size,
                   const std::vector<uint8_t>& extra_data,
-                  const EncryptionScheme& encryption_scheme);
+                  const EncryptionScheme& encryption_scheme,
+                  bool is_for_android_media_player);
 
   // Returns true if this object has appropriate configuration values, false
   // otherwise.
@@ -129,6 +131,8 @@ class MEDIA_EXPORT VideoDecoderConfig {
   // useful for decryptors that decrypts an encrypted stream to a clear stream.
   void SetIsEncrypted(bool is_encrypted);
 
+  bool is_for_android_media_player() const { return is_for_android_media_player_; };
+
  private:
   VideoCodec codec_;
   VideoCodecProfile profile_;
@@ -153,6 +157,7 @@ class MEDIA_EXPORT VideoDecoderConfig {
   VideoColorSpace color_space_info_;
   base::Optional<HDRMetadata> hdr_metadata_;
 
+  bool is_for_android_media_player_;
   // Not using DISALLOW_COPY_AND_ASSIGN here intentionally to allow the compiler
   // generated copy constructor and assignment operator. Since the extra data is
   // typically small, the performance impact is minimal.

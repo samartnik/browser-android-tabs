@@ -373,7 +373,7 @@ bool AVCodecContextToAudioDecoderConfig(
 
   config->Initialize(codec, sample_format, channel_layout, sample_rate,
                      extra_data, encryption_scheme, seek_preroll,
-                     codec_context->delay);
+                     codec_context->delay, false);
   if (channel_layout == CHANNEL_LAYOUT_DISCRETE)
     config->SetChannelsForDiscrete(codec_context->channels);
 
@@ -569,7 +569,7 @@ bool AVStreamToVideoDecoderConfig(const AVStream* stream,
   }
   config->Initialize(codec, profile, format, color_space, video_rotation,
                      coded_size, visible_rect, natural_size, extra_data,
-                     GetEncryptionScheme(stream));
+                     GetEncryptionScheme(stream), false);
 
   const AVCodecParameters* codec_parameters = stream->codecpar;
   config->set_color_space_info(VideoColorSpace(

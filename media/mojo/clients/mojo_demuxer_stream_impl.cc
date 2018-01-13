@@ -52,7 +52,8 @@ void MojoDemuxerStreamImpl::Initialize(InitializeCallback callback) {
                           audio_config, video_config);
 }
 
-void MojoDemuxerStreamImpl::Read(ReadCallback callback) {
+void MojoDemuxerStreamImpl::Read1(Read1Callback callback) {
+  LOG(INFO) << "SAM: MojoDemuxerStreamImpl::Read1";
   stream_->Read(base::Bind(&MojoDemuxerStreamImpl::OnBufferReady,
                            weak_factory_.GetWeakPtr(),
                            base::Passed(&callback)));
@@ -63,7 +64,7 @@ void MojoDemuxerStreamImpl::EnableBitstreamConverter() {
 }
 
 void MojoDemuxerStreamImpl::OnBufferReady(
-    ReadCallback callback,
+    Read1Callback callback,
     Status status,
     const scoped_refptr<media::DecoderBuffer>& buffer) {
   base::Optional<AudioDecoderConfig> audio_config;

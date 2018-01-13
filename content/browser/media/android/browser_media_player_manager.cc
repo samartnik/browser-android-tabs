@@ -217,6 +217,7 @@ void BrowserMediaPlayerManager::OnPlaybackComplete(int player_id) {
 }
 
 void BrowserMediaPlayerManager::OnMediaInterrupted(int player_id) {
+  LOG(INFO) << "SAM: BrowserMediaPlayerManager::OnMediaInterrupted";
   // Tell WebKit that the audio should be paused, then release all resources
   Send(new MediaPlayerMsg_MediaPlayerReleased(RoutingID(), player_id));
   ReleaseResources(player_id);
@@ -224,6 +225,7 @@ void BrowserMediaPlayerManager::OnMediaInterrupted(int player_id) {
 
 void BrowserMediaPlayerManager::OnBufferingUpdate(int player_id,
                                                   int percentage) {
+  LOG(INFO) << "SAM: BrowserMediaPlayerManager::OnBufferingUpdate: " << percentage;
   Send(new MediaPlayerMsg_MediaBufferingUpdate(RoutingID(), player_id,
                                                percentage));
 }
@@ -231,12 +233,14 @@ void BrowserMediaPlayerManager::OnBufferingUpdate(int player_id,
 void BrowserMediaPlayerManager::OnSeekRequest(
     int player_id,
     const base::TimeDelta& time_to_seek) {
+  LOG(INFO) << "SAM: BrowserMediaPlayerManager::OnSeekRequest: " << time_to_seek;
   Send(new MediaPlayerMsg_SeekRequest(RoutingID(), player_id, time_to_seek));
 }
 
 void BrowserMediaPlayerManager::OnSeekComplete(
     int player_id,
     const base::TimeDelta& current_time) {
+  LOG(INFO) << "SAM: BrowserMediaPlayerManager::OnSeekComplete: " << current_time;
   Send(new MediaPlayerMsg_SeekCompleted(RoutingID(), player_id, current_time));
 }
 

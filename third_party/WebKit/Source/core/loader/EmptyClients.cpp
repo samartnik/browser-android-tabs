@@ -208,6 +208,7 @@ std::unique_ptr<WebMediaPlayer> EmptyLocalFrameClient::CreateWebMediaPlayer(
     const WebMediaPlayerSource&,
     WebMediaPlayerClient*,
     WebLayerTreeView*) {
+  LOG(INFO) << "SAM: EmptyLocalFrameClient::CreateWebMediaPlayer";
   return nullptr;
 }
 

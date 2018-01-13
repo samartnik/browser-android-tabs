@@ -39,7 +39,7 @@ void MojoDemuxerStreamAdapter::Read(const ReadCB& read_cb) {
   DCHECK(read_cb_.is_null());
 
   read_cb_ = read_cb;
-  demuxer_stream_->Read(base::Bind(&MojoDemuxerStreamAdapter::OnBufferReady,
+  demuxer_stream_->Read1(base::Bind(&MojoDemuxerStreamAdapter::OnBufferReady,
                                    weak_factory_.GetWeakPtr()));
 }
 

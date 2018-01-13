@@ -146,6 +146,7 @@ class BLINK_EXPORT WebFrameClient {
                                             WebContentDecryptionModule*,
                                             const WebString& sink_id,
                                             WebLayerTreeView*) {
+    LOG(INFO) << "SAM: CreateMediaPlayer return nullptr";
     return nullptr;
   }
 

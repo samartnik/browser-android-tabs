@@ -25,6 +25,7 @@ FakeTextTrackStream::~FakeTextTrackStream() {
 }
 
 void FakeTextTrackStream::Read(const ReadCB& read_cb) {
+  LOG(INFO) << "SAM: FakeTextTrackStream::Read";
   DCHECK(!read_cb.is_null());
   DCHECK(read_cb_.is_null());
   OnRead();

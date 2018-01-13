@@ -166,6 +166,7 @@ void HTMLTrackElement::ScheduleLoad() {
 }
 
 void HTMLTrackElement::LoadTimerFired(TimerBase*) {
+  LOG(INFO) << "SAM: HTMLTrackElement::LoadTimerFired";
   DVLOG(TRACK_LOG_LEVEL) << "loadTimerFired";
 
   // 7. [X] Let URL be the track URL of the track element.

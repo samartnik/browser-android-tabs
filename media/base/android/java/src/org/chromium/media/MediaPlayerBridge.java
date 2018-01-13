@@ -4,6 +4,8 @@
 
 package org.chromium.media;
 
+import android.annotation.TargetApi;
+import android.media.MediaDataSource;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.TrackInfo;
 import android.net.Uri;
@@ -170,7 +172,12 @@ public class MediaPlayerBridge {
 
     @CalledByNative
     protected void seekTo(int msec) throws IllegalStateException {
-        getLocalPlayer().seekTo(msec);
+        Log.i(TAG, "SAM: seekTo: " + msec);
+        try {
+            getLocalPlayer().seekTo(msec);
+        } catch (IllegalStateException ise) {
+            Log.e(TAG, "SAM: Unable to prepare MediaPlayer.", ise);
+        }
     }
 
     @CalledByNative
@@ -204,6 +211,21 @@ public class MediaPlayerBridge {
             return true;
         } catch (IOException e) {
             Log.e(TAG, "Failed to set data source from file descriptor: " + e);
+            return false;
+        }
+    }
+
+    @TargetApi(23)
+    @CalledByNative
+    protected boolean setMediaDataSource(MediaDataSource mds) {
+        try {
+            getLocalPlayer().setDataSource(mds);
+            return true;
+        } catch (IllegalArgumentException e) {
+            Log.e(TAG, "Failed to set data source from media data source: " + e);
+            return false;
+        } catch (IllegalStateException e) {
+            Log.e(TAG, "Failed to set data source from media data source: " + e);
             return false;
         }
     }

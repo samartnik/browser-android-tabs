@@ -434,6 +434,7 @@ bool FrameProcessor::UpdateTrackIds(const TrackIdChanges& track_id_changes) {
 }
 
 void FrameProcessor::SetAllTrackBuffersNeedRandomAccessPoint() {
+  LOG(INFO) << "SAM: FrameProcessor::SetAllTrackBuffersNeedRandomAccessPoint";
   for (auto itr = track_buffers_.begin(); itr != track_buffers_.end(); ++itr) {
     itr->second->set_needs_random_access_point(true);
   }
@@ -635,12 +636,12 @@ bool FrameProcessor::ProcessFrame(
     DecodeTimestamp decode_timestamp = frame->GetDecodeTimestamp();
     base::TimeDelta frame_duration = frame->duration();
 
-    DVLOG(3) << __func__ << ": Processing frame Type=" << frame->type()
+    /*LOG(INFO) << __func__ << " SAM: Processing frame Type=" << frame->type()
              << ", TrackID=" << frame->track_id()
              << ", PTS=" << presentation_timestamp.InMicroseconds()
              << "us, DTS=" << decode_timestamp.InMicroseconds()
              << "us, DUR=" << frame_duration.InMicroseconds()
-             << "us, RAP=" << frame->is_key_frame();
+             << "us, RAP=" << frame->is_key_frame();*/
 
     // Buffering, splicing, append window trimming, etc., all depend on the
     // assumption that all audio coded frames are key frames. Metadata in the
@@ -659,12 +660,12 @@ bool FrameProcessor::ProcessFrame(
 
     // Sanity check the timestamps.
     if (presentation_timestamp == kNoTimestamp) {
-      MEDIA_LOG(ERROR, media_log_) << "Unknown PTS for " << frame->GetTypeName()
+      LOG(ERROR) << "SAM: Unknown PTS for " << frame->GetTypeName()
                                    << " frame";
       return false;
     }
     if (decode_timestamp == kNoDecodeTimestamp()) {
-      MEDIA_LOG(ERROR, media_log_) << "Unknown DTS for " << frame->GetTypeName()
+      LOG(ERROR) << "SAM: Unknown DTS for " << frame->GetTypeName()
                                    << " frame";
       return false;
     }
@@ -686,14 +687,14 @@ bool FrameProcessor::ProcessFrame(
     // All stream parsers must emit valid (non-negative) frame durations.
     // Note that duration of 0 can occur for at least WebM alt-ref frames.
     if (frame_duration == kNoTimestamp) {
-      MEDIA_LOG(ERROR, media_log_)
-          << "Unknown duration for " << frame->GetTypeName() << " frame at PTS "
+      LOG(ERROR)
+          << "SAM: Unknown duration for " << frame->GetTypeName() << " frame at PTS "
           << presentation_timestamp.InMicroseconds() << "us";
       return false;
     }
     if (frame_duration <  base::TimeDelta()) {
-      MEDIA_LOG(ERROR, media_log_)
-          << "Negative duration " << frame_duration.InMicroseconds()
+      LOG(ERROR)
+          << "SAM: Negative duration " << frame_duration.InMicroseconds()
           << "us for " << frame->GetTypeName() << " frame at PTS "
           << presentation_timestamp.InMicroseconds() << "us";
       return false;
@@ -737,14 +738,14 @@ bool FrameProcessor::ProcessFrame(
     StreamParser::TrackId track_id = frame->track_id();
     MseTrackBuffer* track_buffer = FindTrack(track_id);
     if (!track_buffer) {
-      MEDIA_LOG(ERROR, media_log_)
-          << "Unknown track with type " << frame->GetTypeName()
+      LOG(ERROR)
+          << "SAM: Unknown track with type " << frame->GetTypeName()
           << ", frame processor track id " << track_id
           << ", and parser track id " << frame->track_id();
       return false;
     }
     if (frame->type() != track_buffer->stream()->type()) {
-      MEDIA_LOG(ERROR, media_log_) << "Frame type " << frame->GetTypeName()
+      LOG(ERROR) << "SAM: Frame type " << frame->GetTypeName()
                                    << " doesn't match track buffer type "
                                    << track_buffer->stream()->type();
       return false;
@@ -826,7 +827,8 @@ bool FrameProcessor::ProcessFrame(
     if (presentation_timestamp < append_window_start ||
         frame_end_timestamp > append_window_end) {
       track_buffer->set_needs_random_access_point(true);
-      DVLOG(3) << "Dropping frame that is outside append window.";
+      LOG(WARNING) << "SAM: Dropping frame that is outside append window: " << presentation_timestamp << ", " << append_window_start
+      << ", " << frame_end_timestamp << ", " << append_window_end;
       return true;
     }
 
@@ -839,8 +841,8 @@ bool FrameProcessor::ProcessFrame(
       // are allowed. Remove this parse failure and error log as part of fixing
       // PTS/DTS conflation in SourceBufferStream. See https://crbug.com/398141
       // and https://crbug.com/718641.
-      MEDIA_LOG(ERROR, media_log_)
-          << frame->GetTypeName() << " frame with PTS "
+      LOG(ERROR)
+          << frame->GetTypeName() << " SAM: frame with PTS "
           << presentation_timestamp.InMicroseconds() << "us has negative DTS "
           << decode_timestamp.InMicroseconds()
           << "us after applying timestampOffset, handling any discontinuity, "
@@ -855,8 +857,8 @@ bool FrameProcessor::ProcessFrame(
       //       coded frame and jump to the top of the loop to start processing
       //       the next coded frame.
       if (!frame->is_key_frame()) {
-        DVLOG(3) << __func__
-                 << ": Dropping frame that is not a random access point";
+        LOG(WARNING) << __func__
+                 << " SAM: Dropping frame that is not a random access point";
         return true;
       }
 
@@ -891,8 +893,10 @@ bool FrameProcessor::ProcessFrame(
 
       // First, complete the append to track buffer streams of the previous
       // coded frame group's frames, if any.
-      if (!FlushProcessedFrames())
+      if (!FlushProcessedFrames()) {
+        LOG(ERROR) << "SAM: !FlushProcessedFrames";
         return false;
+      }
 
       if (pending_notify_all_group_start_) {
         NotifyStartOfCodedFrameGroup(decode_timestamp, presentation_timestamp);

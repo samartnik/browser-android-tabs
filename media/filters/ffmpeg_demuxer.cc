@@ -631,6 +631,7 @@ DemuxerStream::Liveness FFmpegDemuxerStream::liveness() const {
 }
 
 void FFmpegDemuxerStream::Read(const ReadCB& read_cb) {
+  LOG(INFO) << "SAM: FFmpegDemuxerStream::Read";
   DCHECK(task_runner_->BelongsToCurrentThread());
   CHECK(read_cb_.is_null()) << "Overlapping reads are not supported";
   read_cb_ = BindToCurrentLoop(read_cb);
@@ -879,6 +880,7 @@ std::string FFmpegDemuxer::GetDisplayName() const {
 void FFmpegDemuxer::Initialize(DemuxerHost* host,
                                const PipelineStatusCB& status_cb,
                                bool enable_text_tracks) {
+  LOG(INFO) << "SAM: FFmpegDemuxer::Initialize";
   DCHECK(task_runner_->BelongsToCurrentThread());
   host_ = host;
   text_enabled_ = enable_text_tracks;

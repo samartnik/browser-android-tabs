@@ -70,6 +70,7 @@ void WebMStreamParser::Flush() {
 }
 
 bool WebMStreamParser::Parse(const uint8_t* buf, int size) {
+  LOG(INFO) << "SAM: WebMStreamParser::Parse";
   DCHECK_NE(state_, kWaitingForInit);
 
   if (state_ == kError)

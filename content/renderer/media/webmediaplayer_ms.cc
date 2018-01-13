@@ -231,6 +231,7 @@ WebMediaPlayerMS::~WebMediaPlayerMS() {
 void WebMediaPlayerMS::Load(LoadType load_type,
                             const blink::WebMediaPlayerSource& source,
                             CORSMode /*cors_mode*/) {
+  LOG(INFO) << "SAM: WebMediaPlayerMS::Load";
   DVLOG(1) << __func__;
   DCHECK(thread_checker_.CalledOnValidThread());
 

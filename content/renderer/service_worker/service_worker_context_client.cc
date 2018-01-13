@@ -239,7 +239,7 @@ void ToWebServiceWorkerRequest(const ServiceWorkerFetchRequest& request,
 void ToWebServiceWorkerResponse(const ServiceWorkerResponse& response,
                                 blink::WebServiceWorkerResponse* web_response) {
   DCHECK(web_response);
-
+  LOG(INFO) << "SAM: ToWebServiceWorkerResponse";
   std::vector<blink::WebURL> url_list;
   for (const GURL& url : response.url_list)
     url_list.push_back(blink::WebURL(url));

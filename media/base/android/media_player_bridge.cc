@@ -14,6 +14,7 @@
 #include "base/strings/string_util.h"
 #include "jni/MediaPlayerBridge_jni.h"
 #include "media/base/android/media_common_android.h"
+#include "media/base/android/media_data_source_bridge.h"
 #include "media/base/android/media_player_manager.h"
 #include "media/base/android/media_resource_getter.h"
 #include "media/base/android/media_url_interceptor.h"
@@ -66,9 +67,13 @@ MediaPlayerBridge::MediaPlayerBridge(
       is_active_(false),
       has_error_(false),
       has_ever_started_(false),
-      weak_factory_(this) {}
+      is_media_source_(manager && manager->GetMediaResource()),
+      weak_factory_(this) {
+        LOG(INFO) << "SAM: MediaPlayerBridge::MediaPlayerBridge: " << is_media_source_;
+      }
 
 MediaPlayerBridge::~MediaPlayerBridge() {
+  LOG(INFO) << "SAM: MediaPlayerBridge::~MediaPlayerBridge";
   if (!j_media_player_bridge_.is_null()) {
     JNIEnv* env = base::android::AttachCurrentThread();
     CHECK(env);
@@ -84,33 +89,34 @@ MediaPlayerBridge::~MediaPlayerBridge() {
 }
 
 void MediaPlayerBridge::Initialize() {
+  LOG(INFO) << "SAM: MediaPlayerBridge::Initialize";
   cookies_.clear();
-  if (url_.SchemeIsBlob()) {
+  if (!is_media_source_ && url_.SchemeIsBlob()) {
     NOTREACHED();
     return;
   }
 
-  if (url_.SchemeIsFile() || url_.SchemeIs("data")) {
+  if (!is_media_source_ && (url_.SchemeIsFile() || url_.SchemeIs("data"))) {
     ExtractMediaMetadata(url_.spec());
     return;
   }
 
   media::MediaResourceGetter* resource_getter =
       manager()->GetMediaResourceGetter();
-  if (url_.SchemeIsFileSystem()) {
+  if (!is_media_source_ && url_.SchemeIsFileSystem()) {
     resource_getter->GetPlatformPathFromURL(
         url_, base::BindOnce(&MediaPlayerBridge::ExtractMediaMetadata,
                              weak_factory_.GetWeakPtr()));
     return;
   }
 
-  // Start extracting the metadata immediately if the request is anonymous.
+  // Start extracting the metadata immediately if the request is anonymous or it is media source.
   // Otherwise, wait for user credentials to be retrieved first.
-  if (!allow_credentials_) {
+  if (!allow_credentials_ || is_media_source_) {
     ExtractMediaMetadata(url_.spec());
     return;
   }
-
+  LOG(INFO) << "SAM: MediaPlayerBridge::Initialize GetCookies: " << url_ << ", " << site_for_cookies_;
   resource_getter->GetCookies(url_, site_for_cookies_,
                               base::Bind(&MediaPlayerBridge::OnCookiesRetrieved,
                                          weak_factory_.GetWeakPtr()));
@@ -146,26 +152,34 @@ void MediaPlayerBridge::SetVideoSurface(gl::ScopedJavaSurface surface) {
 }
 
 void MediaPlayerBridge::Prepare() {
+  LOG(INFO) << "SAM: MediaPlayerBridge::Prepare";
   DCHECK(j_media_player_bridge_.is_null());
 
-  if (url_.SchemeIsBlob()) {
+  if (!is_media_source_ && url_.SchemeIsBlob()) {
     NOTREACHED();
     return;
   }
 
   CreateJavaMediaPlayerBridge();
 
-  if (url_.SchemeIsFileSystem()) {
+  if (!is_media_source_ && url_.SchemeIsFileSystem()) {
     manager()->GetMediaResourceGetter()->GetPlatformPathFromURL(
         url_, base::BindOnce(&MediaPlayerBridge::SetDataSource,
                              weak_factory_.GetWeakPtr()));
     return;
   }
-
-  SetDataSource(url_.spec());
+  if (is_media_source_) {
+    SetMediaDataSource();
+  } else {
+    SetDataSource(url_.spec());
+  }
 }
 
 void MediaPlayerBridge::SetDataSource(const std::string& url) {
+  if (is_media_source_) {
+      NOTREACHED();
+      return;
+  }
   if (j_media_player_bridge_.is_null())
     return;
 
@@ -212,10 +226,28 @@ void MediaPlayerBridge::SetDataSource(const std::string& url) {
     OnMediaError(MEDIA_ERROR_FORMAT);
 }
 
+void MediaPlayerBridge::SetMediaDataSource() {
+  LOG(INFO) << "SAM: MediaPlayerBridge::SetMediaDataSource";
+  if (j_media_player_bridge_.is_null())
+    return;
+  JNIEnv* env = base::android::AttachCurrentThread();
+  CHECK(env);
+  media_data_source_bridge_.reset(new MediaDataSourceBridge(manager()->GetMediaResource()));
+  Java_MediaPlayerBridge_setMediaDataSource(env, j_media_player_bridge_, media_data_source_bridge_->GetJavaMediaDataSourceBridge());
+
+  if (!Java_MediaPlayerBridge_prepareAsync(env, j_media_player_bridge_))
+    OnMediaError(MEDIA_ERROR_FORMAT);
+}
+
 bool MediaPlayerBridge::InterceptMediaUrl(const std::string& url,
                                           int* fd,
                                           int64_t* offset,
                                           int64_t* size) {
+  if (is_media_source_) {
+      LOG(ERROR) << "SAM: MediaPlayerBridge::InterceptMediaUrl is called for non URL source";
+      NOTREACHED();
+      return false;
+  }
   // Sentinel value to check whether the output arguments have been set.
   const int kUnsetValue = -1;
 
@@ -267,6 +299,7 @@ void MediaPlayerBridge::OnAuthCredentialsRetrieved(
 }
 
 void MediaPlayerBridge::ExtractMediaMetadata(const std::string& url) {
+  LOG(INFO) << "SAM: MediaPlayerBridge::ExtractMediaMetadata";
   if (url.empty()) {
     OnMediaError(MEDIA_ERROR_FORMAT);
     on_decoder_resources_released_cb_.Run(player_id());
@@ -375,6 +408,7 @@ int MediaPlayerBridge::GetVideoHeight() {
 }
 
 void MediaPlayerBridge::SeekTo(base::TimeDelta timestamp) {
+  LOG(INFO) << "SAM: MediaPlayerBridge::SeekTo: " <<  timestamp << ", " << prepared_;
   // Record the time to seek when OnMediaPrepared() is called.
   pending_seek_ = timestamp;
   should_seek_on_prepare_ = true;
@@ -442,6 +476,7 @@ void MediaPlayerBridge::OnVideoSizeChanged(int width, int height) {
 }
 
 void MediaPlayerBridge::OnMediaError(int error_type) {
+  LOG(ERROR) << "SAM: MediaPlayerBridge::OnMediaError: " << error_type;
   // Gather errors for UMA only in the active state.
   // The MEDIA_ERROR_INVALID_CODE is reported by MediaPlayerListener.java in
   // the situations that are considered normal, and is ignored by upper level.
@@ -458,16 +493,19 @@ void MediaPlayerBridge::OnMediaError(int error_type) {
 }
 
 void MediaPlayerBridge::OnPlaybackComplete() {
+  LOG(INFO) << "SAM: MediaPlayerBridge::OnPlaybackComplete";
   time_update_timer_.Stop();
   MediaPlayerAndroid::OnPlaybackComplete();
 }
 
 void MediaPlayerBridge::OnMediaInterrupted() {
+  LOG(INFO) << "SAM: MediaPlayerBridge::OnMediaInterrupted";
   time_update_timer_.Stop();
   MediaPlayerAndroid::OnMediaInterrupted();
 }
 
 void MediaPlayerBridge::OnMediaPrepared() {
+  LOG(INFO) << "SAM: MediaPlayerBridge::OnMediaPrepared started";
   if (j_media_player_bridge_.is_null())
     return;
 
@@ -491,7 +529,7 @@ void MediaPlayerBridge::OnMediaPrepared() {
     StartInternal();
     pending_play_ = false;
   }
-
+  LOG(INFO) << "SAM: MediaPlayerBridge::OnMediaPrepared: " << duration_;
   manager()->OnMediaMetadataChanged(
       player_id(), duration_, width_, height_, true);
 }
@@ -515,6 +553,7 @@ void MediaPlayerBridge::UpdateAllowedOperations() {
       Java_AllowedOperations_canSeekForward(env, allowedOperations);
   can_seek_backward_ =
       Java_AllowedOperations_canSeekBackward(env, allowedOperations);
+  LOG(INFO) << "SAM: MediaPlayerBridge::UpdateAllowedOperations: " << can_pause_ << ", " << can_seek_forward_ << ", " << can_seek_backward_;
 }
 
 void MediaPlayerBridge::StartInternal() {
@@ -547,6 +586,7 @@ bool MediaPlayerBridge::SeekInternal(base::TimeDelta current_time,
                                      base::TimeDelta time) {
   // Seeking on content like live streams may cause the media player to
   // get stuck in an error state.
+  LOG(INFO) << "SAM: MediaPlayerBridge::SeekInternal: " << time << ", " << current_time << ", " << duration_;
   if (time < current_time && !CanSeekBackward())
     return false;
 

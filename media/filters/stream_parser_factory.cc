@@ -31,6 +31,8 @@
 #endif
 #include "media/formats/mp4/es_descriptor.h"
 #include "media/formats/mp4/mp4_stream_parser.h"
+#elif defined(OS_ANDROID)
+#include "media/formats/common/android_stream_parser.h"
 #endif
 
 namespace media {
@@ -103,7 +105,6 @@ static StreamParser* BuildWebMParser(const std::vector<std::string>& codecs,
   return new WebMStreamParser();
 }
 
-#if BUILDFLAG(USE_PROPRIETARY_CODECS)
 bool CheckIfMseFlacInIsobmffEnabled(const std::string& codec_id,
                                     MediaLog* media_log) {
   return base::FeatureList::IsEnabled(kMseFlacInIsobmff);
@@ -239,7 +240,7 @@ static const CodecInfo* const kAudioMP4Codecs[] = {&kMPEG4AACCodecInfo,
                                                    &kEAC3CodecInfo3,
 #endif
                                                    NULL};
-
+#if BUILDFLAG(USE_PROPRIETARY_CODECS)
 static StreamParser* BuildMP4Parser(const std::vector<std::string>& codecs,
                                     MediaLog* media_log) {
   std::set<int> audio_object_types;
@@ -285,7 +286,18 @@ static StreamParser* BuildMP4Parser(const std::vector<std::string>& codecs,
 
   return new mp4::MP4StreamParser(audio_object_types, has_sbr, has_flac);
 }
-
+#elif defined(OS_ANDROID)
+static StreamParser* BuildAndroidParser(const std::vector<std::string>& codecs,
+                                    MediaLog* media_log) {
+  LOG(INFO) << "SAM: BuildAndroidParser: ";
+  for (auto& codec : codecs) {
+    LOG(INFO) << "SAM: codec: " << codec;
+  }
+  // Todo: add check for Android version 6 and higher
+  return new AndroidStreamParser(codecs.size() > 0 ? codecs[0] : "");
+}
+#endif
+#if BUILDFLAG(USE_PROPRIETARY_CODECS)
 static const CodecInfo kMP3CodecInfo = { NULL, CodecInfo::AUDIO, NULL,
                                          CodecInfo::HISTOGRAM_MP3 };
 
@@ -354,6 +366,9 @@ static const SupportedTypeInfo kSupportedTypeInfo[] = {
 #if BUILDFLAG(ENABLE_MSE_MPEG2TS_STREAM_PARSER)
     {"video/mp2t", &BuildMP2TParser, kVideoMP2TCodecs},
 #endif
+#elif defined(OS_ANDROID)
+    {"video/mp4", &BuildAndroidParser, kVideoMP4Codecs},
+    {"audio/mp4", &BuildAndroidParser, kAudioMP4Codecs},
 #endif
 };
 
@@ -389,7 +404,7 @@ static bool VerifyCodec(
       return true;
     default:
       // Not audio or video, so skip it.
-      DVLOG(1) << "CodecInfo type of " << codec_info->type
+      LOG(ERROR) << "SAM: CodecInfo type of " << codec_info->type
                << " should not be specified in a SupportedTypes list";
       return false;
   }
@@ -430,8 +445,8 @@ static bool CheckTypeAndCodecs(
           return true;
         }
 
-        MEDIA_LOG(DEBUG, media_log)
-            << "A codecs parameter must be provided for '" << type << "'";
+        LOG(ERROR)
+            << "SAM: A codecs parameter must be provided for '" << type << "'";
         return false;
       }
 
@@ -452,7 +467,7 @@ static bool CheckTypeAndCodecs(
         }
 
         if (!found_codec) {
-          MEDIA_LOG(DEBUG, media_log) << "Codec '" << codec_id
+          LOG(ERROR) << "SAM: Codec '" << codec_id
                                       << "' is not supported for '" << type
                                       << "'";
           return false;
@@ -466,7 +481,6 @@ static bool CheckTypeAndCodecs(
       return true;
     }
   }
-
   // |type| didn't match any of the supported types.
   return false;
 }
@@ -487,7 +501,6 @@ std::unique_ptr<StreamParser> StreamParserFactory::Create(
   ParserFactoryFunction factory_function;
   std::vector<CodecInfo::HistogramTag> audio_codecs;
   std::vector<CodecInfo::HistogramTag> video_codecs;
-
   if (CheckTypeAndCodecs(type, codecs, media_log, &factory_function,
                          &audio_codecs, &video_codecs)) {
     // Log the number of codecs specified, as well as the details on each one.
@@ -509,7 +522,6 @@ std::unique_ptr<StreamParser> StreamParserFactory::Create(
                                   CodecInfo::HISTOGRAM_MAX + 1);
       }
     }
-
     stream_parser.reset(factory_function(codecs, media_log));
   }
 

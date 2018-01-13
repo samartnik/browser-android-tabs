@@ -18,6 +18,7 @@ MediaResourceShim::MediaResourceShim(
     : demuxer_ready_cb_(demuxer_ready_cb),
       streams_ready_(0),
       weak_factory_(this) {
+  LOG(INFO) << "SAM: MediaResourceShim::MediaResourceShim";
   DCHECK(!streams.empty());
   DCHECK(!demuxer_ready_cb_.is_null());
 
@@ -28,7 +29,9 @@ MediaResourceShim::MediaResourceShim(
   }
 }
 
-MediaResourceShim::~MediaResourceShim() {}
+MediaResourceShim::~MediaResourceShim() {
+    LOG(INFO) << "SAM: MediaResourceShim::~MediaResourceShim";
+}
 
 std::vector<DemuxerStream*> MediaResourceShim::GetAllStreams() {
   DCHECK(demuxer_ready_cb_.is_null());
@@ -44,6 +47,7 @@ void MediaResourceShim::SetStreamStatusChangeCB(
 }
 
 void MediaResourceShim::OnStreamReady() {
+  LOG(INFO) << "SAM: MediaResourceShim::OnStreamReady";
   if (++streams_ready_ == streams_.size())
     base::ResetAndReturn(&demuxer_ready_cb_).Run();
 }

@@ -35,7 +35,8 @@ class MEDIA_EXPORT AudioDecoderConfig {
                      ChannelLayout channel_layout,
                      int samples_per_second,
                      const std::vector<uint8_t>& extra_data,
-                     const EncryptionScheme& encryption_scheme);
+                     const EncryptionScheme& encryption_scheme,
+                     bool is_for_android_media_player);
 
   AudioDecoderConfig(const AudioDecoderConfig& other);
 
@@ -49,7 +50,8 @@ class MEDIA_EXPORT AudioDecoderConfig {
                   const std::vector<uint8_t>& extra_data,
                   const EncryptionScheme& encryption_scheme,
                   base::TimeDelta seek_preroll,
-                  int codec_delay);
+                  int codec_delay,
+                  bool is_for_android_media_player);
 
   // Returns true if this object has appropriate configuration values, false
   // otherwise.
@@ -95,6 +97,8 @@ class MEDIA_EXPORT AudioDecoderConfig {
   // useful for decryptors that decrypts an encrypted stream to a clear stream.
   void SetIsEncrypted(bool is_encrypted);
 
+  bool is_for_android_media_player() const { return is_for_android_media_player_; }
+
  private:
   AudioCodec codec_;
   SampleFormat sample_format_;
@@ -115,6 +119,7 @@ class MEDIA_EXPORT AudioDecoderConfig {
   // as padding added during encoding.
   int codec_delay_;
 
+  bool is_for_android_media_player_;
   // Not using DISALLOW_COPY_AND_ASSIGN here intentionally to allow the compiler
   // generated copy constructor and assignment operator. Since the extra data is
   // typically small, the performance impact is minimal.

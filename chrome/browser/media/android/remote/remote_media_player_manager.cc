@@ -293,4 +293,9 @@ void RemoteMediaPlayerManager::OnMediaMetadataChanged(int player_id,
                                                       width, height, success);
   }
 }
+
+media::MediaResource* RemoteMediaPlayerManager::GetMediaResource() {
+  LOG(INFO) << "SAM: RemoteMediaPlayerManager::GetMediaResource";
+  return nullptr;
+}
 } // namespace remote_media

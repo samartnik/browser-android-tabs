@@ -218,6 +218,7 @@ void MojoDecoderBufferReader::OnPipeError(MojoResult result) {
 std::unique_ptr<MojoDecoderBufferWriter> MojoDecoderBufferWriter::Create(
     DemuxerStream::Type type,
     mojo::ScopedDataPipeConsumerHandle* consumer_handle) {
+  LOG(INFO) << "SAM: MojoDecoderBufferWriter::Create";
   DVLOG(1) << __func__;
   std::unique_ptr<mojo::DataPipe> data_pipe = CreateDataPipe(type);
   *consumer_handle = std::move(data_pipe->consumer_handle);
@@ -232,15 +233,15 @@ MojoDecoderBufferWriter::MojoDecoderBufferWriter(
       armed_(false),
       bytes_written_(0) {
   DVLOG(1) << __func__;
-
+  LOG(INFO) << "SAM: MojoDecoderBufferWriter::MojoDecoderBufferWriter";
   MojoResult result =
       pipe_watcher_.Watch(producer_handle_.get(), MOJO_HANDLE_SIGNAL_WRITABLE,
                           MOJO_WATCH_CONDITION_SATISFIED,
                           base::Bind(&MojoDecoderBufferWriter::OnPipeWritable,
                                      base::Unretained(this)));
   if (result != MOJO_RESULT_OK) {
-    DVLOG(1) << __func__
-             << ": Failed to start watching the pipe. result=" << result;
+    LOG(ERROR) << __func__
+             << "SAM : Failed to start watching the pipe. result=" << result;
     producer_handle_.reset();
   }
 }

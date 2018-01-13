@@ -9,6 +9,10 @@ import "mojo/common/time.mojom";
 import "mojo/common/values.mojom";
 import "ui/gfx/geometry/mojo/geometry.mojom";
 
+// See media/base/demuxer_stream.h for descriptions.
+[Native]
+enum RawBuffer;
+
 // See media/base/audio_codecs.h for descriptions.
 [Native]
 enum AudioCodec;
@@ -131,6 +135,7 @@ struct AudioDecoderConfig {
   mojo.common.mojom.TimeDelta seek_preroll;
   int32 codec_delay;
   EncryptionScheme encryption_scheme;
+  bool is_for_android_media_player;
 };
 
 // This defines a mojo transport format for media::VideoDecoderConfig.
@@ -148,6 +153,7 @@ struct VideoDecoderConfig {
   EncryptionScheme encryption_scheme;
   VideoColorSpace color_space_info;
   HDRMetadata? hdr_metadata;
+  bool is_for_android_media_player;
 };
 
 // Native struct media::SubsampleEntry;

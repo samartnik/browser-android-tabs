@@ -5,6 +5,8 @@
 #include "media/base/audio_decoder_config.h"
 
 #include "base/logging.h"
+#include "base/optional.h"
+#include "build/buildflag.h"
 #include "media/base/limits.h"
 #include "media/base/media_util.h"
 
@@ -17,7 +19,8 @@ AudioDecoderConfig::AudioDecoderConfig()
       channel_layout_(CHANNEL_LAYOUT_UNSUPPORTED),
       samples_per_second_(0),
       bytes_per_frame_(0),
-      codec_delay_(0) {}
+      codec_delay_(0),
+      is_for_android_media_player_(false) {}
 
 AudioDecoderConfig::AudioDecoderConfig(
     AudioCodec codec,
@@ -25,9 +28,11 @@ AudioDecoderConfig::AudioDecoderConfig(
     ChannelLayout channel_layout,
     int samples_per_second,
     const std::vector<uint8_t>& extra_data,
-    const EncryptionScheme& encryption_scheme) {
+    const EncryptionScheme& encryption_scheme,
+    bool is_for_android_media_player)
+    : is_for_android_media_player_(is_for_android_media_player) {
   Initialize(codec, sample_format, channel_layout, samples_per_second,
-             extra_data, encryption_scheme, base::TimeDelta(), 0);
+             extra_data, encryption_scheme, base::TimeDelta(), 0, is_for_android_media_player);
 }
 
 AudioDecoderConfig::AudioDecoderConfig(const AudioDecoderConfig& other) =
@@ -40,7 +45,8 @@ void AudioDecoderConfig::Initialize(AudioCodec codec,
                                     const std::vector<uint8_t>& extra_data,
                                     const EncryptionScheme& encryption_scheme,
                                     base::TimeDelta seek_preroll,
-                                    int codec_delay) {
+                                    int codec_delay,
+                                    bool is_for_android_media_player) {
   codec_ = codec;
   channel_layout_ = channel_layout;
   samples_per_second_ = samples_per_second;
@@ -55,11 +61,17 @@ void AudioDecoderConfig::Initialize(AudioCodec codec,
   // |bytes_per_frame_| will be overwritten in SetChannelsForDiscrete()
   channels_ = ChannelLayoutToChannelCount(channel_layout_);
   bytes_per_frame_ = channels_ * bytes_per_channel_;
+  is_for_android_media_player_ = is_for_android_media_player;
 }
 
 AudioDecoderConfig::~AudioDecoderConfig() {}
 
 bool AudioDecoderConfig::IsValidConfig() const {
+  if (is_for_android_media_player_) {
+    // We don't need special config for Android media player
+    // Todo: add check for Android version
+    return true;
+  }
   return codec_ != kUnknownAudioCodec &&
          channel_layout_ != CHANNEL_LAYOUT_UNSUPPORTED &&
          bytes_per_channel_ > 0 &&
@@ -123,5 +135,4 @@ void AudioDecoderConfig::SetIsEncrypted(bool is_encrypted) {
     encryption_scheme_ = AesCtrEncryptionScheme();
   }
 }
-
 }  // namespace media
