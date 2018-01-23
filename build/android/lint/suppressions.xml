@@ -326,6 +326,14 @@ Still reading?
     <!-- 2 resources used by android webview glue layer, could be refactored -->
     <ignore regexp="android_webview/java/res/drawable-hdpi/ic_play_circle_outline_black_48dp.png"/>
     <ignore regexp="R.string.private_browsing_warning"/>
+    <!-- 7 temporary unused Brave resources -->
+    <ignore regexp="R.string.brave_sync_description"/>
+    <ignore regexp="R.string.brave_sync_have_existing_code"/>
+    <ignore regexp="R.drawable.brave_sync2x"/>
+    <ignore regexp="R.drawable.brave_sync_background"/>
+    <ignore regexp="R.string.brave_sync_qrcode_message"/>
+    <ignore regexp="R.string.brave_sync_qrcode"/>
+    <ignore regexp="R.string.reset_sync"/>
   </issue>
   <issue id="UseCompoundDrawables">
     <!-- Upscaling 24dp to 48dp doesn't work as expected with a TextView compound drawable. -->

@@ -39,8 +39,10 @@ import android.view.LayoutInflater;
 import android.view.WindowManager;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -67,6 +69,8 @@ import com.google.android.gms.vision.barcode.BarcodeDetector;
 
 import java.io.IOException;
 import java.lang.Runnable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Settings fragment that allows to control Sync functionality.
@@ -76,30 +80,39 @@ public class BraveSyncScreensPreference extends PreferenceFragment
 
   private static final String PREF_NAME = "SyncPreferences";
   private static final String PREF_SYNC_SWITCH = "sync_switch";
+  private static final String PREF_SYNC_BOOKMARKS = "brave_sync_bookmarks";
+  private static final String PREF_SYNC_TABS = "brave_sync_tabs";
+  private static final String PREF_SYNC_HISTORY = "brave_sync_history";
+  private static final String PREF_SYNC_AUTOFILL_PASSWORDS = "brave_sync_autofill_passwords";
+  private static final String PREF_SYNC_PAYMENT_SETTINGS = "brave_sync_payment_settings";
   private static final String PREF_SEED = "Seed";
   private static final String PREF_SYNC_DEVICE_NAME = "SyncDeviceName";
   private static final String TAG = "SYNC_PREFERENCES";
   // Permission request codes need to be < 256
   private static final int RC_HANDLE_CAMERA_PERM = 2;
   // Intent request code to handle updating play services if needed.
-    private static final int RC_HANDLE_GMS = 9001;
-  private TextView mEmptyView;
-  // The new to sync button displayed in the Sync view.
-  private Button mNewToSyncButton;
+  private static final int RC_HANDLE_GMS = 9001;
   // The have a sync code button displayed in the Sync view.
-  private Button mHaveASyncCodeButton;
+  private Button mScanChainCodeButton;
+  private Button mStartNewChainButton;
   private Button mEnterCodeWordsButton;
-  private Button mResetSync;
+  private Button mDoneButton;
+  private Button mDisplayCodeWordsButton;
+  private ImageButton mMobileButton;
+  private ImageButton mLaptopButton;
+  private Button mRemoveDeviceButton;
   // Brave Sync messaeg text view
   private TextView mBraveSyncTextView;
   private CameraSource mCameraSource;
   private CameraSourcePreview mCameraSourcePreview;
   private ImageView mImageView;
   private TableLayout mEnterWordsLayout;
-  private Switch mSyncSwitch;
   private BraveSyncScreensObserver mSyncScreensObserver;
-  private LinearLayout mBookmarksLayout;
   private String mDeviceName = "";
+  private ListView mDevicesListView;
+  private ArrayAdapter<String> mDevicesAdapter;
+  private List<String> mDevicesList;
+  private ListView mPreferences;
 
   @Override
   public void onConfigurationChanged(Configuration newConfig) {
@@ -167,38 +180,71 @@ public class BraveSyncScreensPreference extends PreferenceFragment
   public void onActivityCreated(Bundle savedInstanceState) {
       addPreferencesFromResource(R.xml.brave_sync_preferences);
       getActivity().setTitle(R.string.sign_in_sync);
-      ListView listView = (ListView) getView().findViewById(android.R.id.list);
-      mEmptyView = (TextView) getView().findViewById(android.R.id.empty);
-      listView.setEmptyView(mEmptyView);
-      listView.setDivider(null);
-
-      mNewToSyncButton = (Button) getView().findViewById(R.id.new_to_sync);
-      if (mNewToSyncButton != null) {
-          mNewToSyncButton.setOnClickListener(this);
+      mDevicesList = new ArrayList<String>();
+      mDevicesAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, mDevicesList);
+      mPreferences = (ListView) getView().findViewById(android.R.id.list);
+      ChromeSwitchPreference prefSync = (ChromeSwitchPreference) findPreference(PREF_SYNC_SWITCH);
+      if (null != prefSync) {
+          Log.i(TAG, "SAM: Hiding Sync view");
+          //prefSync.setInvisible();
+      }
+      Preference prefDevicesControl = findPreference("brave_sync_devices_control");
+      View prefDevicesControlView = prefDevicesControl.getView(null, null);
+      if (null != prefDevicesControlView) {
+          Log.i(TAG, "SAM: Setting up Devices controls");
+          mDevicesListView = (ListView) prefDevicesControlView.findViewById(R.id.brave_sync_devices);
+          if (null == mDevicesListView) {
+              Log.e(TAG, "SAM: Could not find list view");
+          }
+          mDevicesListView.setAdapter(mDevicesAdapter);
+          mRemoveDeviceButton = (Button)prefDevicesControlView.findViewById(R.id.brave_sync_btn_remove_device);
       }
 
-      mHaveASyncCodeButton = (Button) getView().findViewById(R.id.have_existing_sync_code);
-      if (mHaveASyncCodeButton != null) {
-          mHaveASyncCodeButton.setOnClickListener(this);
+      mDevicesList.add("test device");
+      mDevicesAdapter.notifyDataSetChanged();
+
+      mScanChainCodeButton = (Button) getView().findViewById(R.id.brave_sync_btn_scan_chain_code);
+      if (mScanChainCodeButton != null) {
+          mScanChainCodeButton.setOnClickListener(this);
       }
 
-      mEnterCodeWordsButton = (Button) getView().findViewById(R.id.enter_code_words);
+      mStartNewChainButton = (Button) getView().findViewById(R.id.brave_sync_btn_start_new_chain);
+      if (mStartNewChainButton != null) {
+          mStartNewChainButton.setOnClickListener(this);
+      }
+
+      mEnterCodeWordsButton = (Button) getView().findViewById(R.id.brave_sync_btn_enter_code_words);
       if (mEnterCodeWordsButton != null) {
           mEnterCodeWordsButton.setOnClickListener(this);
       }
+
+      mDoneButton = (Button) getView().findViewById(R.id.brave_sync_btn_done);
+      if (mDoneButton != null) {
+          mDoneButton.setOnClickListener(this);
+      }
+
+      mDisplayCodeWordsButton = (Button) getView().findViewById(R.id.brave_sync_btn_display_code_words);
+      if (mDisplayCodeWordsButton != null) {
+          mDisplayCodeWordsButton.setOnClickListener(this);
+      }
+
+      mMobileButton = (ImageButton) getView().findViewById(R.id.brave_sync_btn_mobile);
+      if (mMobileButton != null) {
+          mMobileButton.setOnClickListener(this);
+      }
+
+      mLaptopButton = (ImageButton) getView().findViewById(R.id.brave_sync_btn_laptop);
+      if (mLaptopButton != null) {
+          mLaptopButton.setOnClickListener(this);
+      }
+
       mBraveSyncTextView = (TextView)getView().findViewById(R.id.brave_sync_text);
       setMainSyncText();
       mImageView = (ImageView)getView().findViewById(R.id.brave_sync_image);
       mCameraSourcePreview = (CameraSourcePreview)getView().findViewById(R.id.preview);
       mEnterWordsLayout = (TableLayout)getView().findViewById(R.id.tableEnterWords);
-      mSyncSwitch = (Switch)getView().findViewById(R.id.sync_switch_control);
-      if (null != mSyncSwitch) {
-          mSyncSwitch.setOnCheckedChangeListener(this);
-      }
-      mBookmarksLayout = (LinearLayout)getView().findViewById(R.id.bookmarksLayout);
-      mResetSync = (Button)getView().findViewById(R.id.reset_sync);
-      if (null != mResetSync) {
-          mResetSync.setOnClickListener(this);
+      if (null != mRemoveDeviceButton) {
+          mRemoveDeviceButton.setOnClickListener(this);
       }
       setAppropriateView();
       getActivity().getWindow().setSoftInputMode(
@@ -208,6 +254,7 @@ public class BraveSyncScreensPreference extends PreferenceFragment
   }
 
   private void setAppropriateView() {
+      getActivity().setTitle(R.string.prefs_sync);
       SharedPreferences sharedPref = getActivity().getApplicationContext().getSharedPreferences(PREF_NAME, 0);
       String seed = sharedPref.getString(PREF_SEED, null);
       if (null == seed || seed.isEmpty()) {
@@ -218,11 +265,11 @@ public class BraveSyncScreensPreference extends PreferenceFragment
           if (null != mImageView) {
               mImageView.setVisibility(View.VISIBLE);
           }
-          /*if (null != mNewToSyncButton) {
-              mNewToSyncButton.setVisibility(View.VISIBLE);
-          }*/
-          if (null != mHaveASyncCodeButton) {
-              mHaveASyncCodeButton.setVisibility(View.VISIBLE);
+          if (null != mScanChainCodeButton) {
+              mScanChainCodeButton.setVisibility(View.VISIBLE);
+          }
+          if (null != mStartNewChainButton) {
+              mStartNewChainButton.setVisibility(View.VISIBLE);
           }
           if (null != mEnterWordsLayout) {
               mEnterWordsLayout.setVisibility(View.GONE);
@@ -230,14 +277,27 @@ public class BraveSyncScreensPreference extends PreferenceFragment
           if (null != mEnterCodeWordsButton) {
               mEnterCodeWordsButton.setVisibility(View.GONE);
           }
+          if (null != mDoneButton) {
+              mDoneButton.setVisibility(View.GONE);
+          }
+          if (null != mDisplayCodeWordsButton) {
+              mDisplayCodeWordsButton.setVisibility(View.GONE);
+          }
+          if (null != mMobileButton) {
+              mMobileButton.setVisibility(View.GONE);
+          }
+          if (null != mLaptopButton) {
+              mLaptopButton.setVisibility(View.GONE);
+          }
           if (null != mBraveSyncTextView) {
               mBraveSyncTextView.setVisibility(View.VISIBLE);
           }
-          if (null != mBookmarksLayout) {
-              mBookmarksLayout.setVisibility(View.GONE);
+          if (null != mPreferences) {
+              //mPreferences.setVisibility(View.GONE);
+              mPreferences.setVisibility(View.VISIBLE);
           }
-          if (null != mResetSync) {
-              mResetSync.setVisibility(View.GONE);
+          if (null != mRemoveDeviceButton) {
+              mRemoveDeviceButton.setVisibility(View.GONE);
           }
           return;
       }
@@ -248,11 +308,11 @@ public class BraveSyncScreensPreference extends PreferenceFragment
       if (null != mImageView) {
           mImageView.setVisibility(View.GONE);
       }
-      if (null != mNewToSyncButton) {
-          mNewToSyncButton.setVisibility(View.GONE);
+      if (null != mScanChainCodeButton) {
+          mScanChainCodeButton.setVisibility(View.GONE);
       }
-      if (null != mHaveASyncCodeButton) {
-          mHaveASyncCodeButton.setVisibility(View.GONE);
+      if (null != mStartNewChainButton) {
+          mStartNewChainButton.setVisibility(View.GONE);
       }
       if (null != mEnterWordsLayout) {
           mEnterWordsLayout.setVisibility(View.GONE);
@@ -260,33 +320,48 @@ public class BraveSyncScreensPreference extends PreferenceFragment
       if (null != mEnterCodeWordsButton) {
           mEnterCodeWordsButton.setVisibility(View.GONE);
       }
+      if (null != mDoneButton) {
+          mDoneButton.setVisibility(View.GONE);
+      }
+      if (null != mDisplayCodeWordsButton) {
+          mDisplayCodeWordsButton.setVisibility(View.GONE);
+      }
+      if (null != mMobileButton) {
+          mMobileButton.setVisibility(View.GONE);
+      }
+      if (null != mLaptopButton) {
+          mLaptopButton.setVisibility(View.GONE);
+      }
       if (null != mBraveSyncTextView) {
           mBraveSyncTextView.setVisibility(View.GONE);
       }
-      if (null != mSyncSwitch) {
-          ChromeSwitchPreference syncSwitch = (ChromeSwitchPreference) findPreference(PREF_SYNC_SWITCH);
-          if (null != syncSwitch) {
-              mSyncSwitch.setChecked(syncSwitch.isChecked());
-          }
-      }
-      /*if (null != mBookmarksLayout) {
-          mBookmarksLayout.setVisibility(View.VISIBLE);
+      /*ChromeApplication application = (ChromeApplication)ContextUtils.getApplicationContext();
+      if (null != application && null != application.mBraveSyncWorker) {
+          application.mBraveSyncWorker.GetAllDevices(mDevicesList);
+          mDevicesAdapter.notifyDataSetChanged();
       }*/
-      if (null != mResetSync) {
-          mResetSync.setVisibility(View.VISIBLE);
+      if (null != mPreferences) {
+          mPreferences.setVisibility(View.VISIBLE);
+      }
+      if (null != mRemoveDeviceButton) {
+          mRemoveDeviceButton.setVisibility(View.VISIBLE);
       }
   }
 
   private void setMainSyncText() {
-      setSyncText(getResources().getString(R.string.brave_sync), getResources().getString(R.string.brave_sync_description));
+      setSyncText(getResources().getString(R.string.brave_sync), getResources().getString(R.string.brave_sync_description_page_1_part_1) + "\n" + getResources().getString(R.string.brave_sync_description_page_1_part_2));
   }
 
   private void setQRCodeText() {
-      setSyncText(getResources().getString(R.string.brave_sync_qrcode), getResources().getString(R.string.brave_sync_qrcode_message));
+      setSyncText("", getResources().getString(R.string.brave_sync_qrcode_message_v2));
   }
 
   private void setSyncText(String title, String message) {
-      String htmlMessage = "<b>" + title + "</b><br/>" + message.replace("\n", "<br/>");
+      String htmlMessage = "";
+      if (title.length() > 0) {
+         htmlMessage = "<b>" + title + "</b><br/><br/>";
+      }
+      htmlMessage += message.replace("\n", "<br/>");
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
           setTextViewStyle(htmlMessage);
       } else {
@@ -310,25 +385,46 @@ public class BraveSyncScreensPreference extends PreferenceFragment
   /** OnClickListener for the clear button. We show an alert dialog to confirm the action */
   @Override
   public void onClick(View v) {
-      if (getActivity() == null || v != mNewToSyncButton && v != mHaveASyncCodeButton
-          && v != mEnterCodeWordsButton && v != mResetSync) return;
+      if (getActivity() == null || v != mScanChainCodeButton && v != mStartNewChainButton
+          && v != mEnterCodeWordsButton && v != mDoneButton && v != mDisplayCodeWordsButton
+          && v != mMobileButton && v != mLaptopButton && v != mRemoveDeviceButton) return;
 
-      if (mHaveASyncCodeButton == v) {
+      if (mScanChainCodeButton == v) {
           showAddDeviceNameDialog();
-      } else if (mNewToSyncButton == v) {
+      } else if (mStartNewChainButton == v) {
+          setNewChainLayout();
+      } else if (mMobileButton == v) {
+          setAddMobileDeviceLayout();
+      } else if (mLaptopButton == v) {
+          // TODO
+      } else if (mDoneButton == v) {
+          // TODO
+      } else if (mDisplayCodeWordsButton == v) {
           // TODO
       } else if (mEnterCodeWordsButton == v) {
           if (null != mImageView) {
               mImageView.setVisibility(View.GONE);
           }
-          if (null != mNewToSyncButton) {
-              mNewToSyncButton.setVisibility(View.GONE);
+          if (null != mScanChainCodeButton) {
+              mScanChainCodeButton.setVisibility(View.GONE);
           }
-          if (null != mHaveASyncCodeButton) {
-              mHaveASyncCodeButton.setVisibility(View.GONE);
+          if (null != mStartNewChainButton) {
+              mStartNewChainButton.setVisibility(View.GONE);
           }
           if (null != mEnterCodeWordsButton) {
               mEnterCodeWordsButton.setVisibility(View.GONE);
+          }
+          if (null != mDoneButton) {
+              mDoneButton.setVisibility(View.GONE);
+          }
+          if (null != mDisplayCodeWordsButton) {
+              mDisplayCodeWordsButton.setVisibility(View.GONE);
+          }
+          if (null != mMobileButton) {
+              mMobileButton.setVisibility(View.GONE);
+          }
+          if (null != mLaptopButton) {
+              mLaptopButton.setVisibility(View.GONE);
           }
           if (null != mBraveSyncTextView) {
               mBraveSyncTextView.setVisibility(View.GONE);
@@ -340,6 +436,7 @@ public class BraveSyncScreensPreference extends PreferenceFragment
           if (null != mEnterWordsLayout) {
               mEnterWordsLayout.setVisibility(View.VISIBLE);
           }
+          getActivity().setTitle(R.string.brave_sync_code_words_title);
           EditText wordControl = getWordControl(1);
           if (null != wordControl) {
               wordControl.requestFocus();
@@ -392,9 +489,6 @@ public class BraveSyncScreensPreference extends PreferenceFragment
                                   ChromeSwitchPreference syncSwitch = (ChromeSwitchPreference) findPreference(PREF_SYNC_SWITCH);
                                   if (null != syncSwitch) {
                                       syncSwitch.setChecked(true);
-                                      if (null != mSyncSwitch) {
-                                          mSyncSwitch.setChecked(true);
-                                      }
                                   }
                                   ChromeApplication application = (ChromeApplication)ContextUtils.getApplicationContext();
                                   if (null != application && null != application.mBraveSyncWorker) {
@@ -409,19 +503,14 @@ public class BraveSyncScreensPreference extends PreferenceFragment
               }
               application.mBraveSyncWorker.InitJSWebView(mSyncScreensObserver);
           }
-      } else if (mResetSync == v) {
+      } else if (mRemoveDeviceButton == v) {
           ResetSyncDialog();
       }
   }
 
   public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-      if (getActivity() == null || buttonView != mSyncSwitch) return;
-      ChromeSwitchPreference syncSwitch = (ChromeSwitchPreference) findPreference(PREF_SYNC_SWITCH);
-      if (null != syncSwitch) {
-          syncSwitch.setChecked(isChecked);
-          /*if (null != mSyncSwitch) {
-              mSyncSwitch.setChecked(isChecked);
-          }*/
+      if (getActivity() == null) {
+          return;
       }
   }
 
@@ -429,17 +518,29 @@ public class BraveSyncScreensPreference extends PreferenceFragment
       if (null != mImageView) {
           mImageView.setVisibility(View.VISIBLE);
       }
-      /*if (null != mNewToSyncButton) {
-          mNewToSyncButton.setVisibility(View.VISIBLE);
-      }*/
-      if (null != mHaveASyncCodeButton) {
-          mHaveASyncCodeButton.setVisibility(View.VISIBLE);
+      if (null != mScanChainCodeButton) {
+          mScanChainCodeButton.setVisibility(View.VISIBLE);
+      }
+      if (null != mStartNewChainButton) {
+          mStartNewChainButton.setVisibility(View.VISIBLE);
       }
       if (null != mBraveSyncTextView) {
           mBraveSyncTextView.setVisibility(View.VISIBLE);
       }
       if (null != mEnterCodeWordsButton) {
           mEnterCodeWordsButton.setVisibility(View.GONE);
+      }
+      if (null != mDoneButton) {
+          mDoneButton.setVisibility(View.GONE);
+      }
+      if (null != mDisplayCodeWordsButton) {
+          mDisplayCodeWordsButton.setVisibility(View.GONE);
+      }
+      if (null != mMobileButton) {
+          mMobileButton.setVisibility(View.GONE);
+      }
+      if (null != mLaptopButton) {
+          mLaptopButton.setVisibility(View.GONE);
       }
       if (null != mCameraSourcePreview) {
           mCameraSourcePreview.setVisibility(View.GONE);
@@ -601,7 +702,7 @@ public class BraveSyncScreensPreference extends PreferenceFragment
               }
               seed += String.valueOf(Integer.parseInt(barcodeString[i], 16));
           }
-          //Log.i(TAG, "!!!seed == " + seed);
+          // Log.i(TAG, "!!!seed == " + seed);
           // Save seed and deviceId in preferences
           SharedPreferences sharedPref = getActivity().getApplicationContext().getSharedPreferences(PREF_NAME, 0);
           SharedPreferences.Editor editor = sharedPref.edit();
@@ -610,11 +711,9 @@ public class BraveSyncScreensPreference extends PreferenceFragment
           getActivity().runOnUiThread(new Runnable() {
               @Override
               public void run() {
-                  showEndDialog(getResources().getString(R.string.sync_device_success));
                   ChromeSwitchPreference syncSwitch = (ChromeSwitchPreference) findPreference(PREF_SYNC_SWITCH);
                   if (null != syncSwitch) {
                       syncSwitch.setChecked(true);
-                      mSyncSwitch.setChecked(true);
                   }
                   ChromeApplication application = (ChromeApplication)ContextUtils.getApplicationContext();
                   if (null != application && null != application.mBraveSyncWorker) {
@@ -724,11 +823,11 @@ public class BraveSyncScreensPreference extends PreferenceFragment
                   if (null != mImageView) {
                       mImageView.setVisibility(View.GONE);
                   }
-                  if (null != mNewToSyncButton) {
-                      mNewToSyncButton.setVisibility(View.GONE);
+                  if (null != mScanChainCodeButton) {
+                      mScanChainCodeButton.setVisibility(View.GONE);
                   }
-                  if (null != mHaveASyncCodeButton) {
-                      mHaveASyncCodeButton.setVisibility(View.GONE);
+                  if (null != mStartNewChainButton) {
+                      mStartNewChainButton.setVisibility(View.GONE);
                   }
                   if (null != mEnterWordsLayout) {
                       mEnterWordsLayout.setVisibility(View.GONE);
@@ -736,7 +835,20 @@ public class BraveSyncScreensPreference extends PreferenceFragment
                   if (null != mEnterCodeWordsButton) {
                       mEnterCodeWordsButton.setVisibility(View.VISIBLE);
                   }
+                  if (null != mDoneButton) {
+                      mDoneButton.setVisibility(View.GONE);
+                  }
+                  if (null != mDisplayCodeWordsButton) {
+                      mDisplayCodeWordsButton.setVisibility(View.GONE);
+                  }
+                  if (null != mMobileButton) {
+                      mMobileButton.setVisibility(View.GONE);
+                  }
+                  if (null != mLaptopButton) {
+                      mLaptopButton.setVisibility(View.GONE);
+                  }
                   setQRCodeText();
+                  getActivity().setTitle(R.string.brave_sync_scan_chain_code);
                   if (null != mCameraSourcePreview) {
                       mCameraSourcePreview.setVisibility(View.VISIBLE);
                       int rc = ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.CAMERA);
@@ -786,9 +898,6 @@ public class BraveSyncScreensPreference extends PreferenceFragment
                   ChromeSwitchPreference syncSwitch = (ChromeSwitchPreference) findPreference(PREF_SYNC_SWITCH);
                   if (null != syncSwitch) {
                       syncSwitch.setChecked(false);
-                      if (null != mSyncSwitch) {
-                          mSyncSwitch.setChecked(false);
-                      }
                   }
                   ChromeApplication application = (ChromeApplication)ContextUtils.getApplicationContext();
                   if (null != application && null != application.mBraveSyncWorker) {
@@ -799,12 +908,83 @@ public class BraveSyncScreensPreference extends PreferenceFragment
           }
       };
       AlertDialog alertDialog = alert
-              .setTitle(getResources().getString(R.string.reset_sync))
+              .setTitle(getResources().getString(R.string.brave_sync_remove_device_text))
               .setMessage(getResources().getString(R.string.resetting_sync))
               .setPositiveButton(R.string.ok, onClickListener)
               .setNegativeButton(R.string.cancel, onClickListener)
               .create();
       alertDialog.getDelegate().setHandleNativeActionModesEnabled(false);
       alertDialog.show();
+  }
+
+  private void setNewChainLayout() {
+      getActivity().setTitle(R.string.brave_sync_start_new_chain);
+      if (null != mBraveSyncTextView) {
+          mBraveSyncTextView.setVisibility(View.GONE);
+      }
+      if (null != mImageView) {
+          mImageView.setVisibility(View.GONE);
+      }
+      if (null != mScanChainCodeButton) {
+          mScanChainCodeButton.setVisibility(View.GONE);
+      }
+      if (null != mStartNewChainButton) {
+          mStartNewChainButton.setVisibility(View.GONE);
+      }
+      if (null != mEnterWordsLayout) {
+          mEnterWordsLayout.setVisibility(View.GONE);
+      }
+      if (null != mEnterCodeWordsButton) {
+          mEnterCodeWordsButton.setVisibility(View.GONE);
+      }
+      if (null != mDoneButton) {
+          mDoneButton.setVisibility(View.GONE);
+      }
+      if (null != mDisplayCodeWordsButton) {
+          mDisplayCodeWordsButton.setVisibility(View.GONE);
+      }
+      if (null != mMobileButton) {
+          mMobileButton.setVisibility(View.VISIBLE);
+      }
+      if (null != mLaptopButton) {
+          mLaptopButton.setVisibility(View.VISIBLE);
+      }
+  }
+
+  private void setAddMobileDeviceLayout() {
+      getActivity().setTitle(R.string.brave_sync_btn_mobile);
+      if (null != mBraveSyncTextView) {
+          setSyncText(getResources().getString(R.string.brave_sync_scan_sync_code),
+                        getResources().getString(R.string.brave_sync_add_mobile_device_text_part_1) + "\n\n" +
+                        getResources().getString(R.string.brave_sync_add_mobile_device_text_part_2));
+          mBraveSyncTextView.setVisibility(View.VISIBLE);
+      }
+      if (null != mImageView) {
+          mImageView.setVisibility(View.GONE);
+      }
+      if (null != mScanChainCodeButton) {
+          mScanChainCodeButton.setVisibility(View.GONE);
+      }
+      if (null != mStartNewChainButton) {
+          mStartNewChainButton.setVisibility(View.GONE);
+      }
+      if (null != mEnterWordsLayout) {
+          mEnterWordsLayout.setVisibility(View.GONE);
+      }
+      if (null != mEnterCodeWordsButton) {
+          mEnterCodeWordsButton.setVisibility(View.GONE);
+      }
+      if (null != mDoneButton) {
+          mDoneButton.setVisibility(View.VISIBLE);
+      }
+      if (null != mDisplayCodeWordsButton) {
+          mDisplayCodeWordsButton.setVisibility(View.VISIBLE);
+      }
+      if (null != mMobileButton) {
+          mMobileButton.setVisibility(View.GONE);
+      }
+      if (null != mLaptopButton) {
+          mLaptopButton.setVisibility(View.GONE);
+      }
   }
 }

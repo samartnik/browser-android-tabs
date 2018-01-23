@@ -72,7 +72,6 @@ public class BraveSyncWorker {
     private static final int SEND_RECORDS_COUNT_LIMIT = 1000;
     private static final int FETCH_RECORDS_CHUNK_SIZE = 300;
     private static final String PREF_SYNC_SWITCH = "sync_switch";
-    private static final String PREF_BOOKMARKS_CHECK_BOX = "sync_bookmarks_check_box";
     public static final String CREATE_RECORD = "0";
     public static final String UPDATE_RECORD = "1";
     public static final String DELETE_RECORD = "2";
@@ -95,8 +94,8 @@ public class BraveSyncWorker {
     private String mSeed = null;
     private String mDeviceId = null;
     private String mApiVersion = "0";
-    //private String mServerUrl = "https://sync-staging.brave.com";
-    private String mServerUrl = "https://sync.brave.com";
+    private String mServerUrl = "https://sync-staging.brave.com";
+    //private String mServerUrl = "https://sync.brave.com";
     private String mDebug = "true";
     private long mTimeLastFetch = 0;   // In milliseconds
     private long mTimeLastFetchExecuted = 0;   // In milliseconds
@@ -517,6 +516,46 @@ public class BraveSyncWorker {
         //Log.i("TAG", "!!!GetDeviceNameByObjectId res == " + res);
 
         return res;
+    }
+
+    public void GetAllDevices(List<String> devices) {
+        String object = nativeGetObjectIdByLocalId("devicesNames");
+        if (object.isEmpty()) {
+            return;
+        }
+
+        JsonReader reader = null;
+        try {
+            reader = new JsonReader(new InputStreamReader(new ByteArrayInputStream(object.getBytes()), "UTF-8"));
+            reader.beginArray();
+            while (reader.hasNext()) {
+                reader.beginObject();
+                while (reader.hasNext()) {
+                    String name = reader.nextName();
+                    if (name.equals("name")) {
+                        devices.add(reader.nextString());
+                    } else {
+                        reader.skipValue();
+                    }
+               }
+               reader.endObject();
+           }
+           reader.endArray();
+        } catch (UnsupportedEncodingException e) {
+            Log.e("TAG", "GetAllDevices UnsupportedEncodingException error " + e);
+        } catch (IOException e) {
+            Log.e("TAG", "GetAllDevices IOException error " + e);
+            return;
+        } catch (IllegalStateException e) {
+              Log.e("TAG", "GetAllDevices IllegalStateException error " + e);
+        } finally {
+            if (null != reader) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                }
+            }
+        }
     }
 
     private String GetObjectId(String localId) {

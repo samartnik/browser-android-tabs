@@ -8,47 +8,18 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent">
 
-    <LinearLayout android:id="@+id/bookmarksLayout"
+    <!-- Items from brave_sync_preferences.xml -->
+    <ListView android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dip"
-        android:orientation="horizontal"
-        android:visibility="gone" >
-
-        <TextView
-            android:id="@+id/bookmarks_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/sync_bookmarks"
-            android:gravity="start"
-            android:layout_weight="1"
-            android:textStyle="bold"
-            android:padding="5dip" />
-
-        <Switch
-            android:id="@+id/sync_switch_control"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="5dip"
-            android:defaultValue="false"
-            android:gravity="end"
-            android:layout_weight="1"
-            android:theme="@style/SwitchTheme" />
-    </LinearLayout>
-
-    <Button android:id="@+id/reset_sync"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/reset_sync"
-        style="@style/FlushFooterButton"
-        android:visibility="gone" />
+        android:drawSelectorOnTop="false"
+        android:visibility="gone"/>    
 
     <ImageView android:id="@+id/brave_sync_image"
        android:layout_width="match_parent"
        android:layout_height="0px"
-       android:layout_weight="3"
-       android:src="@drawable/brave_sync2x"
-       android:background="@drawable/brave_sync_background"
+       android:layout_weight="2"
+       android:src="@drawable/brave_sync"
        android:scaleType="center"
        android:contentDescription="@null" />
 
@@ -66,30 +37,55 @@
        android:layout_weight="1.4"
        android:gravity="center" />
 
-   <ListView android:id="@android:id/list"
-       android:layout_width="match_parent"
-       android:layout_height="1dp"
-       android:visibility="gone"/>
-
-   <Button android:id="@+id/new_to_sync"
+   <Button android:id="@+id/brave_sync_btn_scan_chain_code"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:text="@string/new_to_sync"
-       android:visibility="gone"
+       android:text="@string/brave_sync_scan_chain_code"
        style="@style/FlushFooterButton"/>
 
-   <Button android:id="@+id/have_existing_sync_code"
+   <Button android:id="@+id/brave_sync_btn_start_new_chain"
+       android:fragment="org.chromium.chrome.browser.preferences.BraveSyncScreensPreference"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:text="@string/brave_sync_have_existing_code"
+       android:text="@string/brave_sync_start_new_chain"
        style="@style/FlushFooterButton"/>
 
-   <Button android:id="@+id/enter_code_words"
+   <Button android:id="@+id/brave_sync_btn_enter_code_words"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:text="@string/enter_code_words_sync"
        style="@style/FlushFooterButton"
        android:visibility="gone"/>
+
+   <Button android:id="@+id/brave_sync_btn_done"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:text="@string/brave_sync_btn_done"
+       style="@style/FlushFooterButton"
+       android:visibility="gone"/>
+
+   <Button android:id="@+id/brave_sync_btn_display_code_words"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:text="@string/brave_sync_btn_display_code_words"
+       style="@style/FlushFooterButton"
+       android:visibility="gone"/>
+
+    <ImageButton android:id="@+id/brave_sync_btn_mobile"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1"
+        android:src="@drawable/brave_sync_btn_mobile"
+        android:contentDescription="@string/brave_sync_btn_mobile"
+        android:visibility="gone"/>
+
+    <ImageButton android:id="@+id/brave_sync_btn_laptop"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1"
+        android:src="@drawable/brave_sync_btn_laptop"
+        android:contentDescription="@string/brave_sync_btn_laptop"
+        android:visibility="gone"/>
 
    <TableLayout
       android:id="@+id/tableEnterWords"

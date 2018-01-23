@@ -3,13 +3,79 @@
      Use of this source code is governed by a BSD-style license that can be
      found in the LICENSE file. -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
 
     <org.chromium.chrome.browser.preferences.ChromeSwitchPreference
         android:key="sync_switch"
-        android:summaryOn="@string/text_on"
-        android:summaryOff="@string/text_off"
+        android:summaryOn="@string/prefs_sync"
+        android:summaryOff="@string/prefs_sync"
         android:defaultValue="false" />
+
+    <Preference
+        android:key="brave_sync_preferences"
+        android:title="@string/brave_sync_settings_title"/>
+
+    <org.chromium.chrome.browser.preferences.ChromeSwitchPreference
+        android:key="brave_sync_bookmarks"
+        android:summaryOn="@string/sync_bookmarks"
+        android:summaryOff="@string/sync_bookmarks"
+        android:defaultValue="true" />
+
+    <org.chromium.chrome.browser.preferences.ChromeSwitchPreference
+        android:key="brave_sync_tabs"
+        android:summaryOn="@string/brave_sync_tabs_text"
+        android:summaryOff="@string/brave_sync_tabs_text"
+        android:defaultValue="true" />
+
+    <org.chromium.chrome.browser.preferences.ChromeSwitchPreference
+        android:key="brave_sync_history"
+        android:summaryOn="@string/brave_sync_history_text"
+        android:summaryOff="@string/brave_sync_history_text"
+        android:defaultValue="true" />
+
+    <org.chromium.chrome.browser.preferences.ChromeSwitchPreference
+        android:key="brave_sync_autofill_passwords"
+        android:summaryOn="@string/brave_sync_autofill_passwords_text"
+        android:summaryOff="@string/brave_sync_autofill_passwords_text"
+        android:defaultValue="true" />
+
+    <org.chromium.chrome.browser.preferences.ChromeSwitchPreference
+        android:key="brave_sync_payment_settings"
+        android:summaryOn="@string/brave_sync_payment_settings_text"
+        android:summaryOff="@string/brave_sync_payment_settings_text"
+        android:defaultValue="true" />
+
+    <Preference
+        android:key="brave_sync_preferences_description"
+        android:title="@string/brave_sync_settings_description"/>
+
+    <Preference
+        android:key="brave_sync_devices_title"
+        android:title="@string/brave_sync_devices_title"/>
+
+    <Preference
+        android:key="brave_sync_devices_control">
+        <aapt:attr name="android:layout">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ListView android:id="@+id/brave_sync_devices"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawSelectorOnTop="false"/>
+
+                <Button android:id="@+id/brave_sync_btn_remove_device"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/brave_sync_remove_device_text"
+                    style="@style/FlushFooterButton"
+                    android:paddingTop="10dip" />
+            </LinearLayout>
+        </aapt:attr>
+    </Preference>
 
     <!--<Preference
         android:fragment="org.chromium.chrome.browser.preferences.website.BraveSyncScreensPreference"
