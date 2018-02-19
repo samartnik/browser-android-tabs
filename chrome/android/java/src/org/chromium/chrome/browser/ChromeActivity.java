@@ -1398,7 +1398,7 @@ public abstract class ChromeActivity extends AsyncInitializationActivity
         // Starting Brave Sync
         ChromeApplication app = (ChromeApplication)ContextUtils.getApplicationContext();
         if (null != app) {
-            //app.mBraveSyncWorker = new BraveSyncWorker(this);
+            app.mBraveSyncWorker = new BraveSyncWorker(this);
             app.mStatsUpdaterWorker = new StatsUpdaterWorker(this);
             MixPanelWorker.SendBraveAppStartEvent();
         }
