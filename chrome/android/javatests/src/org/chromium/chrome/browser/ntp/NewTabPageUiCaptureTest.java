@@ -92,47 +92,40 @@ public class NewTabPageUiCaptureTest {
         mNtp = (NewTabPage) tab.getNativePage();
     }
 
-    private void waitForWindowUpdates() {
-        // Wait for update to start and finish.
-        UiDevice device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
-        device.waitForWindowUpdate(null, MAX_WINDOW_UPDATE_TIME_MS);
-        device.waitForIdle(MAX_WINDOW_UPDATE_TIME_MS);
-    }
-
     // Disabled as there is no RecyclerView
     @Test
     @DisabledTest
     @MediumTest
     @Feature({"NewTabPage", "UiCatalogue"})
     public void testCaptureNewTabPage() {
-        assertThat(ChromeFeatureList.isEnabled(ChromeFeatureList.NTP_MODERN_LAYOUT),
-                is(mEnableNTPModernLayout));
-        shoot("New Tab Page");
-
-        // Scroll to search bar
-        final NewTabPageRecyclerView recyclerView = mNtp.getNewTabPageView().getRecyclerView();
-
-        final View fakebox = mNtp.getView().findViewById(org.chromium.chrome.R.id.search_box);
-        final int firstScrollHeight = fakebox.getTop() + fakebox.getPaddingTop();
-        final int subsequentScrollHeight = mNtp.getView().getHeight()
-                - mActivityTestRule.getActivity().getToolbarManager().getToolbar().getHeight();
-
-        ThreadUtils.runOnUiThreadBlocking(() -> { recyclerView.scrollBy(0, firstScrollHeight); });
-        RecyclerViewTestUtils.waitForStableRecyclerView(recyclerView);
-        InstrumentationRegistry.getInstrumentation().waitForIdleSync();
-        shoot("New Tab Page scrolled");
-
-        ThreadUtils.runOnUiThreadBlocking(
-                () -> { recyclerView.scrollBy(0, subsequentScrollHeight); });
-        RecyclerViewTestUtils.waitForStableRecyclerView(recyclerView);
-        InstrumentationRegistry.getInstrumentation().waitForIdleSync();
-        shoot("New Tab Page scrolled twice");
-
-        ThreadUtils.runOnUiThreadBlocking(
-                () -> { recyclerView.scrollBy(0, subsequentScrollHeight); });
-        RecyclerViewTestUtils.waitForStableRecyclerView(recyclerView);
-        InstrumentationRegistry.getInstrumentation().waitForIdleSync();
-        shoot("New Tab Page scrolled thrice");
+        // assertThat(ChromeFeatureList.isEnabled(ChromeFeatureList.NTP_MODERN_LAYOUT),
+        //         is(mEnableNTPModernLayout));
+        // shoot("New Tab Page");
+        //
+        // // Scroll to search bar
+        // final NewTabPageRecyclerView recyclerView = mNtp.getNewTabPageView().getRecyclerView();
+        //
+        // final View fakebox = mNtp.getView().findViewById(org.chromium.chrome.R.id.search_box);
+        // final int firstScrollHeight = fakebox.getTop() + fakebox.getPaddingTop();
+        // final int subsequentScrollHeight = mNtp.getView().getHeight()
+        //         - mActivityTestRule.getActivity().getToolbarManager().getToolbar().getHeight();
+        //
+        // ThreadUtils.runOnUiThreadBlocking(() -> { recyclerView.scrollBy(0, firstScrollHeight); });
+        // RecyclerViewTestUtils.waitForStableRecyclerView(recyclerView);
+        // InstrumentationRegistry.getInstrumentation().waitForIdleSync();
+        // shoot("New Tab Page scrolled");
+        //
+        // ThreadUtils.runOnUiThreadBlocking(
+        //         () -> { recyclerView.scrollBy(0, subsequentScrollHeight); });
+        // RecyclerViewTestUtils.waitForStableRecyclerView(recyclerView);
+        // InstrumentationRegistry.getInstrumentation().waitForIdleSync();
+        // shoot("New Tab Page scrolled twice");
+        //
+        // ThreadUtils.runOnUiThreadBlocking(
+        //         () -> { recyclerView.scrollBy(0, subsequentScrollHeight); });
+        // RecyclerViewTestUtils.waitForStableRecyclerView(recyclerView);
+        // InstrumentationRegistry.getInstrumentation().waitForIdleSync();
+        // shoot("New Tab Page scrolled thrice");
     }
 
     /**
