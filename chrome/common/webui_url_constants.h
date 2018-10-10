@@ -169,7 +169,9 @@ extern const char kDeprecatedChromeUIHistoryFrameURL[];
 
 #if defined(OS_ANDROID)
 extern const char kBraveRewardsURL[];
+extern const char kBraveRewardsPanelURL[];
 extern const char kBraveRewardsHost[];
+extern const char kBraveRewardsPanelHost[];
 extern const char kChromeUIJavaCrashURL[];
 extern const char kChromeUINativeBookmarksURL[];
 extern const char kChromeUINativeHistoryURL[];

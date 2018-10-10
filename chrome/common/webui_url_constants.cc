@@ -170,6 +170,8 @@ const char kDeprecatedChromeUIHistoryFrameURL[] = "chrome://history-frame/";
 #if defined(OS_ANDROID)
 const char kBraveRewardsURL[] = "chrome://rewards/";
 const char kBraveRewardsHost[] = "rewards";
+const char kBraveRewardsPanelURL[] = "chrome://rewards-panel/";
+const char kBraveRewardsPanelHost[] = "rewards-panel";
 const char kChromeUIJavaCrashURL[] = "chrome://java-crash/";
 const char kChromeUINativeBookmarksURL[] = "chrome-native://bookmarks/";
 const char kChromeUINativeHistoryURL[] = "chrome-native://history/";
@@ -379,6 +381,7 @@ const char* const kChromeHostURLs[] = {
 #endif
 #if defined(OS_ANDROID)
     kBraveRewardsURL,
+    kBraveRewardsPanelURL,
     kChromeUIOfflineInternalsHost,
     kChromeUISnippetsInternalsHost,
     kChromeUIWebApksHost,

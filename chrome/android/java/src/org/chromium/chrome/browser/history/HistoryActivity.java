@@ -5,6 +5,7 @@
 package org.chromium.chrome.browser.history;
 
 import android.os.Bundle;
+import android.view.WindowManager;
 
 import org.chromium.base.VisibleForTesting;
 import org.chromium.chrome.browser.IntentHandler;
@@ -25,6 +26,12 @@ public class HistoryActivity extends SnackbarActivity {
                 getIntent(), IntentHandler.EXTRA_INCOGNITO_MODE, false);
         mHistoryManager = new HistoryManager(this, true, getSnackbarManager(), isIncognito);
         setContentView(mHistoryManager.getView());
+
+        WindowManager.LayoutParams params = getWindow().getAttributes();
+        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        params.width = WindowManager.LayoutParams.WRAP_CONTENT;
+
+        getWindow().setAttributes(params);
     }
 
     @Override

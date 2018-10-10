@@ -7,6 +7,7 @@ package org.chromium.chrome.browser;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.SearchManager;
 import android.app.assist.AssistContent;
 import android.content.ActivityNotFoundException;
@@ -38,8 +39,12 @@ import android.view.accessibility.AccessibilityManager;
 import android.view.accessibility.AccessibilityManager.AccessibilityStateChangeListener;
 import android.view.accessibility.AccessibilityManager.TouchExplorationStateChangeListener;
 import android.widget.ImageButton;
+import android.widget.PopupMenu;
+import android.widget.PopupWindow;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import org.chromium.base.Log;
 import org.chromium.base.ActivityState;
@@ -135,6 +140,7 @@ import org.chromium.chrome.browser.snackbar.SnackbarManager.SnackbarManageable;
 import org.chromium.chrome.browser.sync.ProfileSyncService;
 import org.chromium.chrome.browser.sync.SyncController;
 import org.chromium.chrome.browser.tab.Tab;
+import org.chromium.chrome.browser.tab.TabDelegateFactory;
 import org.chromium.chrome.browser.tabmodel.AsyncTabParamsManager;
 import org.chromium.chrome.browser.tabmodel.EmptyTabModel;
 import org.chromium.chrome.browser.tabmodel.TabCreatorManager;
@@ -189,6 +195,8 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Nullable;
+
+import org.chromium.chrome.browser.fullscreen.FullscreenOptions;
 
 /**
  * A {@link AsyncInitializationActivity} that builds and manages a {@link CompositorViewHolder}
@@ -2295,12 +2303,23 @@ public abstract class ChromeActivity extends AsyncInitializationActivity
             RecordUserAction.record("MobileMenuRequestDesktopSite");
         } else if (id == R.id.reader_mode_prefs_id) {
             DomDistillerUIUtils.openSettings(currentTab.getWebContents());
+        } else if (id == R.id.brave_rewards_id) {
+            showBraveRewardsPanel();
         } else if (id == R.id.exit_id) {
             ApplicationLifetime.terminate(false);
         } else {
             return false;
         }
         return true;
+    }
+
+    private void showBraveRewardsPanel() {
+        /*TabCreator tabCreator = getTabCreator(false);
+        if (tabCreator == null) return;
+        Tab tab = tabCreator.createNewTab(
+                new LoadUrlParams("chrome://rewards", PageTransition.LINK),
+                TabModel.TabLaunchType.FROM_LONGPRESS_BACKGROUND, null);*/
+        PopupActivity.show(this/*tab*/);
     }
 
     /**

@@ -25,6 +25,7 @@
 #include "chrome/browser/ui/webui/about_ui.h"
 #include "chrome/browser/ui/webui/bluetooth_internals/bluetooth_internals_ui.h"
 #include "chrome/browser/ui/webui/brave_rewards_ui.h"
+#include "chrome/browser/ui/webui/brave_rewards_panel_ui.h"
 #include "chrome/browser/ui/webui/components_ui.h"
 #include "chrome/browser/ui/webui/constrained_web_dialog_ui.h"
 #include "chrome/browser/ui/webui/crashes_ui.h"
@@ -332,9 +333,9 @@ WebUIFactoryFunction GetWebUIFactoryFunction(WebUI* web_ui,
   // dialog as backup.  It's just that on Chrome OS, it's the only
   // print dialog.
   if (url.host_piece() == chrome::kBraveRewardsHost)
-  {
-    return &NewWebUI<BraveRewardsUI>;
-  }
+      return &NewWebUI<BraveRewardsUI>;
+  if (url.host_piece() == chrome::kBraveRewardsPanelHost)
+      return &NewWebUI<BraveRewardsPanelUI>;
   if (url.host_piece() == chrome::kChromeUIBluetoothInternalsHost)
     return &NewWebUI<BluetoothInternalsUI>;
   if (url.host_piece() == chrome::kChromeUIComponentsHost)

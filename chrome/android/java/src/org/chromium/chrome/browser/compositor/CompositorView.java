@@ -193,7 +193,7 @@ public class CompositorView
         // usage during SurfaceFlinger composition. We might also want to set |mAlwaysTranslucent|
         // on non-low memory devices, if we are running on hardware that implements efficient alpha
         // blending.
-        mAlwaysTranslucent = lowMemDevice;
+        mAlwaysTranslucent = true;
 
         // In case we changed the requested format due to |lowMemDevice|,
         // re-request the surface now.
@@ -389,7 +389,7 @@ public class CompositorView
         // setBackground* calls in View.  We still call to setBackground on the SurfaceView because
         // SetBackgroundDrawable is deprecated, and the semantics are the same I think.
         super.setBackgroundDrawable(background);
-        mCompositorSurfaceManager.setBackgroundDrawable(background);
+        if (mCompositorSurfaceManager != null) mCompositorSurfaceManager.setBackgroundDrawable(background);
     }
 
     @Override

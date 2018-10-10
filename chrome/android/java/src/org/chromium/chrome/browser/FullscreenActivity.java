@@ -33,7 +33,7 @@ import org.chromium.content_public.browser.WebContentsObserver;
 public class FullscreenActivity extends SingleTabActivity {
     private static final String TAG = "FullscreenActivity";
 
-    private static final SparseArray<Tab> sTabsToSteal = new SparseArray<>();
+    protected static final SparseArray<Tab> sTabsToSteal = new SparseArray<>();
 
     private WebContentsObserver mWebContentsObserver;
 
@@ -212,7 +212,7 @@ public class FullscreenActivity extends SingleTabActivity {
         return ApplicationStatus.getStateForActivity(activity) == ActivityState.RESUMED;
     }
 
-    private static Tab getTabToSteal(int id) {
+    protected static Tab getTabToSteal(int id) {
         Tab tab = sTabsToSteal.get(id);
         assert tab != null;
 
