@@ -200,6 +200,12 @@ public:
   void SetPublisherAllowVideos(bool allow) override;
   void SetAutoContribute(bool enabled) override;
 
+  void LoadNicewareList(ledger::GetNicewareListCallback callback) override {};
+  void OnPublisherActivity(ledger::Result result,
+                                   std::unique_ptr<ledger::PublisherInfo>,
+                                   uint64_t windowId) override {};
+   void OnExcludedSitesChanged() override {};
+
 
   // URLFetcherDelegate impl
   void OnURLFetchComplete(const net::URLFetcher* source) override;

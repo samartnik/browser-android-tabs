@@ -1001,13 +1001,13 @@ std::map<std::string, brave_rewards::BalanceReport> BraveRewardsServiceImpl::Get
   for (auto const& report : reports) {
     brave_rewards::BalanceReport newReport;
     const ledger::BalanceReportInfo oldReport = report.second;
-    newReport.opening_balance = oldReport.opening_balance_;
+    /*newReport.opening_balance = oldReport.opening_balance_;
     newReport.closing_balance = oldReport.closing_balance_;
     newReport.grants = oldReport.grants_;
     newReport.earning_from_ads = oldReport.earning_from_ads_;
     newReport.auto_contribute = oldReport.auto_contribute_;
     newReport.recurring_donation = oldReport.recurring_donation_;
-    newReport.one_time_donation = oldReport.one_time_donation_;
+    newReport.one_time_donation = oldReport.one_time_donation_;*/
 
     newReports[report.first] = newReport;
   }
