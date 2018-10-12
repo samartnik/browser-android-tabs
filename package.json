@@ -80,7 +80,6 @@
     "http-node": "^1.2.0",
     "prettier-bytes": "^1.0.4",
     "qr-image": "^3.2.0",
-    "react-chrome-redux": "^1.5.1",
     "throttleit": "^1.0.0",
     "webtorrent": "github:brave/webtorrent#600664249258dd7e893789e991d4cc5f481a7bae"
   }

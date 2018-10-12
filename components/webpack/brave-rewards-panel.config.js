@@ -3,7 +3,7 @@ const webpack = require('webpack')
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
-  mode: 'production',
+  mode: 'development',
   entry: {
     brave_rewards_panel: path.join(__dirname, '../brave_rewards_ui/extension/brave_rewards/brave_rewards_panel'),
   },

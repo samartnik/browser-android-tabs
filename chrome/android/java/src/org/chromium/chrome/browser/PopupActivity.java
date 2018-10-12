@@ -35,79 +35,63 @@ import org.chromium.chrome.browser.tabmodel.TabModel;
 import org.chromium.ui.base.PageTransition;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.ColorDrawable;
+import android.util.DisplayMetrics;
 
 /**
  * An Activity used to display popup html page.
  */
 public class PopupActivity extends SingleTabActivity {
     private static final String TAG = "PopupActivity";
+    private static final String EXTRA_POPUP_Y_SHIFT = "com.android.brave.popup_y_shift";
+    private static final int DEFAULT_POPUP_Y_SHIFT = 100;
+
+    @Override
+    public void preInflationStartup() {
+        WindowManager.LayoutParams windowParams = getWindow().getAttributes();
+        windowParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        windowParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
+        windowParams.gravity = android.view.Gravity.END;
+        //windowParams.alpha = 0f;
+        getWindow().setAttributes(windowParams);
+        super.preInflationStartup();
+    }
 
     @Override
     public void postInflationStartup() {
         super.postInflationStartup();
 
-        WindowManager.LayoutParams windowParams = getWindow().getAttributes();
-        windowParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        windowParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
-        windowParams.gravity = android.view.Gravity.END/* | android.view.Gravity.AXIS_CLIP*/;
-        //windowParams.y = 100;
-        //windowParams.flags = WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN;
-        //windowParams.alpha = 0f;
-        getWindow().setAttributes(windowParams);
-        getWindow().setFormat(PixelFormat.TRANSLUCENT);
-        getWindow().setBackgroundDrawable(getResources().getDrawable(R.drawable.rounded_activity));
+        if (getCompositorViewHolder() == null || getCompositorViewHolder().getCompositorView() == null) return;
 
-        ViewGroup rootView = (ViewGroup) getWindow().getDecorView().getRootView();
-        if (rootView != null) {
-            rootView.setOnTouchListener(new View.OnTouchListener()
-            {
-                @Override
-                public boolean onTouch(View view, MotionEvent ev)
-                {
-                    finish();
-                    return false;
-                }
-            });
-            //setTransparentBackground(getWindow().getDecorView());
-            ViewGroup compositor = getCompositorViewHolder().getCompositorView();
-            compositor.setBackgroundDrawable(getResources().getDrawable(R.drawable.rounded_activity));
-            compositor.setContentDescription(getResources().getString(R.string.accessibility_content_view) + "1");
-            if (compositor.getChildCount() > 0) {
-                View child = compositor.getChildAt(0);
-                child.setContentDescription(getResources().getString(R.string.accessibility_content_view) + "2");
-                Log.i(TAG, "SAM: view: " + child.getClass().getName());
-                ViewGroup.LayoutParams params = child.getLayoutParams();
-                params.height = WindowManager.LayoutParams.WRAP_CONTENT;
-                params.width = WindowManager.LayoutParams.WRAP_CONTENT;
-                if (params instanceof ViewGroup.MarginLayoutParams) {
-                    Log.i(TAG, "SAM: setMargins");
-                    ((ViewGroup.MarginLayoutParams)params).setMargins(10, 100, 10, 10);
-                }
-                child.setLayoutParams(params);
+        ViewParent compositor =  getCompositorViewHolder().getCompositorView().getParent();
+        if (compositor instanceof ViewGroup) {
+            setTransparentBackground((View)compositor);
+            int y_shift = IntentUtils.safeGetIntExtra(getIntent(), EXTRA_POPUP_Y_SHIFT, DEFAULT_POPUP_Y_SHIFT);
+            int xy[] = new int[2];
+            ((View)compositor).getLocationOnScreen(xy);
+            Log.i(TAG, "SAM: y_shift: " + y_shift + ", xy[1]:" + xy[1]);
+            y_shift = y_shift - xy[1];
+            Log.i(TAG, "SAM: y_shift after: " + y_shift);
+            //((View)compositor).setPadding(0, y_shift, 10, 10);
+            View parent = (View) compositor.getParent();
+            if (parent != null) {
+                parent.setClickable(true);
+                parent.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        finish();
+                    }
+                });
             }
-            /*for (int i = 0; i < compositor.getChildCount(); i++) {
-                View child = compositor.getChildAt(i);
-                Log.i(TAG, "SAM: view: " + child.getClass().getName());
-            }*/
-            /*ViewGroup.LayoutParams params = compositor.getLayoutParams();
-            params.height = WindowManager.LayoutParams.WRAP_CONTENT;
-            params.width = WindowManager.LayoutParams.WRAP_CONTENT;
-            if (params instanceof ViewGroup.MarginLayoutParams) {
-                ((ViewGroup.MarginLayoutParams)params).setMargins(10, 100, 10, 10);
-            }
-            compositor.setLayoutParams(params);*/
         }
         int i = R.drawable.rounded_activity;
     }
 
     private void setTransparentBackground(View v) {
-        v.setBackgroundColor(Color.TRANSPARENT);
-        if (v instanceof ViewGroup) {
-            ViewGroup vg = (ViewGroup) v;
-            for (int i = 0; i < vg.getChildCount(); i++) {
-                View child = vg.getChildAt(i);
-                setTransparentBackground(child);
-            }
+        if (v == null) return;
+        v.setAlpha(0f);
+        ViewParent parent = v.getParent();
+        if (parent instanceof View) {
+            setTransparentBackground((View)parent);
         }
     }
 
@@ -121,14 +105,18 @@ public class PopupActivity extends SingleTabActivity {
         return tab;
     }
 
-    public static void show(ChromeActivity activity/*final Tab tab*/) {
-        //ChromeActivity activity = tab.getActivity();
-
-        //sTabsToSteal.put(tab.getId(), tab);
-
+    public static void show(ChromeActivity activity) {
+        int y_shift = DEFAULT_POPUP_Y_SHIFT;
+        View anchor = activity.findViewById(R.id.toolbar_shadow);
+        if (anchor != null) {
+            int xy[] = new int[2];
+            anchor.getLocationOnScreen(xy);
+            y_shift = xy[1];
+            Log.i(TAG, "SAM: y_shift: " + y_shift);
+        }
         Intent intent = new Intent();
         intent.setClass(activity, PopupActivity.class);
-        //intent.putExtra(IntentHandler.EXTRA_TAB_ID, tab.getId());
+        intent.putExtra(EXTRA_POPUP_Y_SHIFT, y_shift);
         intent.putExtra(IntentHandler.EXTRA_PARENT_COMPONENT, activity.getComponentName());
         intent.putExtra(Browser.EXTRA_APPLICATION_ID, activity.getPackageName());
         intent.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);

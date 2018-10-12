@@ -193,7 +193,7 @@ public class CompositorView
         // usage during SurfaceFlinger composition. We might also want to set |mAlwaysTranslucent|
         // on non-low memory devices, if we are running on hardware that implements efficient alpha
         // blending.
-        mAlwaysTranslucent = true;
+        mAlwaysTranslucent = lowMemDevice;
 
         // In case we changed the requested format due to |lowMemDevice|,
         // re-request the surface now.
