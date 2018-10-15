@@ -65,6 +65,7 @@ chrome_java_sources = [
   "java/src/org/chromium/chrome/browser/NavigationBarColorController.java",
   "java/src/org/chromium/chrome/browser/NavigationPopup.java",
   "java/src/org/chromium/chrome/browser/NearOomMonitor.java",
+  "java/src/org/chromium/chrome/browser/PopupActivity.java",
   "java/src/org/chromium/chrome/browser/PowerBroadcastReceiver.java",
   "java/src/org/chromium/chrome/browser/RepostFormWarningDialog.java",
   "java/src/org/chromium/chrome/browser/RestartWorker.java",

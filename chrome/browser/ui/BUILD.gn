@@ -752,6 +752,8 @@ split_static_library("ui") {
     "webui/brave_webui_source.cc",
     "webui/basic_ui.cc",
     "webui/basic_ui.h",
+    "webui/brave_rewards_panel_ui.cc",
+    "webui/brave_rewards_panel_ui.h",
     "webui/chrome_web_ui_controller_factory.cc",
     "webui/chrome_web_ui_controller_factory.h",
     "webui/components_ui.cc",

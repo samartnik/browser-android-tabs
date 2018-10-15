@@ -3848,6 +3848,9 @@ Saved
       <message name="IDS_OPEN_PAGES_IN_CUSTOM_TABS_SUMMARY" desc="Summary of preference that allows the user to open pages in a full mode always.">
         Offer to open tabs in Custom Tabs
       </message>
+      <message name="IDS_BRAVE_REWARDS" desc="Menu item for 'Brave Rewards'">
+        Brave Rewards
+      </message>
     </messages>
   </release>
 </grit>

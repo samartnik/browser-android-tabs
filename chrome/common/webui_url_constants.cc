@@ -172,6 +172,8 @@ const char kRewardsJS[] = "brave_rewards.bundle.js";
 const char kChromeUIEocInternalsHost[] = "eoc-internals";
 const char kBraveRewardsURL[] = "chrome://rewards/";
 const char kBraveRewardsHost[] = "rewards";
+const char kBraveRewardsPanelURL[] = "chrome://rewards-panel/";
+const char kBraveRewardsPanelHost[] = "rewards-panel";
 const char kChromeUIJavaCrashURL[] = "chrome://java-crash/";
 const char kChromeUINativeBookmarksURL[] = "chrome-native://bookmarks/";
 const char kChromeUINativeHistoryURL[] = "chrome-native://history/";
@@ -383,6 +385,7 @@ const char* const kChromeHostURLs[] = {
 #if defined(OS_ANDROID)
     kChromeUIEocInternalsHost,
     kBraveRewardsURL,
+    kBraveRewardsPanelURL,
     kChromeUIOfflineInternalsHost,
     kChromeUISnippetsInternalsHost,
     kChromeUIWebApksHost,

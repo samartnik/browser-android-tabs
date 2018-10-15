@@ -11,4 +11,5 @@ sh . build/android/envsetup.sh
 sh scripts/postThirdPartiesSetup.js
 npm install
 npm run web-ui
+npm run brave-rewards-panel-web-ui
 gn args out/Default

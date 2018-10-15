@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "web-ui": "webpack --config components/webpack/prod.config.js --progress --profile --colors"
+    "web-ui": "webpack --config components/webpack/prod.config.js --progress --profile --colors",
+    "brave-rewards-panel-web-ui": "webpack --config components/webpack/brave-rewards-panel.config.js --progress --profile --colors"
   },
   "repository": {
     "type": "git",
@@ -80,7 +81,6 @@
     "http-node": "^1.2.0",
     "prettier-bytes": "^1.0.4",
     "qr-image": "^3.2.0",
-    "react-chrome-redux": "^1.5.1",
     "throttleit": "^1.0.0",
     "torrent-discovery": "github:brave/torrent-discovery#b565f40278c1cb910722ceb027a739d9173d587a",
     "webtorrent": "github:brave/webtorrent#7742597c9cee74100dcd1f241e1a55aff93adf5c"
