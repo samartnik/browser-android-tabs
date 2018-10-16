@@ -5,7 +5,7 @@
 import * as React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
-import { Store } from 'react-chrome-redux'
+import store from '../../resources/store'
 
 import Theme from 'brave-ui/theme/brave-default'
 import { ThemeProvider } from 'brave-ui/theme'
@@ -20,22 +20,12 @@ import App from './components/app'
 // Utils
 import { getUIMessages } from './background/api/locale_api'
 
-const store: Store<RewardsExtension.State> = new Store({
-  portName: 'REWARDSPANEL'
-})
-
 initLocale(getUIMessages())
 
-store.ready().then(
-  () => {
-    render(
-      <Provider store={store}>
-        <ThemeProvider theme={Theme}>
-          <App />
-        </ThemeProvider>
-      </Provider>,
-      document.getElementById('root'))
-  })
-  .catch(() => {
-    console.error('Problem mounting rewards panel')
-  })
+render(
+  <Provider store={store}>
+    <ThemeProvider theme={Theme}>
+      <App />
+    </ThemeProvider>
+  </Provider>,
+  document.getElementById('root'))
