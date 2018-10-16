@@ -1,14 +1,14 @@
 {
   "braveRewards": {
-    "message": "Brave Rewards",
+    "message": "Винагороди Brave ",
     "description": ""
   },
   "welcomeButtonTextOne": {
-    "message": "Start Earning Now!",
+    "message": "Почати заробляти зараз!",
     "description": ""
   },
   "welcomeButtonTextTwo": {
-    "message": "Join Rewards",
+    "message": "Приєднатись до нагород",
     "description": ""
   },
   "welcomeDescOne": {
@@ -20,11 +20,11 @@
     "description": ""
   },
   "welcomeFooterTextOne": {
-    "message": "Check out what’s improved",
+    "message": "Перевірте, що вдосконалено",
     "description": ""
   },
   "welcomeFooterTextTwo": {
-    "message": "Learn More",
+    "message": "Детальніше",
     "description": ""
   },
   "welcomeHeaderOne": {
@@ -36,27 +36,27 @@
     "description": ""
   },
   "yourWallet": {
-    "message": "Your wallet",
+    "message": "Ваш гаманець",
     "description": ""
   },
   "grants": {
-    "message": "Grants",
+    "message": "Пожертвування",
     "description": ""
   },
   "on": {
-    "message": "on",
+    "message": "увімкнути",
     "description": ""
   },
   "verifiedPublisher": {
-    "message": "Brave Verified Publisher",
+    "message": "Перевірений дописувач Brave",
     "description": ""
   },
   "rewardsContributeAttentionScore": {
-    "message": "Attention",
+    "message": "Attention Value",
     "description": ""
   },
   "donateMonthly": {
-    "message": "Tip this site Monthly",
+    "message": "Tip to this site Monthly",
     "description": ""
   },
   "includeInAuto": {
@@ -68,11 +68,11 @@
     "description": ""
   },
   "enableTips": {
-    "message": "Enable Tips",
+    "message": "Увімкнути підказки",
     "description": ""
   },
   "for": {
-    "message": "for",
+    "message": "для",
     "description": ""
   },
   "rewardsSummary": {
@@ -80,55 +80,55 @@
     "description": ""
   },
   "monthApr": {
-    "message": "April",
+    "message": "Квітень",
     "description": ""
   },
   "monthAug": {
-    "message": "August",
+    "message": "Серпень",
     "description": ""
   },
   "monthDec": {
-    "message": "December",
+    "message": "Грудень",
     "description": ""
   },
   "monthFeb": {
-    "message": "February",
+    "message": "Лютий",
     "description": ""
   },
   "monthJan": {
-    "message": "January",
+    "message": "Січень",
     "description": ""
   },
   "monthJul": {
-    "message": "July",
+    "message": "Липень",
     "description": ""
   },
   "monthJun": {
-    "message": "June",
+    "message": "Червень",
     "description": ""
   },
   "monthMar": {
-    "message": "March",
+    "message": "Березень",
     "description": ""
   },
   "monthMay": {
-    "message": "May",
+    "message": "Травень",
     "description": ""
   },
   "monthNov": {
-    "message": "November",
+    "message": "Листопад",
     "description": ""
   },
   "monthOct": {
-    "message": "October",
+    "message": "Жовтень",
     "description": ""
   },
   "monthSep": {
-    "message": "September",
+    "message": "Вересень",
     "description": ""
   },
   "tokenGrant": {
-    "message": "Token Grant",
+    "message": "Пожертвування з токенів",
     "description": ""
   },
   "earningsAds": {
@@ -136,19 +136,19 @@
     "description": ""
   },
   "rewardsContribute": {
-    "message": "Auto-Contribute",
+    "message": "Робити внески автоматично",
     "description": ""
   },
   "oneTimeDonation": {
-    "message": "One-Time Tips",
+    "message": "One-time Tips",
     "description": ""
   },
   "total": {
-    "message": "Total",
+    "message": "Усього",
     "description": ""
   },
   "expiresOn": {
-    "message": "expires on",
+    "message": "строк дії закінчується",
     "description": ""
   },
   "recurringDonations": {
@@ -156,7 +156,7 @@
     "description": ""
   },
   "off": {
-    "message": "Off",
+    "message": "Вимкнути",
     "description": ""
   }
 }

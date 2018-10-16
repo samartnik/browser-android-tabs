@@ -1,14 +1,14 @@
 {
   "braveRewards": {
-    "message": "Brave Rewards",
+    "message": "Braveリワード",
     "description": ""
   },
   "welcomeButtonTextOne": {
-    "message": "Start Earning Now!",
+    "message": "今すぐ獲得しましょう！",
     "description": ""
   },
   "welcomeButtonTextTwo": {
-    "message": "Join Rewards",
+    "message": "リワードに参加する",
     "description": ""
   },
   "welcomeDescOne": {
@@ -20,11 +20,11 @@
     "description": ""
   },
   "welcomeFooterTextOne": {
-    "message": "Check out what’s improved",
+    "message": "改善された機能を確認",
     "description": ""
   },
   "welcomeFooterTextTwo": {
-    "message": "Learn More",
+    "message": "詳しく知る",
     "description": ""
   },
   "welcomeHeaderOne": {
@@ -36,27 +36,27 @@
     "description": ""
   },
   "yourWallet": {
-    "message": "Your wallet",
+    "message": "あなたのウォレット",
     "description": ""
   },
   "grants": {
-    "message": "Grants",
+    "message": "補助金",
     "description": ""
   },
   "on": {
-    "message": "on",
+    "message": "オン",
     "description": ""
   },
   "verifiedPublisher": {
-    "message": "Brave Verified Publisher",
+    "message": "Braveが検証済みのパブリッシャー",
     "description": ""
   },
   "rewardsContributeAttentionScore": {
-    "message": "Attention",
+    "message": "Attention Value",
     "description": ""
   },
   "donateMonthly": {
-    "message": "Tip this site Monthly",
+    "message": "Tip to this site Monthly",
     "description": ""
   },
   "includeInAuto": {
@@ -68,11 +68,11 @@
     "description": ""
   },
   "enableTips": {
-    "message": "Enable Tips",
+    "message": "ヒントをオンにする",
     "description": ""
   },
   "for": {
-    "message": "for",
+    "message": "のための",
     "description": ""
   },
   "rewardsSummary": {
@@ -80,55 +80,55 @@
     "description": ""
   },
   "monthApr": {
-    "message": "April",
+    "message": "4月",
     "description": ""
   },
   "monthAug": {
-    "message": "August",
+    "message": "8月",
     "description": ""
   },
   "monthDec": {
-    "message": "December",
+    "message": "12月",
     "description": ""
   },
   "monthFeb": {
-    "message": "February",
+    "message": "2月",
     "description": ""
   },
   "monthJan": {
-    "message": "January",
+    "message": "1月",
     "description": ""
   },
   "monthJul": {
-    "message": "July",
+    "message": "7月",
     "description": ""
   },
   "monthJun": {
-    "message": "June",
+    "message": "6月",
     "description": ""
   },
   "monthMar": {
-    "message": "March",
+    "message": "3月",
     "description": ""
   },
   "monthMay": {
-    "message": "May",
+    "message": "5月",
     "description": ""
   },
   "monthNov": {
-    "message": "November",
+    "message": "11月",
     "description": ""
   },
   "monthOct": {
-    "message": "October",
+    "message": "10月",
     "description": ""
   },
   "monthSep": {
-    "message": "September",
+    "message": "9月",
     "description": ""
   },
   "tokenGrant": {
-    "message": "Token Grant",
+    "message": "トークンの付与",
     "description": ""
   },
   "earningsAds": {
@@ -136,19 +136,19 @@
     "description": ""
   },
   "rewardsContribute": {
-    "message": "Auto-Contribute",
+    "message": "自動コントリビュート",
     "description": ""
   },
   "oneTimeDonation": {
-    "message": "One-Time Tips",
+    "message": "One-time Tips",
     "description": ""
   },
   "total": {
-    "message": "Total",
+    "message": "合計",
     "description": ""
   },
   "expiresOn": {
-    "message": "expires on",
+    "message": "に期限切れ",
     "description": ""
   },
   "recurringDonations": {
@@ -156,7 +156,7 @@
     "description": ""
   },
   "off": {
-    "message": "Off",
+    "message": "オフ",
     "description": ""
   }
 }

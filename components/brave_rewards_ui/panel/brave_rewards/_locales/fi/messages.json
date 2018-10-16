@@ -4,11 +4,11 @@
     "description": ""
   },
   "welcomeButtonTextOne": {
-    "message": "Start Earning Now!",
+    "message": "Aloita ansaitseminen nyt!",
     "description": ""
   },
   "welcomeButtonTextTwo": {
-    "message": "Join Rewards",
+    "message": "Liittymispalkinnot",
     "description": ""
   },
   "welcomeDescOne": {
@@ -20,11 +20,11 @@
     "description": ""
   },
   "welcomeFooterTextOne": {
-    "message": "Check out what’s improved",
+    "message": "Katso, mitä on parannettu",
     "description": ""
   },
   "welcomeFooterTextTwo": {
-    "message": "Learn More",
+    "message": "Lue lisää",
     "description": ""
   },
   "welcomeHeaderOne": {
@@ -36,27 +36,27 @@
     "description": ""
   },
   "yourWallet": {
-    "message": "Your wallet",
+    "message": "Lompakkosi",
     "description": ""
   },
   "grants": {
-    "message": "Grants",
+    "message": "Lahjoitukset",
     "description": ""
   },
   "on": {
-    "message": "on",
+    "message": "päällä",
     "description": ""
   },
   "verifiedPublisher": {
-    "message": "Brave Verified Publisher",
+    "message": "Braven vahvistettu julkaisija",
     "description": ""
   },
   "rewardsContributeAttentionScore": {
-    "message": "Attention",
+    "message": "Attention Value",
     "description": ""
   },
   "donateMonthly": {
-    "message": "Tip this site Monthly",
+    "message": "Tip to this site Monthly",
     "description": ""
   },
   "includeInAuto": {
@@ -68,11 +68,11 @@
     "description": ""
   },
   "enableTips": {
-    "message": "Enable Tips",
+    "message": "Salli vinkit",
     "description": ""
   },
   "for": {
-    "message": "for",
+    "message": "kohteelle",
     "description": ""
   },
   "rewardsSummary": {
@@ -80,55 +80,55 @@
     "description": ""
   },
   "monthApr": {
-    "message": "April",
+    "message": "Huhtikuu",
     "description": ""
   },
   "monthAug": {
-    "message": "August",
+    "message": "Elokuu",
     "description": ""
   },
   "monthDec": {
-    "message": "December",
+    "message": "Joulukuu",
     "description": ""
   },
   "monthFeb": {
-    "message": "February",
+    "message": "Helmikuu",
     "description": ""
   },
   "monthJan": {
-    "message": "January",
+    "message": "Tammikuu",
     "description": ""
   },
   "monthJul": {
-    "message": "July",
+    "message": "Heinäkuu",
     "description": ""
   },
   "monthJun": {
-    "message": "June",
+    "message": "Kesäkuu",
     "description": ""
   },
   "monthMar": {
-    "message": "March",
+    "message": "Maaliskuu",
     "description": ""
   },
   "monthMay": {
-    "message": "May",
+    "message": "Toukokuu",
     "description": ""
   },
   "monthNov": {
-    "message": "November",
+    "message": "Marraskuu",
     "description": ""
   },
   "monthOct": {
-    "message": "October",
+    "message": "Lokakuu",
     "description": ""
   },
   "monthSep": {
-    "message": "September",
+    "message": "Syyskuu",
     "description": ""
   },
   "tokenGrant": {
-    "message": "Token Grant",
+    "message": "Polettilahjoitus",
     "description": ""
   },
   "earningsAds": {
@@ -136,19 +136,19 @@
     "description": ""
   },
   "rewardsContribute": {
-    "message": "Auto-Contribute",
+    "message": "Automaattinen lahjoitus",
     "description": ""
   },
   "oneTimeDonation": {
-    "message": "One-Time Tips",
+    "message": "One-time Tips",
     "description": ""
   },
   "total": {
-    "message": "Total",
+    "message": "Yhteensä",
     "description": ""
   },
   "expiresOn": {
-    "message": "expires on",
+    "message": "voimassaolo päättyy",
     "description": ""
   },
   "recurringDonations": {
@@ -156,7 +156,7 @@
     "description": ""
   },
   "off": {
-    "message": "Off",
+    "message": "Pois päältä ",
     "description": ""
   }
 }

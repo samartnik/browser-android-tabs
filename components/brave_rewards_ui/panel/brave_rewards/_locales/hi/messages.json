@@ -1,14 +1,14 @@
 {
   "braveRewards": {
-    "message": "Brave Rewards",
+    "message": "ब्रेव रिवार्ड्स ",
     "description": ""
   },
   "welcomeButtonTextOne": {
-    "message": "Start Earning Now!",
+    "message": "अभी कमाना शुरू करें!",
     "description": ""
   },
   "welcomeButtonTextTwo": {
-    "message": "Join Rewards",
+    "message": "रिवार्ड्स को जोड़ें",
     "description": ""
   },
   "welcomeDescOne": {
@@ -20,11 +20,11 @@
     "description": ""
   },
   "welcomeFooterTextOne": {
-    "message": "Check out what’s improved",
+    "message": "जानिये कि क्या बेहतर हुआ है",
     "description": ""
   },
   "welcomeFooterTextTwo": {
-    "message": "Learn More",
+    "message": "और जानें ",
     "description": ""
   },
   "welcomeHeaderOne": {
@@ -36,27 +36,27 @@
     "description": ""
   },
   "yourWallet": {
-    "message": "Your wallet",
+    "message": "आपका वॉलेट ",
     "description": ""
   },
   "grants": {
-    "message": "Grants",
+    "message": "अनुदान",
     "description": ""
   },
   "on": {
-    "message": "on",
+    "message": "पर",
     "description": ""
   },
   "verifiedPublisher": {
-    "message": "Brave Verified Publisher",
+    "message": "Brave द्वारा प्रमाणित प्रकाशक ",
     "description": ""
   },
   "rewardsContributeAttentionScore": {
-    "message": "Attention",
+    "message": "Attention Value",
     "description": ""
   },
   "donateMonthly": {
-    "message": "Tip this site Monthly",
+    "message": "Tip to this site Monthly",
     "description": ""
   },
   "includeInAuto": {
@@ -68,11 +68,11 @@
     "description": ""
   },
   "enableTips": {
-    "message": "Enable Tips",
+    "message": "सुझावों को सक्षम करें ",
     "description": ""
   },
   "for": {
-    "message": "for",
+    "message": "के लिए ",
     "description": ""
   },
   "rewardsSummary": {
@@ -80,55 +80,55 @@
     "description": ""
   },
   "monthApr": {
-    "message": "April",
+    "message": "अप्रैल",
     "description": ""
   },
   "monthAug": {
-    "message": "August",
+    "message": "अगस्त ",
     "description": ""
   },
   "monthDec": {
-    "message": "December",
+    "message": "दिसंबर ",
     "description": ""
   },
   "monthFeb": {
-    "message": "February",
+    "message": "फरवरी",
     "description": ""
   },
   "monthJan": {
-    "message": "January",
+    "message": "जनवरी ",
     "description": ""
   },
   "monthJul": {
-    "message": "July",
+    "message": "जुलाई",
     "description": ""
   },
   "monthJun": {
-    "message": "June",
+    "message": "जून",
     "description": ""
   },
   "monthMar": {
-    "message": "March",
+    "message": "मार्च ",
     "description": ""
   },
   "monthMay": {
-    "message": "May",
+    "message": "मई ",
     "description": ""
   },
   "monthNov": {
-    "message": "November",
+    "message": "नवंबर ",
     "description": ""
   },
   "monthOct": {
-    "message": "October",
+    "message": "अक्टूबर",
     "description": ""
   },
   "monthSep": {
-    "message": "September",
+    "message": "सितम्बर",
     "description": ""
   },
   "tokenGrant": {
-    "message": "Token Grant",
+    "message": "टोकन अनुदान ",
     "description": ""
   },
   "earningsAds": {
@@ -136,19 +136,19 @@
     "description": ""
   },
   "rewardsContribute": {
-    "message": "Auto-Contribute",
+    "message": "स्वतः योगदान ",
     "description": ""
   },
   "oneTimeDonation": {
-    "message": "One-Time Tips",
+    "message": "One-time Tips",
     "description": ""
   },
   "total": {
-    "message": "Total",
+    "message": "संपूर्ण",
     "description": ""
   },
   "expiresOn": {
-    "message": "expires on",
+    "message": "को समाप्त ",
     "description": ""
   },
   "recurringDonations": {
@@ -156,7 +156,7 @@
     "description": ""
   },
   "off": {
-    "message": "Off",
+    "message": "बंद",
     "description": ""
   }
 }

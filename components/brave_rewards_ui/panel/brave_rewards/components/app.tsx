@@ -40,11 +40,11 @@ export class RewardsPanel extends React.Component<Props, State> {
 
   render () {
     const { rewardsPanelData, actions } = this.props
-    const walletCreated = rewardsPanelData.walletCreated || false
+
     return (
       <>
         {
-          !walletCreated
+          !rewardsPanelData.walletCreated
           ? <PanelWelcome
             variant={'two'}
             optInAction={actions.createWallet}

@@ -1,14 +1,14 @@
 {
   "braveRewards": {
-    "message": "Brave Rewards",
+    "message": "Recompensas Brave",
     "description": ""
   },
   "welcomeButtonTextOne": {
-    "message": "Start Earning Now!",
+    "message": "Comece a Ganhar Agora!",
     "description": ""
   },
   "welcomeButtonTextTwo": {
-    "message": "Join Rewards",
+    "message": "Junte-se às Recompensas",
     "description": ""
   },
   "welcomeDescOne": {
@@ -20,11 +20,11 @@
     "description": ""
   },
   "welcomeFooterTextOne": {
-    "message": "Check out what’s improved",
+    "message": "Verifique o que melhorou",
     "description": ""
   },
   "welcomeFooterTextTwo": {
-    "message": "Learn More",
+    "message": "Saber mais",
     "description": ""
   },
   "welcomeHeaderOne": {
@@ -36,27 +36,27 @@
     "description": ""
   },
   "yourWallet": {
-    "message": "Your wallet",
+    "message": "A sua carteira",
     "description": ""
   },
   "grants": {
-    "message": "Grants",
+    "message": "Concessões",
     "description": ""
   },
   "on": {
-    "message": "on",
+    "message": "em",
     "description": ""
   },
   "verifiedPublisher": {
-    "message": "Brave Verified Publisher",
+    "message": "Editor Verificado Brave",
     "description": ""
   },
   "rewardsContributeAttentionScore": {
-    "message": "Attention",
+    "message": "Attention Value",
     "description": ""
   },
   "donateMonthly": {
-    "message": "Tip this site Monthly",
+    "message": "Tip to this site Monthly",
     "description": ""
   },
   "includeInAuto": {
@@ -68,11 +68,11 @@
     "description": ""
   },
   "enableTips": {
-    "message": "Enable Tips",
+    "message": "Ativar Sugestões",
     "description": ""
   },
   "for": {
-    "message": "for",
+    "message": "para",
     "description": ""
   },
   "rewardsSummary": {
@@ -80,55 +80,55 @@
     "description": ""
   },
   "monthApr": {
-    "message": "April",
+    "message": "Abril",
     "description": ""
   },
   "monthAug": {
-    "message": "August",
+    "message": "Agosto",
     "description": ""
   },
   "monthDec": {
-    "message": "December",
+    "message": "Dezembro",
     "description": ""
   },
   "monthFeb": {
-    "message": "February",
+    "message": "Fevereiro",
     "description": ""
   },
   "monthJan": {
-    "message": "January",
+    "message": "Janeiro",
     "description": ""
   },
   "monthJul": {
-    "message": "July",
+    "message": "Julho",
     "description": ""
   },
   "monthJun": {
-    "message": "June",
+    "message": "Junho",
     "description": ""
   },
   "monthMar": {
-    "message": "March",
+    "message": "Março",
     "description": ""
   },
   "monthMay": {
-    "message": "May",
+    "message": "Maio",
     "description": ""
   },
   "monthNov": {
-    "message": "November",
+    "message": "Novembro",
     "description": ""
   },
   "monthOct": {
-    "message": "October",
+    "message": "Outubro",
     "description": ""
   },
   "monthSep": {
-    "message": "September",
+    "message": "Setembro",
     "description": ""
   },
   "tokenGrant": {
-    "message": "Token Grant",
+    "message": "Concessão de Token",
     "description": ""
   },
   "earningsAds": {
@@ -136,11 +136,11 @@
     "description": ""
   },
   "rewardsContribute": {
-    "message": "Auto-Contribute",
+    "message": "Auto-Contribua",
     "description": ""
   },
   "oneTimeDonation": {
-    "message": "One-Time Tips",
+    "message": "One-time Tips",
     "description": ""
   },
   "total": {
@@ -148,7 +148,7 @@
     "description": ""
   },
   "expiresOn": {
-    "message": "expires on",
+    "message": "expira em",
     "description": ""
   },
   "recurringDonations": {
@@ -156,7 +156,7 @@
     "description": ""
   },
   "off": {
-    "message": "Off",
+    "message": "Desligado",
     "description": ""
   }
 }

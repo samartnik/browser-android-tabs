@@ -4,11 +4,11 @@
     "description": ""
   },
   "welcomeButtonTextOne": {
-    "message": "Start Earning Now!",
+    "message": "Begin Nu met Verdienen!",
     "description": ""
   },
   "welcomeButtonTextTwo": {
-    "message": "Join Rewards",
+    "message": "Word lid van Rewards",
     "description": ""
   },
   "welcomeDescOne": {
@@ -20,11 +20,11 @@
     "description": ""
   },
   "welcomeFooterTextOne": {
-    "message": "Check out what’s improved",
+    "message": "Bekijk wat we verbeterd hebben",
     "description": ""
   },
   "welcomeFooterTextTwo": {
-    "message": "Learn More",
+    "message": "Meer informatie",
     "description": ""
   },
   "welcomeHeaderOne": {
@@ -36,27 +36,27 @@
     "description": ""
   },
   "yourWallet": {
-    "message": "Your wallet",
+    "message": "Je wallet",
     "description": ""
   },
   "grants": {
-    "message": "Grants",
+    "message": "Beurzen",
     "description": ""
   },
   "on": {
-    "message": "on",
+    "message": "op",
     "description": ""
   },
   "verifiedPublisher": {
-    "message": "Brave Verified Publisher",
+    "message": "Uitgever geverifieerd door Brave",
     "description": ""
   },
   "rewardsContributeAttentionScore": {
-    "message": "Attention",
+    "message": "Attention Value",
     "description": ""
   },
   "donateMonthly": {
-    "message": "Tip this site Monthly",
+    "message": "Tip to this site Monthly",
     "description": ""
   },
   "includeInAuto": {
@@ -68,11 +68,11 @@
     "description": ""
   },
   "enableTips": {
-    "message": "Enable Tips",
+    "message": "Sta fooi toe",
     "description": ""
   },
   "for": {
-    "message": "for",
+    "message": "voor",
     "description": ""
   },
   "rewardsSummary": {
@@ -84,7 +84,7 @@
     "description": ""
   },
   "monthAug": {
-    "message": "August",
+    "message": "Augustus",
     "description": ""
   },
   "monthDec": {
@@ -92,27 +92,27 @@
     "description": ""
   },
   "monthFeb": {
-    "message": "February",
+    "message": "Februari",
     "description": ""
   },
   "monthJan": {
-    "message": "January",
+    "message": "Januari",
     "description": ""
   },
   "monthJul": {
-    "message": "July",
+    "message": "Juli",
     "description": ""
   },
   "monthJun": {
-    "message": "June",
+    "message": "Juni",
     "description": ""
   },
   "monthMar": {
-    "message": "March",
+    "message": "Maart",
     "description": ""
   },
   "monthMay": {
-    "message": "May",
+    "message": "Mei",
     "description": ""
   },
   "monthNov": {
@@ -120,7 +120,7 @@
     "description": ""
   },
   "monthOct": {
-    "message": "October",
+    "message": "Oktober",
     "description": ""
   },
   "monthSep": {
@@ -128,7 +128,7 @@
     "description": ""
   },
   "tokenGrant": {
-    "message": "Token Grant",
+    "message": "Token-donatie",
     "description": ""
   },
   "earningsAds": {
@@ -140,15 +140,15 @@
     "description": ""
   },
   "oneTimeDonation": {
-    "message": "One-Time Tips",
+    "message": "One-time Tips",
     "description": ""
   },
   "total": {
-    "message": "Total",
+    "message": "Totaal",
     "description": ""
   },
   "expiresOn": {
-    "message": "expires on",
+    "message": "loopt af op",
     "description": ""
   },
   "recurringDonations": {
@@ -156,7 +156,7 @@
     "description": ""
   },
   "off": {
-    "message": "Off",
+    "message": "Uit",
     "description": ""
   }
 }

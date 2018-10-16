@@ -1,14 +1,14 @@
 {
   "braveRewards": {
-    "message": "Brave Rewards",
+    "message": "Phần thưởng của Brave",
     "description": ""
   },
   "welcomeButtonTextOne": {
-    "message": "Start Earning Now!",
+    "message": "Bắt đầu kiếm tiền ngay!",
     "description": ""
   },
   "welcomeButtonTextTwo": {
-    "message": "Join Rewards",
+    "message": "Tham gia Nhận thưởng",
     "description": ""
   },
   "welcomeDescOne": {
@@ -20,11 +20,11 @@
     "description": ""
   },
   "welcomeFooterTextOne": {
-    "message": "Check out what’s improved",
+    "message": "Xem có gì được cải thiện",
     "description": ""
   },
   "welcomeFooterTextTwo": {
-    "message": "Learn More",
+    "message": "Tìm hiểu thêm",
     "description": ""
   },
   "welcomeHeaderOne": {
@@ -36,27 +36,27 @@
     "description": ""
   },
   "yourWallet": {
-    "message": "Your wallet",
+    "message": "Ví của bạn",
     "description": ""
   },
   "grants": {
-    "message": "Grants",
+    "message": "Cấp",
     "description": ""
   },
   "on": {
-    "message": "on",
+    "message": "trên",
     "description": ""
   },
   "verifiedPublisher": {
-    "message": "Brave Verified Publisher",
+    "message": "Nhà xuất bản Chứng thực bởi Brave",
     "description": ""
   },
   "rewardsContributeAttentionScore": {
-    "message": "Attention",
+    "message": "Attention Value",
     "description": ""
   },
   "donateMonthly": {
-    "message": "Tip this site Monthly",
+    "message": "Tip to this site Monthly",
     "description": ""
   },
   "includeInAuto": {
@@ -68,11 +68,11 @@
     "description": ""
   },
   "enableTips": {
-    "message": "Enable Tips",
+    "message": "Kcish hoạt tiền boa",
     "description": ""
   },
   "for": {
-    "message": "for",
+    "message": "dành cho",
     "description": ""
   },
   "rewardsSummary": {
@@ -80,55 +80,55 @@
     "description": ""
   },
   "monthApr": {
-    "message": "April",
+    "message": "Tháng 4",
     "description": ""
   },
   "monthAug": {
-    "message": "August",
+    "message": "Tháng 8",
     "description": ""
   },
   "monthDec": {
-    "message": "December",
+    "message": "Tháng 12",
     "description": ""
   },
   "monthFeb": {
-    "message": "February",
+    "message": "Tháng 2",
     "description": ""
   },
   "monthJan": {
-    "message": "January",
+    "message": "Tháng 1",
     "description": ""
   },
   "monthJul": {
-    "message": "July",
+    "message": "Tháng bảy",
     "description": ""
   },
   "monthJun": {
-    "message": "June",
+    "message": "Tháng 6",
     "description": ""
   },
   "monthMar": {
-    "message": "March",
+    "message": "Tháng ba",
     "description": ""
   },
   "monthMay": {
-    "message": "May",
+    "message": "Tháng năm",
     "description": ""
   },
   "monthNov": {
-    "message": "November",
+    "message": "Tháng 11",
     "description": ""
   },
   "monthOct": {
-    "message": "October",
+    "message": "Tháng 10",
     "description": ""
   },
   "monthSep": {
-    "message": "September",
+    "message": "Tháng 9",
     "description": ""
   },
   "tokenGrant": {
-    "message": "Token Grant",
+    "message": "Nguồn cấp Token",
     "description": ""
   },
   "earningsAds": {
@@ -136,19 +136,19 @@
     "description": ""
   },
   "rewardsContribute": {
-    "message": "Auto-Contribute",
+    "message": "Tự động-Đóng góp",
     "description": ""
   },
   "oneTimeDonation": {
-    "message": "One-Time Tips",
+    "message": "One-time Tips",
     "description": ""
   },
   "total": {
-    "message": "Total",
+    "message": "Tổng cộng",
     "description": ""
   },
   "expiresOn": {
-    "message": "expires on",
+    "message": "hết hạn vào",
     "description": ""
   },
   "recurringDonations": {
@@ -156,7 +156,7 @@
     "description": ""
   },
   "off": {
-    "message": "Off",
+    "message": "Tắt",
     "description": ""
   }
 }

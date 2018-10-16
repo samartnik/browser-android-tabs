@@ -1,14 +1,14 @@
 {
   "braveRewards": {
-    "message": "Brave Rewards",
+    "message": "Brave belöningar",
     "description": ""
   },
   "welcomeButtonTextOne": {
-    "message": "Start Earning Now!",
+    "message": "Börja tjäna nu!",
     "description": ""
   },
   "welcomeButtonTextTwo": {
-    "message": "Join Rewards",
+    "message": "Gå med i Rewards",
     "description": ""
   },
   "welcomeDescOne": {
@@ -20,11 +20,11 @@
     "description": ""
   },
   "welcomeFooterTextOne": {
-    "message": "Check out what’s improved",
+    "message": "Kolla in vad som har förbättrats",
     "description": ""
   },
   "welcomeFooterTextTwo": {
-    "message": "Learn More",
+    "message": "Läs mer",
     "description": ""
   },
   "welcomeHeaderOne": {
@@ -36,27 +36,27 @@
     "description": ""
   },
   "yourWallet": {
-    "message": "Your wallet",
+    "message": "Din plånbok",
     "description": ""
   },
   "grants": {
-    "message": "Grants",
+    "message": "Utgivningar",
     "description": ""
   },
   "on": {
-    "message": "on",
+    "message": "på",
     "description": ""
   },
   "verifiedPublisher": {
-    "message": "Brave Verified Publisher",
+    "message": "Brave verifierad utgivare",
     "description": ""
   },
   "rewardsContributeAttentionScore": {
-    "message": "Attention",
+    "message": "Attention Value",
     "description": ""
   },
   "donateMonthly": {
-    "message": "Tip this site Monthly",
+    "message": "Tip to this site Monthly",
     "description": ""
   },
   "includeInAuto": {
@@ -68,11 +68,11 @@
     "description": ""
   },
   "enableTips": {
-    "message": "Enable Tips",
+    "message": "Sätt på dricks",
     "description": ""
   },
   "for": {
-    "message": "for",
+    "message": "för",
     "description": ""
   },
   "rewardsSummary": {
@@ -84,7 +84,7 @@
     "description": ""
   },
   "monthAug": {
-    "message": "August",
+    "message": "Augusti",
     "description": ""
   },
   "monthDec": {
@@ -92,27 +92,27 @@
     "description": ""
   },
   "monthFeb": {
-    "message": "February",
+    "message": "Februari",
     "description": ""
   },
   "monthJan": {
-    "message": "January",
+    "message": "Januari",
     "description": ""
   },
   "monthJul": {
-    "message": "July",
+    "message": "Juli",
     "description": ""
   },
   "monthJun": {
-    "message": "June",
+    "message": "Juni",
     "description": ""
   },
   "monthMar": {
-    "message": "March",
+    "message": "Mars",
     "description": ""
   },
   "monthMay": {
-    "message": "May",
+    "message": "Maj",
     "description": ""
   },
   "monthNov": {
@@ -120,7 +120,7 @@
     "description": ""
   },
   "monthOct": {
-    "message": "October",
+    "message": "Oktober",
     "description": ""
   },
   "monthSep": {
@@ -128,7 +128,7 @@
     "description": ""
   },
   "tokenGrant": {
-    "message": "Token Grant",
+    "message": "Pollett-utgivning",
     "description": ""
   },
   "earningsAds": {
@@ -136,19 +136,19 @@
     "description": ""
   },
   "rewardsContribute": {
-    "message": "Auto-Contribute",
+    "message": "Auto-bidra",
     "description": ""
   },
   "oneTimeDonation": {
-    "message": "One-Time Tips",
+    "message": "One-time Tips",
     "description": ""
   },
   "total": {
-    "message": "Total",
+    "message": "Totalt",
     "description": ""
   },
   "expiresOn": {
-    "message": "expires on",
+    "message": "Går ut den",
     "description": ""
   },
   "recurringDonations": {
@@ -156,7 +156,7 @@
     "description": ""
   },
   "off": {
-    "message": "Off",
+    "message": "Av",
     "description": ""
   }
 }

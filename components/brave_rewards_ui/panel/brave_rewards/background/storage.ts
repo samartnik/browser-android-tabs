@@ -18,20 +18,23 @@ const defaultState: RewardsExtension.State = {
     rates: {}
   },
   report: {
-    ads: 0,
-    closing: 0,
-    contribute: 0,
-    donations: 0,
-    grants: 0,
-    oneTime: 0,
-    opening: 0,
-    total: 0
+    ads: '0',
+    closing: '0',
+    contribute: '0',
+    deposit: '0',
+    donation: '0',
+    grant: '0',
+    tips: '0',
+    opening: '0',
+    total: '0'
   }
 }
 
-// TODO check if windowId persist, because if not then we need to
-// clear publishers when you close browser
-const cleanData = (state: RewardsExtension.State) => state
+const cleanData = (state: RewardsExtension.State) => {
+  state = { ...state }
+  state.publishers = {}
+  return state
+}
 
 export const load = (): RewardsExtension.State => {
   const data = window.localStorage.getItem(keyName)

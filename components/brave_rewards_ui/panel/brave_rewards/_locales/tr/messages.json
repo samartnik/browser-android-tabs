@@ -1,14 +1,14 @@
 {
   "braveRewards": {
-    "message": "Brave Rewards",
+    "message": "Brave Ödülleri",
     "description": ""
   },
   "welcomeButtonTextOne": {
-    "message": "Start Earning Now!",
+    "message": "Şimdi Kazanmaya Başlayın!",
     "description": ""
   },
   "welcomeButtonTextTwo": {
-    "message": "Join Rewards",
+    "message": "Ödül'e Katılın",
     "description": ""
   },
   "welcomeDescOne": {
@@ -20,11 +20,11 @@
     "description": ""
   },
   "welcomeFooterTextOne": {
-    "message": "Check out what’s improved",
+    "message": "Nelerin geliştirildiğini kontrol edin",
     "description": ""
   },
   "welcomeFooterTextTwo": {
-    "message": "Learn More",
+    "message": "Daha Fazlasını Öğren",
     "description": ""
   },
   "welcomeHeaderOne": {
@@ -36,27 +36,27 @@
     "description": ""
   },
   "yourWallet": {
-    "message": "Your wallet",
+    "message": "Cüzdanınız",
     "description": ""
   },
   "grants": {
-    "message": "Grants",
+    "message": "Yardımlar",
     "description": ""
   },
   "on": {
-    "message": "on",
+    "message": "açık",
     "description": ""
   },
   "verifiedPublisher": {
-    "message": "Brave Verified Publisher",
+    "message": "Brave Onaylı Yayıncı",
     "description": ""
   },
   "rewardsContributeAttentionScore": {
-    "message": "Attention",
+    "message": "Attention Value",
     "description": ""
   },
   "donateMonthly": {
-    "message": "Tip this site Monthly",
+    "message": "Tip to this site Monthly",
     "description": ""
   },
   "includeInAuto": {
@@ -68,11 +68,11 @@
     "description": ""
   },
   "enableTips": {
-    "message": "Enable Tips",
+    "message": "İpuçlarını Etkinleştir",
     "description": ""
   },
   "for": {
-    "message": "for",
+    "message": "için",
     "description": ""
   },
   "rewardsSummary": {
@@ -80,55 +80,55 @@
     "description": ""
   },
   "monthApr": {
-    "message": "April",
+    "message": "Nisan",
     "description": ""
   },
   "monthAug": {
-    "message": "August",
+    "message": "Ağustos",
     "description": ""
   },
   "monthDec": {
-    "message": "December",
+    "message": "Aralık",
     "description": ""
   },
   "monthFeb": {
-    "message": "February",
+    "message": "Şubat",
     "description": ""
   },
   "monthJan": {
-    "message": "January",
+    "message": "Ocak",
     "description": ""
   },
   "monthJul": {
-    "message": "July",
+    "message": "Temmuz",
     "description": ""
   },
   "monthJun": {
-    "message": "June",
+    "message": "Haziran",
     "description": ""
   },
   "monthMar": {
-    "message": "March",
+    "message": "Mart",
     "description": ""
   },
   "monthMay": {
-    "message": "May",
+    "message": "Mayıs",
     "description": ""
   },
   "monthNov": {
-    "message": "November",
+    "message": "Kasım",
     "description": ""
   },
   "monthOct": {
-    "message": "October",
+    "message": "Ekim",
     "description": ""
   },
   "monthSep": {
-    "message": "September",
+    "message": "Eylül",
     "description": ""
   },
   "tokenGrant": {
-    "message": "Token Grant",
+    "message": "Token Yardımı",
     "description": ""
   },
   "earningsAds": {
@@ -136,19 +136,19 @@
     "description": ""
   },
   "rewardsContribute": {
-    "message": "Auto-Contribute",
+    "message": "Otomatik Katkı",
     "description": ""
   },
   "oneTimeDonation": {
-    "message": "One-Time Tips",
+    "message": "One-time Tips",
     "description": ""
   },
   "total": {
-    "message": "Total",
+    "message": "Toplam",
     "description": ""
   },
   "expiresOn": {
-    "message": "expires on",
+    "message": "sona eriyor",
     "description": ""
   },
   "recurringDonations": {
@@ -156,7 +156,7 @@
     "description": ""
   },
   "off": {
-    "message": "Off",
+    "message": "Kapalı",
     "description": ""
   }
 }

@@ -4,11 +4,11 @@
     "description": ""
   },
   "welcomeButtonTextOne": {
-    "message": "Start Earning Now!",
+    "message": "เริ่มรับเงินได้ตอนนี้!",
     "description": ""
   },
   "welcomeButtonTextTwo": {
-    "message": "Join Rewards",
+    "message": "รางวัลการเข้าร่วม",
     "description": ""
   },
   "welcomeDescOne": {
@@ -20,11 +20,11 @@
     "description": ""
   },
   "welcomeFooterTextOne": {
-    "message": "Check out what’s improved",
+    "message": "มาดูว่ามีอะไรปรับปรุงเปลี่ยนแปลงไปแล้วบ้าง",
     "description": ""
   },
   "welcomeFooterTextTwo": {
-    "message": "Learn More",
+    "message": "เรียนรู้เพิ่มเติม",
     "description": ""
   },
   "welcomeHeaderOne": {
@@ -36,7 +36,7 @@
     "description": ""
   },
   "yourWallet": {
-    "message": "Your wallet",
+    "message": "กระเป๋าเงินของคุณ",
     "description": ""
   },
   "grants": {
@@ -44,19 +44,19 @@
     "description": ""
   },
   "on": {
-    "message": "on",
+    "message": "เปิด",
     "description": ""
   },
   "verifiedPublisher": {
-    "message": "Brave Verified Publisher",
+    "message": "ผู้เผยแพร่ที่ได้รับการยืนยันแล้วของ Brave ",
     "description": ""
   },
   "rewardsContributeAttentionScore": {
-    "message": "Attention",
+    "message": "Attention Value",
     "description": ""
   },
   "donateMonthly": {
-    "message": "Tip this site Monthly",
+    "message": "Tip to this site Monthly",
     "description": ""
   },
   "includeInAuto": {
@@ -68,11 +68,11 @@
     "description": ""
   },
   "enableTips": {
-    "message": "Enable Tips",
+    "message": "เปิดทิป",
     "description": ""
   },
   "for": {
-    "message": "for",
+    "message": "สำหรับ",
     "description": ""
   },
   "rewardsSummary": {
@@ -80,51 +80,51 @@
     "description": ""
   },
   "monthApr": {
-    "message": "April",
+    "message": "เมษายน",
     "description": ""
   },
   "monthAug": {
-    "message": "August",
+    "message": "สิงหาคม",
     "description": ""
   },
   "monthDec": {
-    "message": "December",
+    "message": "ธันวาคม",
     "description": ""
   },
   "monthFeb": {
-    "message": "February",
+    "message": "กุมภาพันธ์",
     "description": ""
   },
   "monthJan": {
-    "message": "January",
+    "message": "มกราคม",
     "description": ""
   },
   "monthJul": {
-    "message": "July",
+    "message": "กรกฏาคม",
     "description": ""
   },
   "monthJun": {
-    "message": "June",
+    "message": "มิถุนายน",
     "description": ""
   },
   "monthMar": {
-    "message": "March",
+    "message": "มีนาคม",
     "description": ""
   },
   "monthMay": {
-    "message": "May",
+    "message": "พฤษภาคม",
     "description": ""
   },
   "monthNov": {
-    "message": "November",
+    "message": "พฤศจิกายน",
     "description": ""
   },
   "monthOct": {
-    "message": "October",
+    "message": "ตุลาคม",
     "description": ""
   },
   "monthSep": {
-    "message": "September",
+    "message": "กันยายน",
     "description": ""
   },
   "tokenGrant": {
@@ -140,15 +140,15 @@
     "description": ""
   },
   "oneTimeDonation": {
-    "message": "One-Time Tips",
+    "message": "One-time Tips",
     "description": ""
   },
   "total": {
-    "message": "Total",
+    "message": "รวม",
     "description": ""
   },
   "expiresOn": {
-    "message": "expires on",
+    "message": "หมดอายุใน",
     "description": ""
   },
   "recurringDonations": {
@@ -156,7 +156,7 @@
     "description": ""
   },
   "off": {
-    "message": "Off",
+    "message": "ปิด",
     "description": ""
   }
 }

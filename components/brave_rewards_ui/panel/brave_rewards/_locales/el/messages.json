@@ -1,14 +1,14 @@
 {
   "braveRewards": {
-    "message": "Brave Rewards",
+    "message": "Επιβραβεύσεις Brave",
     "description": ""
   },
   "welcomeButtonTextOne": {
-    "message": "Start Earning Now!",
+    "message": "Ξεκινήστε να Κερδίζετε Τώρα!",
     "description": ""
   },
   "welcomeButtonTextTwo": {
-    "message": "Join Rewards",
+    "message": "Συμμετοχή σε Ανταμοιβές",
     "description": ""
   },
   "welcomeDescOne": {
@@ -20,11 +20,11 @@
     "description": ""
   },
   "welcomeFooterTextOne": {
-    "message": "Check out what’s improved",
+    "message": "Δείτε τι έχει βελτιωθεί",
     "description": ""
   },
   "welcomeFooterTextTwo": {
-    "message": "Learn More",
+    "message": "Μάθετε Περισσότερα ",
     "description": ""
   },
   "welcomeHeaderOne": {
@@ -36,27 +36,27 @@
     "description": ""
   },
   "yourWallet": {
-    "message": "Your wallet",
+    "message": "Το πορτοφόλι σας",
     "description": ""
   },
   "grants": {
-    "message": "Grants",
+    "message": "Επιχορηγήσεις ",
     "description": ""
   },
   "on": {
-    "message": "on",
+    "message": "ανοιχτό ",
     "description": ""
   },
   "verifiedPublisher": {
-    "message": "Brave Verified Publisher",
+    "message": "Επαληθευμένος Εκδότης Brave",
     "description": ""
   },
   "rewardsContributeAttentionScore": {
-    "message": "Attention",
+    "message": "Attention Value",
     "description": ""
   },
   "donateMonthly": {
-    "message": "Tip this site Monthly",
+    "message": "Tip to this site Monthly",
     "description": ""
   },
   "includeInAuto": {
@@ -68,11 +68,11 @@
     "description": ""
   },
   "enableTips": {
-    "message": "Enable Tips",
+    "message": "Ενεργοποίηση Φιλοδωρημάτων",
     "description": ""
   },
   "for": {
-    "message": "for",
+    "message": "για",
     "description": ""
   },
   "rewardsSummary": {
@@ -80,55 +80,55 @@
     "description": ""
   },
   "monthApr": {
-    "message": "April",
+    "message": "Απρίλιος",
     "description": ""
   },
   "monthAug": {
-    "message": "August",
+    "message": "Αύγουστος",
     "description": ""
   },
   "monthDec": {
-    "message": "December",
+    "message": "Δεκέμβριος",
     "description": ""
   },
   "monthFeb": {
-    "message": "February",
+    "message": "Φεβρουάριος ",
     "description": ""
   },
   "monthJan": {
-    "message": "January",
+    "message": "Ιανουάριος",
     "description": ""
   },
   "monthJul": {
-    "message": "July",
+    "message": "Ιούλιος",
     "description": ""
   },
   "monthJun": {
-    "message": "June",
+    "message": "Ιούνιος",
     "description": ""
   },
   "monthMar": {
-    "message": "March",
+    "message": "Μάρτιος",
     "description": ""
   },
   "monthMay": {
-    "message": "May",
+    "message": "Μάιος",
     "description": ""
   },
   "monthNov": {
-    "message": "November",
+    "message": "Νοέμβριος",
     "description": ""
   },
   "monthOct": {
-    "message": "October",
+    "message": "Οκτώβριος",
     "description": ""
   },
   "monthSep": {
-    "message": "September",
+    "message": "Σεπτέμβριος ",
     "description": ""
   },
   "tokenGrant": {
-    "message": "Token Grant",
+    "message": "Χορηγία Μάρκας",
     "description": ""
   },
   "earningsAds": {
@@ -136,19 +136,19 @@
     "description": ""
   },
   "rewardsContribute": {
-    "message": "Auto-Contribute",
+    "message": "Αυτόματη-Δωρεά",
     "description": ""
   },
   "oneTimeDonation": {
-    "message": "One-Time Tips",
+    "message": "One-time Tips",
     "description": ""
   },
   "total": {
-    "message": "Total",
+    "message": "Σύνολο",
     "description": ""
   },
   "expiresOn": {
-    "message": "expires on",
+    "message": "λήγει στις",
     "description": ""
   },
   "recurringDonations": {
@@ -156,7 +156,7 @@
     "description": ""
   },
   "off": {
-    "message": "Off",
+    "message": "Κλειστό",
     "description": ""
   }
 }

@@ -1,14 +1,14 @@
 {
   "braveRewards": {
-    "message": "Brave Rewards",
+    "message": "Ganjaran Brave",
     "description": ""
   },
   "welcomeButtonTextOne": {
-    "message": "Start Earning Now!",
+    "message": "Mula Dapatkan Sekarang!",
     "description": ""
   },
   "welcomeButtonTextTwo": {
-    "message": "Join Rewards",
+    "message": "Ganjaran Penyertaan",
     "description": ""
   },
   "welcomeDescOne": {
@@ -20,11 +20,11 @@
     "description": ""
   },
   "welcomeFooterTextOne": {
-    "message": "Check out what’s improved",
+    "message": "Lihat peningkatan yang telah dilakukan",
     "description": ""
   },
   "welcomeFooterTextTwo": {
-    "message": "Learn More",
+    "message": "Ketahui lebih lanjut",
     "description": ""
   },
   "welcomeHeaderOne": {
@@ -36,27 +36,27 @@
     "description": ""
   },
   "yourWallet": {
-    "message": "Your wallet",
+    "message": "Dompet anda",
     "description": ""
   },
   "grants": {
-    "message": "Grants",
+    "message": "Geran",
     "description": ""
   },
   "on": {
-    "message": "on",
+    "message": "pada",
     "description": ""
   },
   "verifiedPublisher": {
-    "message": "Brave Verified Publisher",
+    "message": "Penerbit Sah Brave",
     "description": ""
   },
   "rewardsContributeAttentionScore": {
-    "message": "Attention",
+    "message": "Attention Value",
     "description": ""
   },
   "donateMonthly": {
-    "message": "Tip this site Monthly",
+    "message": "Tip to this site Monthly",
     "description": ""
   },
   "includeInAuto": {
@@ -68,11 +68,11 @@
     "description": ""
   },
   "enableTips": {
-    "message": "Enable Tips",
+    "message": "Dayakan Tip",
     "description": ""
   },
   "for": {
-    "message": "for",
+    "message": "untuk",
     "description": ""
   },
   "rewardsSummary": {
@@ -84,35 +84,35 @@
     "description": ""
   },
   "monthAug": {
-    "message": "August",
+    "message": "Ogos",
     "description": ""
   },
   "monthDec": {
-    "message": "December",
+    "message": "Disember",
     "description": ""
   },
   "monthFeb": {
-    "message": "February",
+    "message": "Februari",
     "description": ""
   },
   "monthJan": {
-    "message": "January",
+    "message": "Januari",
     "description": ""
   },
   "monthJul": {
-    "message": "July",
+    "message": "Julai",
     "description": ""
   },
   "monthJun": {
-    "message": "June",
+    "message": "Jun",
     "description": ""
   },
   "monthMar": {
-    "message": "March",
+    "message": "Mac",
     "description": ""
   },
   "monthMay": {
-    "message": "May",
+    "message": "Mei",
     "description": ""
   },
   "monthNov": {
@@ -120,7 +120,7 @@
     "description": ""
   },
   "monthOct": {
-    "message": "October",
+    "message": "Oktober",
     "description": ""
   },
   "monthSep": {
@@ -128,7 +128,7 @@
     "description": ""
   },
   "tokenGrant": {
-    "message": "Token Grant",
+    "message": "Pemberian Token",
     "description": ""
   },
   "earningsAds": {
@@ -136,19 +136,19 @@
     "description": ""
   },
   "rewardsContribute": {
-    "message": "Auto-Contribute",
+    "message": "Sumbangan Automatik",
     "description": ""
   },
   "oneTimeDonation": {
-    "message": "One-Time Tips",
+    "message": "One-time Tips",
     "description": ""
   },
   "total": {
-    "message": "Total",
+    "message": "Jumlah",
     "description": ""
   },
   "expiresOn": {
-    "message": "expires on",
+    "message": "luput pada",
     "description": ""
   },
   "recurringDonations": {
@@ -156,7 +156,7 @@
     "description": ""
   },
   "off": {
-    "message": "Off",
+    "message": "Padam",
     "description": ""
   }
 }

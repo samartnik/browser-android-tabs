@@ -1,14 +1,14 @@
 {
   "braveRewards": {
-    "message": "Brave Rewards",
+    "message": "Brejv nagrade",
     "description": ""
   },
   "welcomeButtonTextOne": {
-    "message": "Start Earning Now!",
+    "message": "Počnite odmah da zarađujete!",
     "description": ""
   },
   "welcomeButtonTextTwo": {
-    "message": "Join Rewards",
+    "message": "Pridružite se Rewards-u",
     "description": ""
   },
   "welcomeDescOne": {
@@ -20,11 +20,11 @@
     "description": ""
   },
   "welcomeFooterTextOne": {
-    "message": "Check out what’s improved",
+    "message": "Pogledajte šta je poboljšano",
     "description": ""
   },
   "welcomeFooterTextTwo": {
-    "message": "Learn More",
+    "message": "Saznajte više",
     "description": ""
   },
   "welcomeHeaderOne": {
@@ -36,7 +36,7 @@
     "description": ""
   },
   "yourWallet": {
-    "message": "Your wallet",
+    "message": "Vaš novčanik",
     "description": ""
   },
   "grants": {
@@ -44,19 +44,19 @@
     "description": ""
   },
   "on": {
-    "message": "on",
+    "message": "uključeno",
     "description": ""
   },
   "verifiedPublisher": {
-    "message": "Brave Verified Publisher",
+    "message": "Objavljivač verifikovan od strane Brave-a",
     "description": ""
   },
   "rewardsContributeAttentionScore": {
-    "message": "Attention",
+    "message": "Attention Value",
     "description": ""
   },
   "donateMonthly": {
-    "message": "Tip this site Monthly",
+    "message": "Tip to this site Monthly",
     "description": ""
   },
   "includeInAuto": {
@@ -68,11 +68,11 @@
     "description": ""
   },
   "enableTips": {
-    "message": "Enable Tips",
+    "message": "Omogućite napojnice",
     "description": ""
   },
   "for": {
-    "message": "for",
+    "message": "za",
     "description": ""
   },
   "rewardsSummary": {
@@ -80,55 +80,55 @@
     "description": ""
   },
   "monthApr": {
-    "message": "April",
+    "message": "april",
     "description": ""
   },
   "monthAug": {
-    "message": "August",
+    "message": "Avgust",
     "description": ""
   },
   "monthDec": {
-    "message": "December",
+    "message": "decembar",
     "description": ""
   },
   "monthFeb": {
-    "message": "February",
+    "message": "februar",
     "description": ""
   },
   "monthJan": {
-    "message": "January",
+    "message": "Januar",
     "description": ""
   },
   "monthJul": {
-    "message": "July",
+    "message": "Jul",
     "description": ""
   },
   "monthJun": {
-    "message": "June",
+    "message": "Jun",
     "description": ""
   },
   "monthMar": {
-    "message": "March",
+    "message": "Mart",
     "description": ""
   },
   "monthMay": {
-    "message": "May",
+    "message": "Maj",
     "description": ""
   },
   "monthNov": {
-    "message": "November",
+    "message": "Novembar",
     "description": ""
   },
   "monthOct": {
-    "message": "October",
+    "message": "Oktobar",
     "description": ""
   },
   "monthSep": {
-    "message": "September",
+    "message": "Septembar",
     "description": ""
   },
   "tokenGrant": {
-    "message": "Token Grant",
+    "message": "Odobrenje tokena",
     "description": ""
   },
   "earningsAds": {
@@ -136,19 +136,19 @@
     "description": ""
   },
   "rewardsContribute": {
-    "message": "Auto-Contribute",
+    "message": "Samo-doprinos",
     "description": ""
   },
   "oneTimeDonation": {
-    "message": "One-Time Tips",
+    "message": "One-time Tips",
     "description": ""
   },
   "total": {
-    "message": "Total",
+    "message": "Ukupno",
     "description": ""
   },
   "expiresOn": {
-    "message": "expires on",
+    "message": "ističe",
     "description": ""
   },
   "recurringDonations": {
@@ -156,7 +156,7 @@
     "description": ""
   },
   "off": {
-    "message": "Off",
+    "message": "Isključeno",
     "description": ""
   }
 }

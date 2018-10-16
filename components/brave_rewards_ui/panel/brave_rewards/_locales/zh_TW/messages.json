@@ -1,14 +1,14 @@
 {
   "braveRewards": {
-    "message": "Brave Rewards",
+    "message": "Brave 報酬",
     "description": ""
   },
   "welcomeButtonTextOne": {
-    "message": "Start Earning Now!",
+    "message": "現在就開始賺取金額！",
     "description": ""
   },
   "welcomeButtonTextTwo": {
-    "message": "Join Rewards",
+    "message": "參加獎勵制度",
     "description": ""
   },
   "welcomeDescOne": {
@@ -20,11 +20,11 @@
     "description": ""
   },
   "welcomeFooterTextOne": {
-    "message": "Check out what’s improved",
+    "message": "查看改進的地方",
     "description": ""
   },
   "welcomeFooterTextTwo": {
-    "message": "Learn More",
+    "message": "瞭解更多",
     "description": ""
   },
   "welcomeHeaderOne": {
@@ -36,27 +36,27 @@
     "description": ""
   },
   "yourWallet": {
-    "message": "Your wallet",
+    "message": "您的錢包",
     "description": ""
   },
   "grants": {
-    "message": "Grants",
+    "message": "授權",
     "description": ""
   },
   "on": {
-    "message": "on",
+    "message": "在",
     "description": ""
   },
   "verifiedPublisher": {
-    "message": "Brave Verified Publisher",
+    "message": "Brave 驗證發行者",
     "description": ""
   },
   "rewardsContributeAttentionScore": {
-    "message": "Attention",
+    "message": "Attention Value",
     "description": ""
   },
   "donateMonthly": {
-    "message": "Tip this site Monthly",
+    "message": "Tip to this site Monthly",
     "description": ""
   },
   "includeInAuto": {
@@ -68,11 +68,11 @@
     "description": ""
   },
   "enableTips": {
-    "message": "Enable Tips",
+    "message": "啟用小費功能",
     "description": ""
   },
   "for": {
-    "message": "for",
+    "message": "給",
     "description": ""
   },
   "rewardsSummary": {
@@ -80,55 +80,55 @@
     "description": ""
   },
   "monthApr": {
-    "message": "April",
+    "message": "四月",
     "description": ""
   },
   "monthAug": {
-    "message": "August",
+    "message": "8 月",
     "description": ""
   },
   "monthDec": {
-    "message": "December",
+    "message": "十二月",
     "description": ""
   },
   "monthFeb": {
-    "message": "February",
+    "message": "二月",
     "description": ""
   },
   "monthJan": {
-    "message": "January",
+    "message": "1 月",
     "description": ""
   },
   "monthJul": {
-    "message": "July",
+    "message": "七月",
     "description": ""
   },
   "monthJun": {
-    "message": "June",
+    "message": "六月",
     "description": ""
   },
   "monthMar": {
-    "message": "March",
+    "message": "3 月",
     "description": ""
   },
   "monthMay": {
-    "message": "May",
+    "message": "5 月",
     "description": ""
   },
   "monthNov": {
-    "message": "November",
+    "message": "11 月",
     "description": ""
   },
   "monthOct": {
-    "message": "October",
+    "message": "十月",
     "description": ""
   },
   "monthSep": {
-    "message": "September",
+    "message": "九月",
     "description": ""
   },
   "tokenGrant": {
-    "message": "Token Grant",
+    "message": "獲贈代幣",
     "description": ""
   },
   "earningsAds": {
@@ -136,19 +136,19 @@
     "description": ""
   },
   "rewardsContribute": {
-    "message": "Auto-Contribute",
+    "message": "自動捐獻",
     "description": ""
   },
   "oneTimeDonation": {
-    "message": "One-Time Tips",
+    "message": "One-time Tips",
     "description": ""
   },
   "total": {
-    "message": "Total",
+    "message": "合計",
     "description": ""
   },
   "expiresOn": {
-    "message": "expires on",
+    "message": "過期",
     "description": ""
   },
   "recurringDonations": {
@@ -156,7 +156,7 @@
     "description": ""
   },
   "off": {
-    "message": "Off",
+    "message": "關閉",
     "description": ""
   }
 }
