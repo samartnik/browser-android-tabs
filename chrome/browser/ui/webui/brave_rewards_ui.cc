@@ -4,6 +4,7 @@
 
 #include "chrome/browser/ui/webui/brave_rewards_ui.h"
 
+#include "chrome/browser/android/brave/check_util.h"
 #include "chrome/browser/braveRewards/brave_rewards_service.h"
 #include "chrome/browser/braveRewards/brave_rewards_service_factory.h"
 
@@ -95,8 +96,11 @@ private:
                            const std::string& viewing_id,
                            const std::string& probi) override;
 
+  void ClientAttestationResult(bool result);
+
 
   brave_rewards::BraveRewardsService* rewards_service_;
+  check_util::CheckUtil check_util_;
 
   DISALLOW_COPY_AND_ASSIGN(RewardsDOMHandler);
 };
@@ -346,9 +350,15 @@ void RewardsDOMHandler::OnGrantCaptcha(
 }
 
 void RewardsDOMHandler::GetGrantCaptcha(const base::ListValue* args) {
-  if (rewards_service_) {
-    rewards_service_->GetGrantCaptcha();
+  check_util::ClientAttestationCallback attest_callback = base::BindOnce(&RewardsDOMHandler::ClientAttestationResult, base::Unretained(this));
+  if (check_util_.ClientAttestation(std::move(attest_callback))) {
+    LOG(INFO) << "SAM: safetynet check succeed, result will be in callback";
+  } else {
+    LOG(ERROR) << "SAM: unable to perform safetynet check due to an error";
   }
+  /*if (rewards_service_) {
+    rewards_service_->GetGrantCaptcha();
+  }*/
 }
 
 void RewardsDOMHandler::GetWalletPassphrase(const base::ListValue* args) {
@@ -693,6 +703,11 @@ void RewardsDOMHandler::HandleGetContributionAmount(
     base::Value v(value);
     web_ui()->CallJavascriptFunctionUnsafe("returnContributionAmount", v);
   }
+}
+
+void RewardsDOMHandler::ClientAttestationResult(bool result) {
+  // TODO: Here we recieve final result and perform further necessary actions
+  LOG(INFO) << "SAM: Final result of client attestation: " << result;
 }
 
 }  // namespace

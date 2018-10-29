@@ -13,7 +13,8 @@
     "play-services-location",
     "play-services-tasks",
     "play-services-vision",
-    "play-services-vision-common"
+    "play-services-vision-common",
+    "play-services-safetynet"
   ],
   "version_number": "12.0.1",
   "version_xml_path": "res/values/version.xml"
