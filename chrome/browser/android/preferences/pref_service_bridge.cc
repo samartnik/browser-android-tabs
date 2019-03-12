@@ -1497,3 +1497,14 @@ const char* PrefServiceBridge::GetPrefNameExposedToJava(int pref_index) {
   DCHECK_LT(pref_index, Pref::PREF_NUM_PREFS);
   return kPrefsExposedToJava[pref_index];
 }
+
+static void JNI_PrefServiceBridge_SetSafetyNetResult(JNIEnv* env,
+                                   const JavaParamRef<jobject>& obj,
+                                   jboolean result) {
+  GetPrefService()->SetBoolean(prefs::kSafetyNetResult, result);
+}
+
+static jboolean JNI_PrefServiceBridge_GetSafetyNetResult(JNIEnv* env,
+                                       const JavaParamRef<jobject>& obj) {
+  return GetPrefService()->GetBoolean(prefs::kSafetyNetResult);
+}

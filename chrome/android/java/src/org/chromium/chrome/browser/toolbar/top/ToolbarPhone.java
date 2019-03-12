@@ -85,6 +85,7 @@ import org.chromium.chrome.browser.util.AccessibilityUtil;
 import org.chromium.chrome.browser.util.ColorUtils;
 import org.chromium.chrome.browser.util.FeatureUtilities;
 import org.chromium.chrome.browser.util.MathUtils;
+import org.chromium.chrome.browser.util.SafetyNetCheck;
 import org.chromium.chrome.browser.util.ViewUtils;
 import org.chromium.chrome.browser.widget.animation.CancelAwareAnimatorListener;
 import org.chromium.components.feature_engagement.EventConstants;
@@ -539,7 +540,8 @@ public class ToolbarPhone
      */
     @Override
     void onNativeLibraryReady() {
-        if (ChromeFeatureList.isEnabled(ChromeFeatureList.BRAVE_REWARDS)) {
+        if (ChromeFeatureList.isEnabled(ChromeFeatureList.BRAVE_REWARDS) &&
+            SafetyNetCheck.isSuccessful()) {
             if (mRewardsLayout != null) {
                 mRewardsLayout.setVisibility(View.VISIBLE);
             }

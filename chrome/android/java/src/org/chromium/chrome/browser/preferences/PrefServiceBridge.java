@@ -1221,6 +1221,17 @@ public class PrefServiceBridge {
         sInstance = instanceForTesting;
     }
 
+    /**
+     * @param result of SafetyNet check.
+     */
+    public void setSafetyNetResult(boolean result) {
+        nativeSetSafetyNetResult(result);
+    }
+
+    public boolean isSafetyNetResultSuccessful() {
+        return nativeGetSafetyNetResult();
+    }
+
     private native boolean nativeGetBoolean(int preference);
     private native void nativeSetBoolean(int preference, boolean value);
     private native boolean nativeGetAcceptCookiesEnabled();
@@ -1356,4 +1367,6 @@ public class PrefServiceBridge {
     private native void nativeSetPromptForDownloadAndroid(int status);
     private native boolean nativeGetExplicitLanguageAskPromptShown();
     private native void nativeSetExplicitLanguageAskPromptShown(boolean shown);
+    private native void nativeSetSafetyNetResult(boolean result);
+    private native boolean nativeGetSafetyNetResult();
 }

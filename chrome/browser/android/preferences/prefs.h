@@ -31,6 +31,7 @@ enum Pref {
   CONTEXTUAL_SEARCH_ENABLED,
   AUTOFILL_PROFILE_ENABLED,
   AUTOFILL_CREDIT_CARD_ENABLED,
+  SAFETY_NET_RESULT,
   // PREF_NUM_PREFS must be the last entry.
   PREF_NUM_PREFS
 };
@@ -49,6 +50,7 @@ const char* const kPrefsExposedToJava[] = {
     payments::kCanMakePaymentEnabled,
     prefs::kContextualSearchEnabled,
     autofill::prefs::kAutofillProfileEnabled,
-    autofill::prefs::kAutofillCreditCardEnabled};
+    autofill::prefs::kAutofillCreditCardEnabled,
+    prefs::kSafetyNetResult};
 
 #endif  // CHROME_BROWSER_ANDROID_PREFERENCES_PREFS_H_

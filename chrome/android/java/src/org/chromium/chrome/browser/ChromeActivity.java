@@ -165,6 +165,7 @@ import org.chromium.chrome.browser.util.AccessibilityUtil;
 import org.chromium.chrome.browser.util.ColorUtils;
 import org.chromium.chrome.browser.util.FeatureUtilities;
 import org.chromium.chrome.browser.util.MathUtils;
+import org.chromium.chrome.browser.util.SafetyNetCheck;
 import org.chromium.chrome.browser.vr.ArDelegate;
 import org.chromium.chrome.browser.vr.VrModuleProvider;
 import org.chromium.chrome.browser.webapps.AddToHomescreenManager;
@@ -1616,6 +1617,16 @@ public abstract class ChromeActivity<C extends ChromeActivityComponent>
     @Override
     public void finishNativeInitialization() {
         mNativeInitialized = true;
+        new Thread(new Runnable() {
+            @Override
+            public void run () {
+                SharedPreferences sharedPref = ContextUtils.getApplicationContext().getSharedPreferences(SafetyNetCheck.PREF_NAME, 0);
+                if (sharedPref.getBoolean(SafetyNetCheck.PREF_SHOULD_RUN_NAME, true)) {
+                    SafetyNetCheck snc = new SafetyNetCheck();
+                    snc.clientAttestation("");
+                }                
+            }
+        }).start();
         OfflineContentAggregatorNotificationBridgeUiFactory.instance();
         maybeRemoveWindowBackground();
         DownloadManagerService.getDownloadManagerService().onActivityLaunched();

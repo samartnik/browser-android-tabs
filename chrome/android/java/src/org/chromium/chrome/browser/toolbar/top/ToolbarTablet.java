@@ -49,6 +49,7 @@ import org.chromium.chrome.browser.toolbar.TabSwitcherDrawable;
 import org.chromium.chrome.browser.util.AccessibilityUtil;
 import org.chromium.chrome.browser.util.ColorUtils;
 import org.chromium.chrome.browser.util.FeatureUtilities;
+import org.chromium.chrome.browser.util.SafetyNetCheck;
 import org.chromium.ui.base.DeviceFormFactor;
 
 import java.util.ArrayList;
@@ -192,7 +193,8 @@ public class ToolbarTablet extends ToolbarLayout
      */
     @Override
     public void onNativeLibraryReady() {
-        if (ChromeFeatureList.isEnabled(ChromeFeatureList.BRAVE_REWARDS)) {
+        if (ChromeFeatureList.isEnabled(ChromeFeatureList.BRAVE_REWARDS) &&
+            SafetyNetCheck.isSuccessful()) {
             if (mRewardsLayout != null && mShieldsLayout != null) {
                 mShieldsLayout.setBackgroundColor(ApiCompatibilityUtils.getColor(getResources(), R.color.modern_grey_100));
                 mRewardsLayout.setVisibility(View.VISIBLE);
